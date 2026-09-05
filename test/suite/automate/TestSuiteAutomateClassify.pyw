@@ -184,8 +184,9 @@ def _match_phrases(match: MatchSpec) -> List[str]:
 
 # Edit this list as you discover new common log phrases.
 RULES: List[Rule] = [
-    # --- Timeouts (harness-written log text) ---
+    # --- Timeouts / resource caps (harness-written log text) ---
     Rule("Generation timed out after", "Timeout", "Generate"),
+    Rule("Generation exceeded memory limit", "MemoryLimit", "Generate"),
     Rule("ModuleNotFoundError", "ModuleNotFound", "Generate"),
     Rule("MemoryError", "MemoryError", "Generate"),
 
@@ -212,11 +213,14 @@ RULES: List[Rule] = [
     Rule("Complex branch problems", "ComplexBranch", "Dungeon"),
     Rule("Unable to find door permutation", "DoorPermute", "Dungeon"),
     Rule("Exception: Max Counter is none", "MaxCounterNone", "Dungeon"),
+    Rule("'NoneType' object has no attribute 'max_chests'", "MaxChestsNone", "Dungeon"),
     Rule(["handle_split_dungeons", "Unable to resolve in"], "SplitDungeonResolve", "Dungeon"),
     Rule(["Something went terribly wrong I think", "check_for_valid_layout"], "TerriblyWrongLayout", "Dungeon"),
+    Rule("Exception: No valid destinations", "DoorsNoValidDest", "Dungeon"),
     Rule(["find_valid_trap_combination", "Bad dungeon"], "BadTrap", "Dungeon"),
     Rule(["find_valid_bk_combination", "Bad dungeon"], "BadBKDoor", "Dungeon"),
     Rule(["generate_dungeon_find_proposal", "StopIteration"], "DungeonProposal-StopIteration", "Dungeon"),
+    Rule("Can\'t get to {start_region.name} from initial state", "PathReachabilityInitial", "Dungeon"),
     Rule(["check_required_paths", "cannot reach"], "PathReachability", "Dungeon"),
     Rule(["link_doors_prep", "No reachable entrances"], "EntranceReachability", "Dungeon"),
     Rule("need to provide more sophisticated crystal connection", "CrystalReachability", "Dungeon"),
@@ -271,13 +275,14 @@ RULES: List[Rule] = [
     Rule("Cannot beat game!", "CannotBeatGame", "CanBeatGame"),
 
     # --- Catch-alls (keep last) ---
+    Rule("FillError", "FillError", "Unknown"),
     Rule("RecursionError", "RecursionError", "Unknown"),
     Rule("RuntimeError", "RuntimeError", "Unknown"),
     Rule("IndexError", "IndexError", "Unknown"),
     Rule("ValueError", "ValueError", "Unknown"),
     Rule("AssertionError", "AssertionError", "Unknown"),
     Rule("KeyError", "KeyError", "Unknown"),
-    Rule("FillError", "FillError", "Unknown"),
+    Rule("TypeError", "TypeError", "Unknown"),
     Rule("StopIteration", "StopIteration", "Unknown"),
     #Rule("Exception:", "Exception", "Unknown"),
     #Rule("Traceback (most recent call last):", "Traceback", "Unknown"),
