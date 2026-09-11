@@ -35,7 +35,7 @@ from Utils import output_path, parse_player_names
 
 from source.item.District import init_districts
 from source.item.FillUtil import create_item_pool_config, massage_item_pool, district_item_pool_config, verify_item_pool_config
-from source.overworld.EntranceShuffle2 import link_entrances_new
+from source.overworld.EntranceShuffle2 import link_entrances_new, relocate_pyramid_entrances
 from source.tools.BPS import create_bps_from_data
 from source.classes.CustomSettings import CustomSettings
 from source.enemizer.DamageTables import DamageTable
@@ -829,6 +829,7 @@ def copy_world(world):
     for player in range(1, world.players + 1):
         create_regions(ret, player)
         update_world_regions(ret, player)
+        relocate_pyramid_entrances(ret, player)
         if world.logic[player] in ('owglitches', 'hybridglitches', 'nologic'):
             create_owg_connections(ret, player)
         create_dungeon_regions(ret, player)
@@ -1055,6 +1056,7 @@ def copy_world_premature(world, player, create_flute_exits=True):
 
     create_regions(ret, player)
     update_world_regions(ret, player)
+    relocate_pyramid_entrances(ret, player)
     if world.logic[player] in ('owglitches', 'hybridglitches', 'nologic'):
         create_owg_connections(ret, player)
     create_dungeon_regions(ret, player)

@@ -30,7 +30,7 @@ from Text import Lumberjacks_texts, SickKid_texts, FluteBoy_texts, Zora_texts, M
 from source.classes.ContributorCredits import get_credits_data
 from Utils import local_path, int16_as_bytes, int32_as_bytes, snes_to_pc
 from Items import ItemFactory, prize_item_table
-from source.overworld.EntranceData import door_addresses, ow_prize_table
+from source.overworld.EntranceData import door_addresses, get_door_addresses, get_ow_prize_coords
 from source.overworld.EntranceShuffle2 import exit_ids
 from source.overworld.FluteShuffle import default_flute_connections, flute_data
 from source.overworld.OWMap import apply_ow_map_assets
@@ -1499,10 +1499,11 @@ def patch_rom(world, rom, player, team, is_mystery=False, rom_header=None):
                     if owid in [0x00, 0x03, 0x05, 0x18, 0x1B, 0x1E, 0x30, 0x35]:
                         coords = (coords[0] + 0x100, coords[1] + 0x100)
         else:
-            if ent.name in ow_prize_table:
-                coords = ow_prize_table[ent.name]
-            elif door_addresses[ent.name][1] is not None:
-                coords = (door_addresses[ent.name][1][6], door_addresses[ent.name][1][5])
+            prize_coords = get_ow_prize_coords(ent.name, world, player)
+            if prize_coords is not None:
+                coords = prize_coords
+            elif get_door_addresses(ent, world, player)[1] is not None:
+                coords = (get_door_addresses(ent, world, player)[1][6], get_door_addresses(ent, world, player)[1][5])
             else:
                 raise Exception(f"No overworld map coordinates for entrance {ent.name}")
         map_x, map_y = adjust_ow_coordinates_to_layout(world, player, coords[0], coords[1], ent.parent_region.type == RegionType.DarkWorld)
@@ -2493,7 +2494,7 @@ def write_strings(rom, world, player, team):
             entrances_to_hint.update(InsanityEntrances)
             if world.shuffle_ganon[player]:
                 if world.is_tile_swapped(0x1b, player):
-                    entrances_to_hint.update({'Inverted Pyramid Entrance': 'The extra castle passage'})
+                    entrances_to_hint.update({'Pyramid Entrance': 'The extra castle passage'})
                 else:
                     entrances_to_hint.update({'Pyramid Entrance': 'The pyramid ledge'})
         hint_count = 4 if world.shuffle[player] not in ['vanilla', 'dungeonssimple', 'dungeonsfull', 'district', 'swapped'] else 0

@@ -11,7 +11,8 @@ from Tables import bonk_prize_lookup
 from Items import ItemFactory
 
 from source.dungeon.EnemyList import add_drop_contents
-from source.overworld.EntranceShuffle2 import exit_ids, door_addresses
+from source.overworld.EntranceShuffle2 import exit_ids
+from source.overworld.EntranceData import get_door_addresses
 from source.item.FillUtil import trash_items, pot_items
 
 import source.classes.constants as CONST
@@ -623,7 +624,7 @@ def connect_entrance(world, entrancename, exitname, player):
         entrance.connected_region.entrances.remove(entrance)
 
     target = exit_ids[exit.name][0] if exit is not None else exit_ids.get(region.name, None)
-    addresses = door_addresses[entrance.name][0]
+    addresses = get_door_addresses(entrance)[0]
 
     entrance.connect(region, addresses, target)
     world.spoiler.set_entrance(entrance.name, exit.name if exit is not None else region.name, 'entrance', player)

@@ -15,7 +15,7 @@ from Items import ItemFactory
 from PotShuffle import key_drop_special
 from Utils import snes_to_pc, pc_to_snes, int16_as_bytes
 
-from source.overworld.EntranceData import door_addresses
+from source.overworld.EntranceData import get_door_addresses
 
 class EnemyStats:
     def __init__(self, sprite, static, drop_flag=False, prize_pack: typing.Union[tuple, int] = 0,
@@ -2266,7 +2266,7 @@ def find_entrance_ids(region):
         current = queue.popleft()
         for ent in current.entrances:
             if ent.parent_region.type in [RegionType.LightWorld, RegionType.DarkWorld]:
-                entrance_list.append(door_addresses[ent.name][0] + 1)
+                entrance_list.append(get_door_addresses(ent)[0] + 1)
             elif ent.parent_region not in visited:
                 queue.append(ent.parent_region)
                 visited.add(ent.parent_region)

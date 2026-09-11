@@ -519,6 +519,7 @@ def global_rules(world, player):
     set_rule(world.get_entrance('Hookshot Cave', player), Primitive('can_lift_rocks', player))
     set_rule(world.get_location('Pyramid Crack', player), Has('Pick Up Big Bomb', player))
     set_rule(world.get_entrance('Pyramid Crack', player), Has('Detonate Big Bomb', player))
+    set_rule(world.get_entrance('Pyramid Hole', player), or_rule(lambda state: world.is_pyramid_open(player), Has('Beat Agahnim 2', player)))
     set_rule(world.get_entrance('Hammer Peg Cave', player), Has('Hammer', player))
     set_rule(world.get_entrance('Bonk Fairy (Dark)', player), Primitive('has_Boots', player))
     set_rule(world.get_entrance('Dark Lake Hylia Ledge Spike Cave', player), Primitive('can_lift_rocks', player))
@@ -1184,21 +1185,13 @@ def ow_inverted_rules(world, player):
         set_rule(world.get_entrance('Kakariko Teleporter', player), Primitive('can_lift_rocks', player))
     else:
         set_rule(world.get_entrance('West Dark World Teleporter', player), Primitive('can_lift_rocks', player))
-        
+
     if not world.is_tile_swapped(0x1b, player):
-        set_rule(world.get_entrance('Inverted Pyramid Hole', player), FALSE)
-        set_rule(world.get_entrance('Inverted Pyramid Entrance', player), FALSE)
-        set_rule(world.get_entrance('Pyramid Hole', player), or_rule(lambda state: world.is_pyramid_open(player), Has('Beat Agahnim 2', player)))
-        
         set_rule(world.get_entrance('Hyrule Castle Main Gate (South)', player), Has('Magic Mirror', player))
         set_rule(world.get_entrance('Hyrule Castle Main Gate (North)', player), Has('Magic Mirror', player))
         set_rule(world.get_entrance('Castle Gate Teleporter', player), Primitive('has_beaten_aga', player))
         set_rule(world.get_entrance('Castle Gate Teleporter (Inner)', player), Primitive('has_beaten_aga', player))
     else:
-        set_rule(world.get_entrance('Inverted Pyramid Hole', player), or_rule(lambda state: world.is_pyramid_open(player), Has('Beat Agahnim 2', player)))
-        set_rule(world.get_entrance('Pyramid Hole', player), FALSE)
-        set_rule(world.get_entrance('Pyramid Entrance', player), FALSE)
-        
         set_rule(world.get_entrance('Post Aga Teleporter', player), Primitive('has_beaten_aga', player))
         
     if not world.is_tile_swapped(0x2f, player):

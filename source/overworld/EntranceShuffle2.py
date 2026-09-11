@@ -5,7 +5,7 @@ import copy
 from collections import defaultdict, OrderedDict
 from BaseClasses import RegionType
 
-from source.overworld.EntranceData import door_addresses
+from source.overworld.EntranceData import door_addresses, get_door_addresses
 
 
 class EntrancePool(object):
@@ -60,8 +60,6 @@ def link_entrances_new(world, player):
     avail_pool.entrances = set(i_drop_map.keys()).union(i_entrance_map.keys()).union(i_single_ent_map.keys())
     avail_pool.exits = set(i_entrance_map.values()).union(i_drop_map.values()).union(i_single_ent_map.values())
     avail_pool.inverted = world.mode[player] == 'inverted'
-    inverted_substitution(avail_pool, avail_pool.entrances, True, True)
-    inverted_substitution(avail_pool, avail_pool.exits, False, True)
     avail_pool.original_entrances.update(avail_pool.entrances)
     avail_pool.original_exits.update(avail_pool.exits)
     default_map = {}
@@ -178,8 +176,7 @@ def link_entrances_new(world, player):
         world.powder_patch_required[player] = True
 
     # check for ganon location
-    pyramid_hole = 'Inverted Pyramid Hole' if avail_pool.world.is_tile_swapped(0x1b, avail_pool.player) else 'Pyramid Hole'
-    if world.get_entrance(pyramid_hole, player).connected_region.name != 'Pyramid':
+    if world.get_entrance('Pyramid Hole', player).connected_region.name != 'Pyramid':
         world.ganon_at_pyramid[player] = False
 
     # check for Ganon's Tower location
@@ -506,13 +503,7 @@ def do_holes_and_linked_drops(entrances, exits, avail, cross_world):
     holes_to_shuffle = [x for x in entrances if x in drop_map]
 
     if not avail.world.shuffle_ganon[avail.player]:
-        if avail.world.is_tile_swapped(0x1b, avail.player) and 'Inverted Pyramid Hole' in holes_to_shuffle:
-            connect_entrance('Inverted Pyramid Hole', 'Pyramid', avail)
-            connect_two_way('Pyramid Entrance', 'Pyramid Exit', avail)
-            holes_to_shuffle.remove('Inverted Pyramid Hole')
-            remove_from_list(entrances, ['Inverted Pyramid Hole', 'Pyramid Entrance'])
-            remove_from_list(exits, ['Pyramid', 'Pyramid Exit'])
-        elif 'Pyramid Hole' in holes_to_shuffle:
+        if 'Pyramid Hole' in holes_to_shuffle:
             connect_entrance('Pyramid Hole', 'Pyramid', avail)
             connect_two_way('Pyramid Entrance', 'Pyramid Exit', avail)
             holes_to_shuffle.remove('Pyramid Hole')
@@ -1843,7 +1834,6 @@ def shuffle_connector_exits(connector_choices):
 
 def find_entrances_and_targets_drops(avail_pool, drop_pool):
     holes, targets = [], []
-    inverted_substitution(avail_pool, drop_pool, True)
     for item in drop_pool:
         if item in avail_pool.entrances:
             holes.append(item)
@@ -1854,7 +1844,6 @@ def find_entrances_and_targets_drops(avail_pool, drop_pool):
 
 def find_entrances_and_exits(avail_pool, entrance_pool):
     entrances, targets = [], []
-    inverted_substitution(avail_pool, entrance_pool, True)
     for item in entrance_pool:
         if item in avail_pool.entrances:
             entrances.append(item)
@@ -1863,30 +1852,6 @@ def find_entrances_and_exits(avail_pool, entrance_pool):
         elif item in avail_pool.one_way_map and avail_pool.one_way_map[item] in avail_pool.exits:
             targets.append(avail_pool.one_way_map[item])
     return entrances, targets
-
-
-inverted_sub_table = {
-    'Pyramid Hole': 'Inverted Pyramid Hole',
-    'Pyramid Entrance': 'Inverted Pyramid Entrance'
-}
-
-inverted_exit_sub_table = { }
-
-
-def inverted_substitution(avail_pool, collection, is_entrance, is_set=False):
-    if avail_pool.world.is_tile_swapped(0x1b, avail_pool.player):
-        sub_table = inverted_sub_table if is_entrance else inverted_exit_sub_table
-        for area, sub in sub_table.items():
-            if is_set:
-                if area in collection:
-                    collection.remove(area)
-                    collection.add(sub)
-            else:
-                try:
-                    idx = collection.index(area)
-                    collection[idx] = sub
-                except ValueError:
-                    pass
 
 
 def connect_swapped(entrancelist, targetlist, avail, two_way=False):
@@ -1921,8 +1886,6 @@ def connect_swap(entrance, exit, avail):
     swap_exit = avail.combine_map[entrance]
     if swap_exit != exit:
         swap_entrance = next(e for e, x in avail.combine_map.items() if x == exit)
-        if swap_entrance in ['Pyramid Entrance', 'Pyramid Hole'] and avail.world.is_tile_swapped(0x1b, avail.player):
-            swap_entrance = 'Inverted ' + swap_entrance
         if swap_exit in entrance_map.values():
             connect_two_way(swap_entrance, swap_exit, avail)
         else:
@@ -1943,22 +1906,52 @@ def connect_random(exitlist, targetlist, avail, two_way=False):
 
 
 def connect_custom(avail_pool, world, player):
+    def anti_alias(name):
+        if name == 'Inverted Pyramid Entrance':
+            return 'Pyramid Entrance'
+        if name == 'Inverted Pyramid Hole':
+            return 'Pyramid Hole'
+        return name
     if world.customizer and world.customizer.get_entrances():
         custom_entrances = world.customizer.get_entrances()
         player_key = player
         if 'two-way' in custom_entrances[player_key]:
             for ent_name, exit_name in custom_entrances[player_key]['two-way'].items():
-                connect_two_way(ent_name, exit_name, avail_pool)
+                connect_two_way(anti_alias(ent_name), anti_alias(exit_name), avail_pool)
         if 'entrances' in custom_entrances[player_key]:
             for ent_name, exit_name in custom_entrances[player_key]['entrances'].items():
-                connect_entrance(ent_name, exit_name, avail_pool)
+                connect_entrance(anti_alias(ent_name), anti_alias(exit_name), avail_pool)
         if 'exits' in custom_entrances[player_key]:
             for ent_name, exit_name in custom_entrances[player_key]['exits'].items():
-                connect_exit(exit_name, ent_name, avail_pool)
+                connect_exit(anti_alias(exit_name), anti_alias(ent_name), avail_pool)
 
 
 def connect_simple(world, exit_name, region_name, player):
     world.get_entrance(exit_name, player).connect(world.get_region(region_name, player))
+
+
+def relocate_pyramid_entrances(world, player):
+    """
+    Attach the single Pyramid Hole / Pyramid Entrance to the region that
+    actually holds them after tile 0x1b is resolved. create_regions always
+    parents them on the dark-world pyramid; mixed/inverted may move them
+    to Hyrule Castle Ledge.
+    """
+    def reparent_entrance(entrance, dest_region):
+        old = entrance.parent_region
+        if old is dest_region:
+            return
+        if old is not None and entrance in old.exits:
+            old.exits.remove(entrance)
+        entrance.parent_region = dest_region
+        if entrance not in dest_region.exits:
+            dest_region.exits.append(entrance)
+
+    swapped = world.is_tile_swapped(0x1b, player)
+    hole_dest = world.get_region('Hyrule Castle Ledge' if swapped else 'Pyramid Area', player)
+    door_dest = world.get_region('Hyrule Castle Ledge' if swapped else 'Pyramid Exit Ledge', player)
+    reparent_entrance(world.get_entrance('Pyramid Hole', player), hole_dest)
+    reparent_entrance(world.get_entrance('Pyramid Entrance', player), door_dest)
 
 
 def connect_vanilla(exit_name, region_name, avail):
@@ -2002,7 +1995,7 @@ def connect_entrance(entrancename, exit_name, avail):
         entrance.connected_region.entrances.remove(entrance)
 
     target = exit_ids[exit.name][0] if exit is not None else exit_ids.get(region.name, None)
-    addresses = door_addresses[entrance.name][0]
+    addresses = get_door_addresses(entrance)[0]
 
     entrance.connect(region, addresses, target)
     avail.entrances.remove(entrancename)
@@ -2032,7 +2025,7 @@ def connect_exit(exit_name, entrancename, avail):
         # Needs to logically exit into greater OW area
         dest_region = entrance.parent_region.entrances[0].parent_region
 
-    exit.connect(dest_region, door_addresses[entrance.name][1], exit_ids[exit.name][1])
+    exit.connect(dest_region, get_door_addresses(entrance)[1], exit_ids[exit.name][1])
     if exit_name != 'Chris Houlihan Room Exit':
         if avail.coupled:
             avail.entrances.remove(entrancename)
@@ -2053,8 +2046,8 @@ def connect_two_way(entrancename, exit_name, avail):
     if exit.connected_region is not None:
         exit.connected_region.entrances.remove(exit)
 
-    entrance.connect(exit.parent_region, door_addresses[entrance.name][0], exit_ids[exit.name][0])
-    exit.connect(entrance.parent_region, door_addresses[entrance.name][1], exit_ids[exit.name][1])
+    entrance.connect(exit.parent_region, get_door_addresses(entrance)[0], exit_ids[exit.name][0])
+    exit.connect(entrance.parent_region, get_door_addresses(entrance)[1], exit_ids[exit.name][1])
     avail.entrances.remove(entrancename)
     avail.exits.remove(exit_name)
     world.spoiler.set_entrance(entrance.name, exit.name, 'both', player)
@@ -2524,14 +2517,14 @@ modes = {
             'central_hyrule': {
                 'special': 'district',
                 'condition': 'lightworld',
-                'drops': ['Hyrule Castle Secret Entrance Drop', 'Inverted Pyramid Hole',
+                'drops': ['Hyrule Castle Secret Entrance Drop',
 
                           'Pyramid Hole'],
-                'entrances': ['Hyrule Castle Secret Entrance Stairs', 'Inverted Pyramid Entrance', 'Agahnims Tower',
+                'entrances': ['Hyrule Castle Secret Entrance Stairs', 'Pyramid Entrance', 'Agahnims Tower',
                               'Hyrule Castle Entrance (West)', 'Hyrule Castle Entrance (East)', 'Hyrule Castle Entrance (South)',
                               'Bonk Fairy (Light)', 'Links House', 'Cave 45', 'Light Hype Fairy', 'Dam',
 
-                              'Pyramid Entrance', 'Pyramid Fairy', 'Bonk Fairy (Dark)', 'Big Bomb Shop', 'Hype Cave', 'Swamp Palace']
+                              'Pyramid Fairy', 'Bonk Fairy (Dark)', 'Big Bomb Shop', 'Hype Cave', 'Swamp Palace']
             },
             'kakariko': {
                 'special': 'district',
@@ -2612,11 +2605,11 @@ modes = {
                 'condition': 'darkworld',
                 'drops': ['Pyramid Hole',
 
-                          'Hyrule Castle Secret Entrance Drop', 'Inverted Pyramid Hole'],
+                          'Hyrule Castle Secret Entrance Drop'],
                 'entrances': ['Pyramid Entrance', 'Pyramid Fairy', 'Dark Potion Shop', 'Palace of Darkness Hint', 'Palace of Darkness',
                               'Dark Lake Hylia Fairy', 'East Dark World Hint',
 
-                              'Hyrule Castle Secret Entrance Stairs', 'Inverted Pyramid Entrance', 'Waterfall of Wishing', 'Potion Shop', 
+                              'Hyrule Castle Secret Entrance Stairs', 'Waterfall of Wishing', 'Potion Shop', 
                               'Agahnims Tower', 'Hyrule Castle Entrance (West)', 'Hyrule Castle Entrance (East)',
                               'Hyrule Castle Entrance (South)', 'Sahasrahlas Hut', 'Eastern Palace', 'Lake Hylia Fairy', 'Long Fairy Cave']
             },
@@ -2686,8 +2679,7 @@ drop_map = {
     'Lost Woods Hideout Drop': 'Lost Woods Hideout (top)',
     'Lumberjack Tree Tree': 'Lumberjack Tree (top)',
     'Sanctuary Grave': 'Sewer Drop',
-    'Pyramid Hole': 'Pyramid',
-    'Inverted Pyramid Hole': 'Pyramid'
+    'Pyramid Hole': 'Pyramid'
 }
 
 linked_drop_map = {
@@ -2699,7 +2691,6 @@ linked_drop_map = {
     'Lumberjack Tree Tree': 'Lumberjack Tree Cave',
     'Sanctuary Grave': 'Sanctuary',
     'Pyramid Hole': 'Pyramid Entrance',
-    'Inverted Pyramid Hole': 'Inverted Pyramid Entrance',
 
     'Skull Woods First Section Hole (North)': 'Skull Woods First Section Door',
     'Skull Woods Second Section Hole': 'Skull Woods Second Section Door (East)',
@@ -2753,7 +2744,6 @@ entrance_map = {
     'Lumberjack Tree Cave': 'Lumberjack Tree Exit',
     'Sanctuary': 'Sanctuary Exit',
     'Pyramid Entrance': 'Pyramid Exit',
-    'Inverted Pyramid Entrance': 'Pyramid Exit',
 
     'Elder House (East)': 'Elder House Exit (East)',
     'Elder House (West)': 'Elder House Exit (West)',
@@ -3100,6 +3090,8 @@ default_connections = {'Lost Woods Gamble': 'Lost Woods Gamble',
                        'Dark World Shop': 'Village of Outcasts Shop',
                        'Brewery': 'Brewery',
                        'Red Shield Shop': 'Red Shield Shop',
+                       'Pyramid Hole': 'Pyramid',
+                       'Pyramid Entrance': 'Bottom of Pyramid',
                        'Pyramid Fairy': 'Pyramid Fairy',
                        'Palace of Darkness Hint': 'Palace of Darkness Hint',
                        'Hammer Peg Cave': 'Hammer Peg Cave',
@@ -3117,13 +3109,9 @@ default_connections = {'Lost Woods Gamble': 'Lost Woods Gamble',
                        'Dark Lake Hylia Ledge Hint': 'Dark Lake Hylia Ledge Hint',
                        'Dark Lake Hylia Ledge Spike Cave': 'Dark Lake Hylia Ledge Spike Cave'}
 
-open_default_connections = {'Pyramid Hole': 'Pyramid',
-                            'Pyramid Exit': 'Pyramid Ledge',
-                            'Pyramid Entrance': 'Bottom of Pyramid'}
+open_default_connections = {'Pyramid Exit': 'Pyramid Ledge'}
 
-inverted_default_connections = {'Inverted Pyramid Hole': 'Pyramid',
-                                'Pyramid Exit': 'Hyrule Castle Ledge',
-                                'Inverted Pyramid Entrance': 'Bottom of Pyramid'}
+inverted_default_connections = {'Pyramid Exit': 'Hyrule Castle Ledge'}
 
 
 # format:

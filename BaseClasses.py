@@ -16,7 +16,7 @@ from Utils import int16_as_bytes
 from Tables import normal_offset_table, spiral_offset_table, multiply_lookup, divisor_lookup
 from RoomData import Room
 from source.dungeon.RoomObject import RoomObject
-from source.overworld.EntranceData import door_addresses
+from source.overworld.EntranceData import door_addresses, get_door_addresses
 
 
 class World(object):
@@ -2986,7 +2986,7 @@ class Shop(object):
         entrances = self.region.entrances
         config = self.item_count
         if len(entrances) == 1 and entrances[0].name in door_addresses:
-            door_id = door_addresses[entrances[0].name][0] + 1
+            door_id = get_door_addresses(entrances[0])[0] + 1
         else:
             door_id = 0
             config |= 0x40  # ignore door id
