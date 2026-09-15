@@ -500,6 +500,26 @@ def remove_from_list(t_list, removals):
 
 
 def do_holes_and_linked_drops(entrances, exits, avail, cross_world):
+    def remove_hole_swap_pair(entrance, ext, drop, target, hole_entrances, hole_targets):
+        swap_ent, swap_ext = connect_swap(entrance, ext, avail)
+        swap_drop, swap_tgt = connect_swap(drop, target, avail)
+        hole_entrances.remove((swap_ent, swap_drop))
+        hole_targets.remove((swap_ext, swap_tgt))
+        remove_from_list(entrances, [swap_ent, swap_drop])
+        remove_from_list(exits, [swap_ext, swap_tgt])
+
+    def connect_hole_via_interior(chosen_entrance, interior, hole_entrances, hole_targets):
+        hole_entrances.remove(chosen_entrance)
+        interior = next(target for target in hole_targets if target[0] == interior)
+        hole_targets.remove(interior)
+        connect_two_way(chosen_entrance[0], interior[0], avail)
+        connect_entrance(chosen_entrance[1], interior[1], avail)
+        remove_from_list(entrances, [chosen_entrance[0], chosen_entrance[1]])
+        remove_from_list(exits, [interior[0], interior[1]])
+        if avail.swapped and drop_map[chosen_entrance[1]] != interior[1]:
+            remove_hole_swap_pair(chosen_entrance[0], interior[0], chosen_entrance[1], interior[1],
+                                  hole_entrances, hole_targets)
+
     holes_to_shuffle = [x for x in entrances if x in drop_map]
 
     if not avail.world.shuffle_ganon[avail.player]:
@@ -560,15 +580,15 @@ def do_holes_and_linked_drops(entrances, exits, avail, cross_world):
                     chosen_entrance = next(e for e in hole_entrances if e[0] in start_world_entrances)
 
             if chosen_entrance:
-                connect_hole_via_interior(chosen_entrance, 'Sanctuary Exit', hole_entrances, hole_targets, entrances, exits, avail)
+                connect_hole_via_interior(chosen_entrance, 'Sanctuary Exit', hole_entrances, hole_targets)
                 
         sw_world_entrances = DW_Entrances if not avail.world.is_tile_swapped(0x00, avail.player) else LW_Entrances
         if 'Skull Woods First Section Hole (North)' in holes_to_shuffle:
             chosen_entrance = next(e for e in hole_entrances if e[0] in sw_world_entrances)
-            connect_hole_via_interior(chosen_entrance, 'Skull Woods First Section Exit', hole_entrances, hole_targets, entrances, exits, avail)
+            connect_hole_via_interior(chosen_entrance, 'Skull Woods First Section Exit', hole_entrances, hole_targets)
         if 'Skull Woods Second Section Hole' in holes_to_shuffle:
             chosen_entrance = next(e for e in hole_entrances if e[0] in sw_world_entrances)
-            connect_hole_via_interior(chosen_entrance, 'Skull Woods Second Section Exit (East)', hole_entrances, hole_targets, entrances, exits, avail)
+            connect_hole_via_interior(chosen_entrance, 'Skull Woods Second Section Exit (East)', hole_entrances, hole_targets)
 
     random.shuffle(hole_targets)
     while len(hole_entrances):
@@ -583,12 +603,7 @@ def do_holes_and_linked_drops(entrances, exits, avail, cross_world):
         remove_from_list(entrances, [entrance, drop])
         remove_from_list(exits, [ext, target])
         if avail.swapped and drop_map[drop] != target:
-            swap_ent, swap_ext = connect_swap(entrance, ext, avail)
-            swap_drop, swap_tgt = connect_swap(drop, target, avail)
-            hole_entrances.remove((swap_ent, swap_drop))
-            hole_targets.remove((swap_ext, swap_tgt))
-            remove_from_list(entrances, [swap_ent, swap_drop])
-            remove_from_list(exits, [swap_ext, swap_tgt])
+            remove_hole_swap_pair(entrance, ext, drop, target, hole_entrances, hole_targets)
 
     if leftover_hole_entrances and leftover_hole_targets:
         remove_from_list(entrances, leftover_hole_entrances)
@@ -597,23 +612,6 @@ def do_holes_and_linked_drops(entrances, exits, avail, cross_world):
             connect_swapped(leftover_hole_entrances, leftover_hole_targets, avail)
         else:
             connect_random(leftover_hole_entrances, leftover_hole_targets, avail)
-
-
-def connect_hole_via_interior(chosen_entrance, interior, hole_entrances, hole_targets, entrances, exits, avail):
-    hole_entrances.remove(chosen_entrance)
-    interior = next(target for target in hole_targets if target[0] == interior)
-    hole_targets.remove(interior)
-    connect_two_way(chosen_entrance[0], interior[0], avail)
-    connect_entrance(chosen_entrance[1], interior[1], avail)
-    remove_from_list(entrances, [chosen_entrance[0], chosen_entrance[1]])
-    remove_from_list(exits, [interior[0], interior[1]])
-    if avail.swapped and drop_map[chosen_entrance[1]] != interior[1]:
-        swap_ent, swap_ext = connect_swap(chosen_entrance[0], interior[0], avail)
-        swap_drop, swap_tgt = connect_swap(chosen_entrance[1], interior[1], avail)
-        hole_entrances.remove((swap_ent, swap_drop))
-        hole_targets.remove((swap_ext, swap_tgt))
-        remove_from_list(entrances, [swap_ent, swap_drop])
-        remove_from_list(exits, [swap_ext, swap_tgt])
 
 
 def do_dark_sanc(entrances, exits, avail):
