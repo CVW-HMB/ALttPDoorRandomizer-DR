@@ -519,7 +519,8 @@ def global_rules(world, player):
     set_rule(world.get_entrance('Hookshot Cave', player), Primitive('can_lift_rocks', player))
     set_rule(world.get_location('Pyramid Crack', player), Has('Pick Up Big Bomb', player))
     set_rule(world.get_entrance('Pyramid Crack', player), Has('Detonate Big Bomb', player))
-    set_rule(world.get_entrance('Pyramid Hole', player), or_rule(lambda state: world.is_pyramid_open(player), Has('Beat Agahnim 2', player)))
+    if not world.is_pyramid_open(player):
+        set_rule(world.get_entrance('Pyramid Hole', player), Has('Beat Agahnim 2', player))
     set_rule(world.get_entrance('Hammer Peg Cave', player), Has('Hammer', player))
     set_rule(world.get_entrance('Bonk Fairy (Dark)', player), Primitive('has_Boots', player))
     set_rule(world.get_entrance('Dark Lake Hylia Ledge Spike Cave', player), Primitive('can_lift_rocks', player))
