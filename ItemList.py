@@ -11,7 +11,8 @@ from Tables import bonk_prize_lookup
 from Items import ItemFactory
 
 from source.dungeon.EnemyList import add_drop_contents
-from source.overworld.EntranceShuffle2 import exit_ids, door_addresses
+from source.overworld.EntranceShuffle2 import exit_ids
+from source.overworld.EntranceData import get_door_addresses
 from source.item.FillUtil import trash_items, pot_items
 
 import source.classes.constants as CONST
@@ -623,7 +624,7 @@ def connect_entrance(world, entrancename, exitname, player):
         entrance.connected_region.entrances.remove(entrance)
 
     target = exit_ids[exit.name][0] if exit is not None else exit_ids.get(region.name, None)
-    addresses = door_addresses[entrance.name][0]
+    addresses = get_door_addresses(entrance)[0]
 
     entrance.connect(region, addresses, target)
     world.spoiler.set_entrance(entrance.name, exit.name if exit is not None else region.name, 'entrance', player)
@@ -700,7 +701,8 @@ def create_farm_locations(world, player):
     def create_and_fill_location(region_name, loc_description, item_name):
         loc = world.get_location_unsafe(f'{region_name} {loc_description}', player)
         if loc:
-            loc.access_rule = lambda state: True
+            from source.logic.AccessRule import set_rule, TRUE
+            set_rule(loc, TRUE)
         else:
             region = world.get_region(region_name, player)
             loc = Location(player, f'{region_name} {loc_description}', 0, region)
@@ -718,17 +720,18 @@ def create_farm_locations(world, player):
         return loc
 
     from Rules import set_rule, add_rule, add_bunny_rule
+    from source.logic.AccessRule import Primitive, not_rule
     for region in bush_bombs:
         loc = create_and_fill_location(region, 'Bush Drop', 'Farmable Bombs')
         add_bunny_rule(loc, player)
     for region in rock_bombs:
         loc = create_and_fill_location(region, 'Rock Drop', 'Farmable Bombs')
-        set_rule(loc, lambda state: state.can_lift_rocks(player))
+        set_rule(loc, Primitive('can_lift_rocks', player))
         add_bunny_rule(loc, player)
     if not world.shuffle_bonk_drops[player]:
         for region in bonk_bombs:
             loc = create_and_fill_location(region, 'Bonk Drop', 'Farmable Bombs')
-            set_rule(loc, lambda state: state.can_collect_bonkdrops(player))
+            set_rule(loc, Primitive('can_collect_bonkdrops', player))
             add_bunny_rule(loc, player)
     if world.pottery[player] in ['none', 'keys', 'dungeon']:
         for region in bomb_caves + rupee_caves:
@@ -741,20 +744,20 @@ def create_farm_locations(world, player):
         rupee_farm = any(i in [0xda, 0xdb] for i in world.prizes[player]['pull'])
         for region in tree_pulls + pre_aga_tree_pulls + post_aga_tree_pulls:
             loc = create_and_fill_location(region, 'Tree Pull', 'Farmable Rupees' if rupee_farm else 'Farmable Bombs')
-            set_rule(loc, lambda state: state.can_kill_most_things(player))
+            set_rule(loc, Primitive('can_kill_most_things', player))
             if region in pre_aga_tree_pulls:
-                add_rule(loc, lambda state: not state.has_beaten_aga(player))
+                add_rule(loc, not_rule(Primitive('has_beaten_aga', player)))
             elif region in post_aga_tree_pulls:
-                add_rule(loc, lambda state: state.has_beaten_aga(player))
+                add_rule(loc, Primitive('has_beaten_aga', player))
             add_bunny_rule(loc, player)
     if world.enemy_shuffle[player] == 'none' and any(i in [0xda, 0xdb, 0xdc, 0xdd, 0xde] for i in world.prizes[player]['crab']):
         rupee_farm = any(i in [0xda, 0xdb] for i in world.prizes[player]['crab'])
         for region in bush_crabs + pre_aga_bush_crabs + rock_crabs:
             loc = create_and_fill_location(region, 'Crab Drop', 'Farmable Rupees' if rupee_farm else 'Farmable Bombs')
             if region in pre_aga_bush_crabs:
-                set_rule(loc, lambda state: not state.has_beaten_aga(player))
+                set_rule(loc, not_rule(Primitive('has_beaten_aga', player)))
             elif region in rock_crabs:
-                set_rule(loc, lambda state: state.can_lift_rocks(player))
+                set_rule(loc, Primitive('can_lift_rocks', player))
             add_bunny_rule(loc, player)
 
     world.clear_location_cache()

@@ -11,11 +11,12 @@ except ImportError:
     from enum import IntFlag as FastEnum
 
 from source.classes.BabelFish import BabelFish
+from source.logic.AccessRule import TRUE, true_fn
 from Utils import int16_as_bytes
 from Tables import normal_offset_table, spiral_offset_table, multiply_lookup, divisor_lookup
 from RoomData import Room
 from source.dungeon.RoomObject import RoomObject
-from source.overworld.EntranceData import door_addresses
+from source.overworld.EntranceData import door_addresses, get_door_addresses
 
 
 class World(object):
@@ -1208,6 +1209,33 @@ class CollectionState(object):
         obtained = self.prog_items[item, player] - self.forced_keys[item, player]
         return obtained >= count
 
+    def eval_small_key_door(self, door_name, dungeon, player):
+        from Rules import eval_small_key_door_main
+        return eval_small_key_door_main(self, door_name, dungeon, player)
+
+    def eval_small_key_door_partial(self, door_name, dungeon, player):
+        from Rules import eval_small_key_door_partial_main
+        return eval_small_key_door_partial_main(self, door_name, dungeon, player)
+
+    def eval_small_key_door_strict(self, door_name, dungeon, player):
+        from Rules import eval_small_key_door_strict_main
+        return eval_small_key_door_strict_main(self, door_name, dungeon, player)
+
+    def eval_alternative_crystal(self, door_name, dungeon, player):
+        from Rules import eval_alternative_crystal_main
+        return eval_alternative_crystal_main(self, door_name, dungeon, player)
+
+    def item_is_at(self, location, player, item):
+        loc = self.world.get_location(location, player)
+        return loc.item is not None and loc.item.name == item and loc.item.player == player
+
+    def item_in_named_locations(self, item, player, location_names):
+        for name in location_names:
+            loc = self.world.get_location(name, player)
+            if loc.item is not None and loc.item.name == item and loc.item.player == player:
+                return True
+        return False
+
     def can_buy_unlimited(self, item, player):
         for shop in self.world.shops[player]:
             if shop.region.player == player and shop.has_unlimited(item) and shop.region.can_reach(self):
@@ -1699,8 +1727,8 @@ class Entrance(object):
         self.spot_type = 'Entrance'
         self.recursion_count = 0
         self.vanilla = None
-        self.access_rule = lambda state: True
-        self.verbose_rule = None
+        self.access_rule = true_fn
+        self.verbose_rule = TRUE
         self.player = player
         self.door = None
         self.hide_path = False
@@ -2734,8 +2762,8 @@ class Location(object):
         self.locked = False
         self.real = True
         self.always_allow = None
-        self.access_rule = lambda state: True
-        self.verbose_rule = None
+        self.access_rule = true_fn
+        self.verbose_rule = TRUE
         self.item_rule = lambda item: True
         self.player = player
         self.skip = False
@@ -2958,7 +2986,7 @@ class Shop(object):
         entrances = self.region.entrances
         config = self.item_count
         if len(entrances) == 1 and entrances[0].name in door_addresses:
-            door_id = door_addresses[entrances[0].name][0] + 1
+            door_id = get_door_addresses(entrances[0])[0] + 1
         else:
             door_id = 0
             config |= 0x40  # ignore door id
