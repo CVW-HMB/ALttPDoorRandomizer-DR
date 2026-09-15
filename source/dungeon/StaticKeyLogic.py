@@ -195,9 +195,12 @@ def set_door_number(world, player, door_name, number):
 def set_turtle_rock_rules(world, player, keys, big_key_in, small_key_at, or_rules, allow_small, forbid_item,
                           set_rule, item_name, loc):
     tr, chest = 'Turtle Rock', 'Turtle Rock - Big Key Chest'
-    # everything but this dungeon's small keys, so its key doors stay shut
+    # everything but this dungeon's small keys, so its key doors stay shut. Other dungeons' keys
+    # must be included: in standard the sewers need Small Key (Escape), and without it no TR
+    # entrance is reachable, every branch below is skipped, and TR keeps the unrelaxed
+    # DOOR_RULES numbers -- which make the dungeon unfillable.
     from BaseClasses import CollectionState
-    full = world.get_all_state(keys=False)
+    full = world.get_all_state(keys=True)
     state = CollectionState(world)
     state.prog_items = full.prog_items.copy()
     state.prog_items[(dungeon_keys[tr], player)] = 0
