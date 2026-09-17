@@ -674,6 +674,16 @@ def copy_dynamic_regions_and_locations(world, ret):
         ret.clear_location_cache()
 
 
+def key_may_lock_itself(world, location):
+    # a key may lock itself in when it blocks no chest but its own. That is exactly where the rules set an
+    # always_allow for it: with locations accessibility they forbid the key there instead, since every chest
+    # must be reachable however the keys are spent
+    item = location.item
+    if not (item.smallkey or item.bigkey) or world.key_logic_algorithm[item.player] != 'static':
+        return False
+    return bool(location.always_allow and location.always_allow(world.state, item))
+
+
 def create_playthrough(world):
     # create a copy as we will modify it
     old_world = world
@@ -710,7 +720,8 @@ def create_playthrough(world):
             if world.accessibility[location.item.player] != 'none':
                 logging.getLogger('').error(world.fish.translate("cli", "cli", "cannot.reach.items"),
                                             [world.fish.translate("cli","cli","cannot.reach.item") % (location.item.name, location.item.player, location.name, location.player) for location in sphere_candidates])
-            if any([location.name not in optional_locations and world.accessibility[location.item.player] != 'none' for location in sphere_candidates]):
+            if any([location.name not in optional_locations and world.accessibility[location.item.player] != 'none'
+                    and not key_may_lock_itself(world, location) for location in sphere_candidates]):
                 raise RuntimeError(world.fish.translate("cli", "cli", "cannot.reach.progression"))
             else:
                 old_world.spoiler.unreachables = sphere_candidates.copy()
