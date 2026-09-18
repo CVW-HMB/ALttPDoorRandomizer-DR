@@ -1601,6 +1601,9 @@ def do_vanilla_connect(pool_def, avail):
     if 'enemy_drop' in pool_def['condition']:
         if avail.world.dropshuffle[avail.player] not in ['none', 'keys'] and avail.world.enemy_shuffle[avail.player] != 'none':
             return
+    if 'skullwoods' in pool_def['condition']:
+        if avail.world.skullwoods[avail.player] == 'followlinked':
+            return
     defaults = {**default_connections, **(inverted_default_connections if avail.inverted != avail.world.is_tile_swapped(0x1b, avail.player) else open_default_connections)}
     for entrance in pool_def['entrances']:
         if entrance in avail.entrances:
@@ -2070,7 +2073,7 @@ modes = {
             },
             'skull_layout': {
                 'special': 'vanilla',
-                'condition': '',
+                'condition': 'skullwoods',
                 'entrances': ['Skull Woods First Section Door', 'Skull Woods Second Section Door (East)',
                               'Skull Woods Second Section Door (West)']
             },
@@ -2345,7 +2348,7 @@ modes = {
             },
             'skull_layout': {
                 'special': 'vanilla',
-                'condition': '',
+                'condition': 'skullwoods',
                 'entrances': ['Skull Woods First Section Door', 'Skull Woods Second Section Door (East)',
                               'Skull Woods Second Section Door (West)']
             },
@@ -2426,7 +2429,7 @@ modes = {
             },
             'skull_layout': {
                 'special': 'vanilla',
-                'condition': '',
+                'condition': 'skullwoods',
                 'entrances': ['Skull Woods First Section Door', 'Skull Woods Second Section Door (East)',
                               'Skull Woods Second Section Door (West)']
             },
