@@ -584,11 +584,13 @@ def do_holes_and_linked_drops(entrances, exits, avail, cross_world):
                 
         sw_world_entrances = DW_Entrances if not avail.world.is_tile_swapped(0x00, avail.player) else LW_Entrances
         if 'Skull Woods First Section Hole (North)' in holes_to_shuffle:
-            chosen_entrance = next(e for e in hole_entrances if e[0] in sw_world_entrances)
-            connect_hole_via_interior(chosen_entrance, 'Skull Woods First Section Exit', hole_entrances, hole_targets)
+            chosen_entrance = next((e for e in hole_entrances if e[0] in sw_world_entrances), None)
+            if chosen_entrance:
+                connect_hole_via_interior(chosen_entrance, 'Skull Woods First Section Exit', hole_entrances, hole_targets)
         if 'Skull Woods Second Section Hole' in holes_to_shuffle:
-            chosen_entrance = next(e for e in hole_entrances if e[0] in sw_world_entrances)
-            connect_hole_via_interior(chosen_entrance, 'Skull Woods Second Section Exit (East)', hole_entrances, hole_targets)
+            chosen_entrance = next((e for e in hole_entrances if e[0] in sw_world_entrances), None)
+            if chosen_entrance:
+                connect_hole_via_interior(chosen_entrance, 'Skull Woods Second Section Exit (East)', hole_entrances, hole_targets)
 
     random.shuffle(hole_targets)
     while len(hole_entrances):
