@@ -936,6 +936,15 @@ def figure_out_true_exits(exits, avail):
 
 
 def must_exits_helper(avail):
+    def sw_back_forest_has_connector(world, player):
+        regions = set()
+        for exit_name in ('Skull Woods Second Section Exit (East)', 'Skull Woods Second Section Exit (West)'):
+            ext = world.get_entrance(exit_name, player)
+            if not ext.connected_region:
+                return False
+            regions.add(ext.connected_region.name)
+        return 'Skull Woods Forest (West)' in regions and 'Skull Woods Forest' in regions
+
     def find_inacessible_ow_regions():
         from DoorShuffle import find_inaccessible_regions
         nonlocal inaccessible_regions
@@ -968,6 +977,10 @@ def must_exits_helper(avail):
                     if exit.connected_region and exit.connected_region.name in multi_dungeon_exits:
                         resolved_regions.append(region_name)
                         break
+        if ('Skull Woods Forest (West)' not in resolved_regions
+                and avail.world.shuffle[avail.player] == 'district'
+                and sw_back_forest_has_connector(avail.world, avail.player)):
+            resolved_regions.append('Skull Woods Forest (West)')
 
     inaccessible_regions = list()
     resolved_regions = list()
@@ -1372,7 +1385,19 @@ def handle_skull_woods_entrances(avail, pool):
         return
     if skull_woods in ['restricted', 'original']:
         entrances, exits = find_entrances_and_exits(avail, pool)
-        if avail.world.shuffle[avail.player] in ['dungeonssimple', 'simple', 'restricted'] \
+        if (avail.world.shuffle[avail.player] == 'district' and skull_woods == 'restricted'
+                and (not avail.world.is_tile_lw_like(0x40, avail.player))):
+            front_doors = [e for e in entrances if avail.world.get_entrance(e, avail.player).parent_region.name == 'Skull Woods Forest']
+            back_doors = [e for e in entrances if avail.world.get_entrance(e, avail.player).parent_region.name == 'Skull Woods Forest (West)']
+            back_exits = [x for x in ('Skull Woods Second Section Exit (West)', 'Skull Woods Second Section Exit (East)') if x in exits]
+            if front_doors and back_doors and len(back_exits) == 2:
+                pair = [random.choice(front_doors), random.choice(back_doors)]
+                for e in pair:
+                    entrances.remove(e)
+                for x in back_exits:
+                    exits.remove(x)
+                connect_random(pair, back_exits, avail, True)
+        elif avail.world.shuffle[avail.player] in ['dungeonssimple', 'simple', 'restricted'] \
                 and not avail.world.is_tile_swapped(0x00, avail.player):
             rem_ent = random.choice(['Skull Woods First Section Door', 'Skull Woods Second Section Door (East)'])
             entrances.remove(rem_ent)
