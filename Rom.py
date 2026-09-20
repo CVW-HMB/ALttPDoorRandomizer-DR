@@ -83,10 +83,13 @@ TELEKEY_ACTION = [
     0xB0, 0x08,              # BCS +8
     0x8F, 0x7C, 0xF3, 0x7E,  # STA.l $7EF37C   - sewers and castle count together
     0x8F, 0x7D, 0xF3, 0x7E,  # STA.l $7EF37D
-    0xAF, 0x8B, 0xF3, 0x7E,  # LDA.l $7EF38B   - generic key count
+    # read the live counter, not the generic one: spending a key decrements live
+    # while UpdateKeys leaves generic stale until the next SaveKeys, so reading
+    # generic here would hand back every key already spent in this dungeon
+    0xAF, 0x6F, 0xF3, 0x7E,  # LDA.l $7EF36F   - live key count
     0x1A,                    # INC A
-    0x8F, 0x8B, 0xF3, 0x7E,  # STA.l $7EF38B
-    0x8F, 0x6F, 0xF3, 0x7E,  # STA.l $7EF36F   - live counter
+    0x8F, 0x8B, 0xF3, 0x7E,  # STA.l $7EF38B   - generic pool
+    0x8F, 0x6F, 0xF3, 0x7E,  # STA.l $7EF36F
     0x60,                    # RTS
 ]
 assert len(TELEKEY_ACTION) <= len(DUNGEON_KEY_ACTION_STOCK)
