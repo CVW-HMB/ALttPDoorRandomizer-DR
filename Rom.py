@@ -47,10 +47,10 @@ from source.enemizer.Enemizer import write_enemy_shuffle_settings
 
 
 JAP10HASH = '03a63945398191337e896e5771f77173'
-RANDOMIZERBASEHASH = '5fd45b38e7951866aeeaf5a3182bdf4d'
+RANDOMIZERBASEHASH = 'a570ac51c18f501fe06f430761431e94'
 
 limited_run_hashes = {
-    '2604' : '402457cd3edee02aeb50c243fb4d5fe8',
+    '2604' : 'a809b417a8cfab5bb5cc00cc554f90c2',
 }
 
 class JsonRom(object):
