@@ -47,8 +47,34 @@ RANDOMIZERBASEHASH = 'a882ed16dce1cb84f366afd69788e8f2'
 # item pickup action table, indexed by item id - JMP ($B600,X) in bank $A2
 ITEM_ACTION_TABLE = 0x113600
 DUNGEON_SMALL_KEY_ITEMS = range(0xA0, 0xAE)
-UNIVERSAL_SMALL_KEY_ITEM = 0xAF
-UNIVERSAL_SMALL_KEY_ACTION = 0xD582
+# the stock dungeon small key action, which telekeys overwrites, and the stock
+# universal key action, checked to confirm the table is where we think it is
+DUNGEON_KEY_ACTION, DUNGEON_KEY_ACTION_PC, DUNGEON_KEY_ACTION_ROOM = 0xD528, 0x115528, 0x40
+UNIVERSAL_KEY_ACTION = 0xD582
+
+# on entry the dispatcher leaves A as the item id doubled, 8 bit accumulator,
+# 16 bit index. Bump the key's own dungeon counter, which is what trackers read,
+# then the generic pool that doors actually spend from
+TELEKEY_ACTION = [
+    0xC2, 0x20,              # REP #$20
+    0x4A,                    # LSR A
+    0x29, 0x0F, 0x00,        # AND #$000F      - dungeon nibble
+    0xAA,                    # TAX
+    0xE2, 0x20,              # SEP #$20
+    0xBF, 0x7C, 0xF3, 0x7E,  # LDA.l $7EF37C,X - that dungeon's key count
+    0x1A,                    # INC A
+    0x9F, 0x7C, 0xF3, 0x7E,  # STA.l $7EF37C,X
+    0xE0, 0x02, 0x00,        # CPX #$0002
+    0xB0, 0x08,              # BCS +8
+    0x8F, 0x7C, 0xF3, 0x7E,  # STA.l $7EF37C   - sewers and castle count together
+    0x8F, 0x7D, 0xF3, 0x7E,  # STA.l $7EF37D
+    0xAF, 0x8B, 0xF3, 0x7E,  # LDA.l $7EF38B   - generic key count
+    0x1A,                    # INC A
+    0x8F, 0x8B, 0xF3, 0x7E,  # STA.l $7EF38B
+    0x8F, 0x6F, 0xF3, 0x7E,  # STA.l $7EF36F   - live counter
+    0x60,                    # RTS
+]
+assert len(TELEKEY_ACTION) <= DUNGEON_KEY_ACTION_ROOM
 
 
 class JsonRom(object):
@@ -421,16 +447,18 @@ def handle_native_dungeon(location, itemid):
 
 
 def write_telekeys(rom):
-    # every dungeon small key runs the universal key's pickup action, so it counts
-    # toward the generic key pool while keeping its own item code and text box
-    action = list(UNIVERSAL_SMALL_KEY_ACTION.to_bytes(2, 'little'))
+    # give every dungeon small key a pickup action that feeds the generic key pool
+    # as well as its own dungeon counter. The item code in the chest is untouched,
+    # so the keysanity pickup text box still names the dungeon
     buffer = getattr(rom, 'buffer', None)
     if buffer is not None:
-        offset = ITEM_ACTION_TABLE + UNIVERSAL_SMALL_KEY_ITEM * 2
-        if list(buffer[offset:offset + 2]) != action:
-            raise RuntimeError('Item action table has moved, telekeys needs new offsets')
+        for itemid, action in ((0xA2, DUNGEON_KEY_ACTION), (0xAF, UNIVERSAL_KEY_ACTION)):
+            offset = ITEM_ACTION_TABLE + itemid * 2
+            if int.from_bytes(buffer[offset:offset + 2], 'little') != action:
+                raise RuntimeError('Item action table has moved, telekeys needs new offsets')
+    rom.write_bytes(DUNGEON_KEY_ACTION_PC, TELEKEY_ACTION)
     for itemid in DUNGEON_SMALL_KEY_ITEMS:
-        rom.write_bytes(ITEM_ACTION_TABLE + itemid * 2, action)
+        rom.write_bytes(ITEM_ACTION_TABLE + itemid * 2, list(DUNGEON_KEY_ACTION.to_bytes(2, 'little')))
 
 
 def patch_rom(world, rom, player, team, is_mystery=False):
