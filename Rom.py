@@ -44,6 +44,12 @@ from source.enemizer.Enemizer import write_enemy_shuffle_settings
 JAP10HASH = '03a63945398191337e896e5771f77173'
 RANDOMIZERBASEHASH = 'a882ed16dce1cb84f366afd69788e8f2'
 
+# item pickup action table, indexed by item id - JMP ($B600,X) in bank $A2
+ITEM_ACTION_TABLE = 0x113600
+DUNGEON_SMALL_KEY_ITEMS = range(0xA0, 0xAE)
+UNIVERSAL_SMALL_KEY_ITEM = 0xAF
+UNIVERSAL_SMALL_KEY_ACTION = 0xD582
+
 
 class JsonRom(object):
 
@@ -412,6 +418,19 @@ def handle_native_dungeon(location, itemid):
             if location.item.compass:
                 return 0x25
     return itemid
+
+
+def write_telekeys(rom):
+    # every dungeon small key runs the universal key's pickup action, so it counts
+    # toward the generic key pool while keeping its own item code and text box
+    action = list(UNIVERSAL_SMALL_KEY_ACTION.to_bytes(2, 'little'))
+    buffer = getattr(rom, 'buffer', None)
+    if buffer is not None:
+        offset = ITEM_ACTION_TABLE + UNIVERSAL_SMALL_KEY_ITEM * 2
+        if list(buffer[offset:offset + 2]) != action:
+            raise RuntimeError('Item action table has moved, telekeys needs new offsets')
+    for itemid in DUNGEON_SMALL_KEY_ITEMS:
+        rom.write_bytes(ITEM_ACTION_TABLE + itemid * 2, action)
 
 
 def patch_rom(world, rom, player, team, is_mystery=False):
@@ -1312,7 +1331,10 @@ def patch_rom(world, rom, player, team, is_mystery=False):
     write_int16(rom, 0x18017A, get_reveal_bytes('Green Pendant') if world.mapshuffle[player] else 0x0000) # Sahasrahla reveal
     write_int16(rom, 0x18017C, get_reveal_bytes('Crystal 5')|get_reveal_bytes('Crystal 6') if world.mapshuffle[player] else 0x0000) # Bomb Shop Reveal
 
-    rom.write_byte(0x180172, 0x01 if world.keyshuffle[player] == 'universal' else 0x00)  # universal keys
+    generic_keys = world.keyshuffle[player] == 'universal' or world.telekeys[player]
+    rom.write_byte(0x180172, 0x01 if generic_keys else 0x00)  # universal keys
+    if world.telekeys[player]:
+        write_telekeys(rom)
     rom.write_byte(0x180175, 0x01 if world.bow_mode[player].startswith('retro') else 0x00)  # rupee bow
     rom.write_byte(0x180176, 0x0A if world.bow_mode[player].startswith('retro') else 0x00)  # wood arrow cost
     rom.write_byte(0x180178, 0x32 if world.bow_mode[player].startswith('retro') else 0x00)  # silver arrow cost

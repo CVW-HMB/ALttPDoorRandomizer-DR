@@ -314,6 +314,10 @@
       "universal"
     ]
   },
+  "telekeys": {
+    "action": "store_true",
+    "type": "bool"
+  },
   "bigkeyshuffle": {
     "action": "store_true",
     "type": "bool"

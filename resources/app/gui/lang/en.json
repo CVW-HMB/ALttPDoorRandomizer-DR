@@ -57,6 +57,7 @@
     "randomizer.dungeon.smallkeyshuffle.wild": "Randomized",
     "randomizer.dungeon.smallkeyshuffle.universal": "Universal",
     "randomizer.dungeon.bigkeyshuffle": "Big Keys",
+    "randomizer.dungeon.telekeys": "Telekeys",
     "randomizer.dungeon.decoupledoors": "Decouple Doors",
     "randomizer.dungeon.door_self_loops": "Allow Self-Looping Spiral Stairs",
 

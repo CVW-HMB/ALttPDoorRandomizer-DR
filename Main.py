@@ -405,6 +405,8 @@ def set_world_options(world, args, fish):
     world.mapshuffle = args.mapshuffle.copy()
     world.compassshuffle = args.compassshuffle.copy()
     world.keyshuffle = args.keyshuffle.copy()
+    world.telekeys = {player: args.telekeys[player] and args.keyshuffle[player] == 'wild'
+                      for player in range(1, world.players + 1)}
     world.bigkeyshuffle = args.bigkeyshuffle.copy()
     world.bombbag = args.bombbag.copy()
     world.flute_mode = args.flute_mode.copy()
@@ -501,6 +503,7 @@ def copy_world(world):
     ret.mapshuffle = world.mapshuffle.copy()
     ret.compassshuffle = world.compassshuffle.copy()
     ret.keyshuffle = world.keyshuffle.copy()
+    ret.telekeys = world.telekeys.copy()
     ret.bigkeyshuffle = world.bigkeyshuffle.copy()
     ret.bombbag = world.bombbag.copy()
     ret.flute_mode = world.flute_mode.copy()

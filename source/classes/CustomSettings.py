@@ -135,6 +135,7 @@ class CustomSettings(object):
                 args.openpyramid[p] = get_setting(settings['openpyramid'], args.openpyramid[p])
                 args.bigkeyshuffle[p] = get_setting(settings['bigkeyshuffle'], args.bigkeyshuffle[p])
                 args.keyshuffle[p] = get_setting(settings['keyshuffle'], args.keyshuffle[p])
+                args.telekeys[p] = get_setting(settings['telekeys'], args.telekeys[p])
                 args.mapshuffle[p] = get_setting(settings['mapshuffle'], args.mapshuffle[p])
                 args.compassshuffle[p] = get_setting(settings['compassshuffle'], args.compassshuffle[p])
 
@@ -370,6 +371,7 @@ class CustomSettings(object):
             settings_dict[p]['openpyramid'] = world.open_pyramid[p]
             settings_dict[p]['bigkeyshuffle'] = world.bigkeyshuffle[p]
             settings_dict[p]['keyshuffle'] = world.keyshuffle[p]
+            settings_dict[p]['telekeys'] = world.telekeys[p]
             settings_dict[p]['mapshuffle'] = world.mapshuffle[p]
             settings_dict[p]['compassshuffle'] = world.compassshuffle[p]
             settings_dict[p]['boss_shuffle'] = world.boss_shuffle[p]
