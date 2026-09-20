@@ -49,8 +49,23 @@ ITEM_ACTION_TABLE = 0x113600
 DUNGEON_SMALL_KEY_ITEMS = range(0xA0, 0xAE)
 # the stock dungeon small key action, which telekeys overwrites, and the stock
 # universal key action, checked to confirm the table is where we think it is
-DUNGEON_KEY_ACTION, DUNGEON_KEY_ACTION_PC, DUNGEON_KEY_ACTION_ROOM = 0xD528, 0x115528, 0x40
+DUNGEON_KEY_ACTION, DUNGEON_KEY_ACTION_PC = 0xD528, 0x115528
 UNIVERSAL_KEY_ACTION = 0xD582
+
+# the stock action and the two tails it shares the space with, all reachable only
+# through the table entries telekeys repoints. Checked byte for byte before we
+# write over it, so a rebuilt base patch fails here instead of corrupting whatever
+# ends up at this address
+DUNGEON_KEY_ACTION_STOCK = [
+    0xC2, 0x20, 0x4A, 0x29, 0x0F, 0x00, 0xAA, 0x0A,
+    0xCD, 0x0C, 0x04, 0xF0, 0x0A, 0xBF, 0x7C, 0xF3,
+    0x7E, 0x1A, 0x9F, 0x7C, 0xF3, 0x7E, 0x60, 0xE2,
+    0x20, 0xAF, 0x6F, 0xF3, 0x7E, 0x1A, 0x8F, 0x6F,
+    0xF3, 0x7E, 0x9F, 0x7C, 0xF3, 0x7E, 0x60, 0xE2,
+    0x20, 0xAF, 0x6F, 0xF3, 0x7E, 0x1A, 0x8F, 0x6F,
+    0xF3, 0x7E, 0xAF, 0x7C, 0xF3, 0x7E, 0x1A, 0x8F,
+    0x7C, 0xF3, 0x7E, 0x8F, 0x7D, 0xF3, 0x7E, 0x60,
+]
 
 # on entry the dispatcher leaves A as the item id doubled, 8 bit accumulator,
 # 16 bit index. Bump the key's own dungeon counter, which is what trackers read,
@@ -74,7 +89,7 @@ TELEKEY_ACTION = [
     0x8F, 0x6F, 0xF3, 0x7E,  # STA.l $7EF36F   - live counter
     0x60,                    # RTS
 ]
-assert len(TELEKEY_ACTION) <= DUNGEON_KEY_ACTION_ROOM
+assert len(TELEKEY_ACTION) <= len(DUNGEON_KEY_ACTION_STOCK)
 
 
 class JsonRom(object):
@@ -456,6 +471,9 @@ def write_telekeys(rom):
             offset = ITEM_ACTION_TABLE + itemid * 2
             if int.from_bytes(buffer[offset:offset + 2], 'little') != action:
                 raise RuntimeError('Item action table has moved, telekeys needs new offsets')
+        stock = DUNGEON_KEY_ACTION_STOCK
+        if list(buffer[DUNGEON_KEY_ACTION_PC:DUNGEON_KEY_ACTION_PC + len(stock)]) != stock:
+            raise RuntimeError('Dungeon small key action has changed, telekeys needs new offsets')
     rom.write_bytes(DUNGEON_KEY_ACTION_PC, TELEKEY_ACTION)
     for itemid in DUNGEON_SMALL_KEY_ITEMS:
         rom.write_bytes(ITEM_ACTION_TABLE + itemid * 2, list(DUNGEON_KEY_ACTION.to_bytes(2, 'little')))
