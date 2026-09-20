@@ -1978,6 +1978,7 @@ mirror_connections = {
     'East Dark Death Mountain (Top)': ['East Death Mountain (Top West)', 'East Death Mountain (Top East)'],
     'Dark Death Mountain Ledge': ['Spiral Cave Ledge', 'Mimic Cave Ledge'],
     'Dark Death Mountain Isolated Ledge': ['Fairy Ascension Ledge'],
+    'East Dark Death Mountain (Bottom)': ['East Death Mountain (Bottom)'],
     'East Dark Death Mountain (Bushes)': ['Fairy Ascension Plateau'],
     'East Dark Death Mountain (Bottom Left)': ['East Death Mountain (Bottom Left)'],
 
