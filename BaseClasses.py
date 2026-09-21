@@ -117,6 +117,7 @@ class World(object):
             set_player_attr('mapshuffle', False)
             set_player_attr('compassshuffle', False)
             set_player_attr('keyshuffle', 'none')
+            set_player_attr('telekeys', False)
             set_player_attr('bigkeyshuffle', False)
             set_player_attr('restrict_boss_items', 'none')
             set_player_attr('bombbag', False)
@@ -2588,6 +2589,7 @@ class Spoiler(object):
                          'mapshuffle': self.world.mapshuffle,
                          'compassshuffle': self.world.compassshuffle,
                          'keyshuffle': self.world.keyshuffle,
+                         'telekeys': self.world.telekeys,
                          'bigkeyshuffle': self.world.bigkeyshuffle,
                          'boss_shuffle': self.world.boss_shuffle,
                          'enemy_shuffle': self.world.enemy_shuffle,
@@ -2809,6 +2811,8 @@ class Spoiler(object):
                     outfile.write('Map shuffle:                     %s\n' % ('Yes' if self.metadata['mapshuffle'][player] else 'No'))
                     outfile.write('Compass shuffle:                 %s\n' % ('Yes' if self.metadata['compassshuffle'][player] else 'No'))
                     outfile.write(f"Small Key shuffle:               {self.metadata['keyshuffle'][player]}\n")
+                    if self.metadata['telekeys'][player]:
+                        outfile.write('Telekeys:                        Yes\n')
                     outfile.write('Big Key shuffle:                 %s\n' % ('Yes' if self.metadata['bigkeyshuffle'][player] else 'No'))
                     outfile.write(f"Key Logic Algorithm:'            {self.metadata['key_logic'][player]}\n")
                     outfile.write('Door Shuffle:                    %s\n' % self.metadata['door_shuffle'][player])

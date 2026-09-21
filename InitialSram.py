@@ -190,7 +190,8 @@ class InitialSram:
                 equip[set_or_table[item.name][0]] = set_or_table[item.name][1]
                 equip[set_or_table[item.name][2]] |= set_or_table[item.name][3]
             elif item.name in keys:
-                for address in keys[item.name]:
+                addresses = [0x38B] if world.telekeys[player] else keys[item.name]
+                for address in addresses:
                     equip[address] = min(equip[address] + 1, 99)
             elif item.name in bottles:
                 if equip[0x34F] < world.difficulty_requirements[player].progressive_bottle_limit:

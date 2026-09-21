@@ -10,6 +10,7 @@
     },
     "mapshuffle":       { "type": "checkbox" },
     "compassshuffle":   { "type": "checkbox" },
-    "bigkeyshuffle":    { "type": "checkbox" }
+    "bigkeyshuffle":    { "type": "checkbox" },
+    "telekeys":         { "type": "checkbox" }
   }
 }

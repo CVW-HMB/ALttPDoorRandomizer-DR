@@ -106,6 +106,7 @@ def roll_settings(weights):
         if 'u' in dungeon_items:
             ret.keyshuffle = 'universal'
     ret.bigkeyshuffle = get_choice_bool('bigkey_shuffle') if 'bigkey_shuffle' in weights else 'b' in dungeon_items
+    ret.telekeys = get_choice_bool('telekeys')
 
     ret.accessibility = get_choice('accessibility')
     ret.restrict_boss_items = get_choice('restrict_boss_items')

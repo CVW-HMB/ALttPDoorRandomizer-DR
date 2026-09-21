@@ -44,6 +44,56 @@ from source.enemizer.Enemizer import write_enemy_shuffle_settings
 JAP10HASH = '03a63945398191337e896e5771f77173'
 RANDOMIZERBASEHASH = 'a882ed16dce1cb84f366afd69788e8f2'
 
+# item pickup action table, indexed by item id - JMP ($B600,X) in bank $A2
+ITEM_ACTION_TABLE = 0x113600
+DUNGEON_SMALL_KEY_ITEMS = range(0xA0, 0xAE)
+# the stock dungeon small key action, which telekeys overwrites, and the stock
+# universal key action, checked to confirm the table is where we think it is
+DUNGEON_KEY_ACTION, DUNGEON_KEY_ACTION_PC = 0xD528, 0x115528
+UNIVERSAL_KEY_ACTION = 0xD582
+
+# the stock action and the two tails it shares the space with, all reachable only
+# through the table entries telekeys repoints. Checked byte for byte before we
+# write over it, so a rebuilt base patch fails here instead of corrupting whatever
+# ends up at this address
+DUNGEON_KEY_ACTION_STOCK = [
+    0xC2, 0x20, 0x4A, 0x29, 0x0F, 0x00, 0xAA, 0x0A,
+    0xCD, 0x0C, 0x04, 0xF0, 0x0A, 0xBF, 0x7C, 0xF3,
+    0x7E, 0x1A, 0x9F, 0x7C, 0xF3, 0x7E, 0x60, 0xE2,
+    0x20, 0xAF, 0x6F, 0xF3, 0x7E, 0x1A, 0x8F, 0x6F,
+    0xF3, 0x7E, 0x9F, 0x7C, 0xF3, 0x7E, 0x60, 0xE2,
+    0x20, 0xAF, 0x6F, 0xF3, 0x7E, 0x1A, 0x8F, 0x6F,
+    0xF3, 0x7E, 0xAF, 0x7C, 0xF3, 0x7E, 0x1A, 0x8F,
+    0x7C, 0xF3, 0x7E, 0x8F, 0x7D, 0xF3, 0x7E, 0x60,
+]
+
+# on entry the dispatcher leaves A as the item id doubled, 8 bit accumulator,
+# 16 bit index. Bump the key's own dungeon counter, which is what trackers read,
+# then the generic pool that doors actually spend from
+TELEKEY_ACTION = [
+    0xC2, 0x20,              # REP #$20
+    0x4A,                    # LSR A
+    0x29, 0x0F, 0x00,        # AND #$000F      - dungeon nibble
+    0xAA,                    # TAX
+    0xE2, 0x20,              # SEP #$20
+    0xBF, 0x7C, 0xF3, 0x7E,  # LDA.l $7EF37C,X - that dungeon's key count
+    0x1A,                    # INC A
+    0x9F, 0x7C, 0xF3, 0x7E,  # STA.l $7EF37C,X
+    0xE0, 0x02, 0x00,        # CPX #$0002
+    0xB0, 0x08,              # BCS +8
+    0x8F, 0x7C, 0xF3, 0x7E,  # STA.l $7EF37C   - sewers and castle count together
+    0x8F, 0x7D, 0xF3, 0x7E,  # STA.l $7EF37D
+    # read the live counter, not the generic one: spending a key decrements live
+    # while UpdateKeys leaves generic stale until the next SaveKeys, so reading
+    # generic here would hand back every key already spent in this dungeon
+    0xAF, 0x6F, 0xF3, 0x7E,  # LDA.l $7EF36F   - live key count
+    0x1A,                    # INC A
+    0x8F, 0x8B, 0xF3, 0x7E,  # STA.l $7EF38B   - generic pool
+    0x8F, 0x6F, 0xF3, 0x7E,  # STA.l $7EF36F
+    0x60,                    # RTS
+]
+assert len(TELEKEY_ACTION) <= len(DUNGEON_KEY_ACTION_STOCK)
+
 
 class JsonRom(object):
 
@@ -412,6 +462,24 @@ def handle_native_dungeon(location, itemid):
             if location.item.compass:
                 return 0x25
     return itemid
+
+
+def write_telekeys(rom):
+    # give every dungeon small key a pickup action that feeds the generic key pool
+    # as well as its own dungeon counter. The item code in the chest is untouched,
+    # so the keysanity pickup text box still names the dungeon
+    buffer = getattr(rom, 'buffer', None)
+    if buffer is not None:
+        for itemid, action in ((0xA2, DUNGEON_KEY_ACTION), (0xAF, UNIVERSAL_KEY_ACTION)):
+            offset = ITEM_ACTION_TABLE + itemid * 2
+            if int.from_bytes(buffer[offset:offset + 2], 'little') != action:
+                raise RuntimeError('Item action table has moved, telekeys needs new offsets')
+        stock = DUNGEON_KEY_ACTION_STOCK
+        if list(buffer[DUNGEON_KEY_ACTION_PC:DUNGEON_KEY_ACTION_PC + len(stock)]) != stock:
+            raise RuntimeError('Dungeon small key action has changed, telekeys needs new offsets')
+    rom.write_bytes(DUNGEON_KEY_ACTION_PC, TELEKEY_ACTION)
+    for itemid in DUNGEON_SMALL_KEY_ITEMS:
+        rom.write_bytes(ITEM_ACTION_TABLE + itemid * 2, list(DUNGEON_KEY_ACTION.to_bytes(2, 'little')))
 
 
 def patch_rom(world, rom, player, team, is_mystery=False):
@@ -1312,7 +1380,10 @@ def patch_rom(world, rom, player, team, is_mystery=False):
     write_int16(rom, 0x18017A, get_reveal_bytes('Green Pendant') if world.mapshuffle[player] else 0x0000) # Sahasrahla reveal
     write_int16(rom, 0x18017C, get_reveal_bytes('Crystal 5')|get_reveal_bytes('Crystal 6') if world.mapshuffle[player] else 0x0000) # Bomb Shop Reveal
 
-    rom.write_byte(0x180172, 0x01 if world.keyshuffle[player] == 'universal' else 0x00)  # universal keys
+    generic_keys = world.keyshuffle[player] == 'universal' or world.telekeys[player]
+    rom.write_byte(0x180172, 0x01 if generic_keys else 0x00)  # universal keys
+    if world.telekeys[player]:
+        write_telekeys(rom)
     rom.write_byte(0x180175, 0x01 if world.bow_mode[player].startswith('retro') else 0x00)  # rupee bow
     rom.write_byte(0x180176, 0x0A if world.bow_mode[player].startswith('retro') else 0x00)  # wood arrow cost
     rom.write_byte(0x180178, 0x32 if world.bow_mode[player].startswith('retro') else 0x00)  # silver arrow cost
