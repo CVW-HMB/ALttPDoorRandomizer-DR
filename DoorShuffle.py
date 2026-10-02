@@ -1141,6 +1141,7 @@ def main_dungeon_generation(dungeon_builders, recombinant_builders, connections_
         builder = sector_queue.popleft()
         split_dungeon = (builder.name.startswith('Desert Palace') or builder.name.startswith('Skull Woods')
                          or (builder.name.startswith('Hyrule Castle') and world.mode[player] == 'standard'))
+        split_dungeon = split_dungeon and builder.name not in dungeon_regions
         name = builder.name
         if split_dungeon:
             name = ' '.join(builder.name.split(' ')[:-1])
@@ -2894,6 +2895,7 @@ def find_valid_bd_combination(builder, suggested, world, player):
     if custom_dash_doors:
         bd_door_pool = filter_key_door_pool(bd_door_pool, custom_dash_doors)
         dash_doors_needed -= len(custom_dash_doors)
+    bomb_doors_needed, dash_doors_needed = max(0, bomb_doors_needed), max(0, dash_doors_needed)
     while len(bd_door_pool) < bomb_doors_needed + dash_doors_needed:
         test = random.choice([True, False])
         if test:
