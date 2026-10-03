@@ -1,0 +1,1362 @@
+{
+ "Hyrule Castle Lobby WN": {
+  "type": "Normal",
+  "region": "Hyrule Castle Lobby"
+ },
+ "Hyrule Castle West Lobby EN": {
+  "type": "Normal",
+  "region": "Hyrule Castle West Lobby"
+ },
+ "Hyrule Castle West Lobby S": {
+  "type": "Normal",
+  "region": "Hyrule Castle West Lobby"
+ },
+ "Hyrule Castle East Lobby N": {
+  "type": "Normal",
+  "region": "Hyrule Castle East Lobby"
+ },
+ "Hyrule Castle Throne Room N": {
+  "type": "Normal",
+  "region": "Hyrule Castle Behind Tapestry"
+ },
+ "Hyrule Dungeon Map Room Key Door S": {
+  "type": "Interior",
+  "region": "Hyrule Dungeon Map Room"
+ },
+ "Hyrule Dungeon North Abyss Key Door N": {
+  "type": "Interior",
+  "region": "Hyrule Dungeon North Abyss"
+ },
+ "Hyrule Dungeon Armory Interior Key Door N": {
+  "type": "Interior",
+  "region": "Hyrule Dungeon Armory Main"
+ },
+ "Hyrule Dungeon Armory Interior Key Door S": {
+  "type": "Interior",
+  "region": "Hyrule Dungeon Armory North Branch"
+ },
+ "Sewers Dark Cross Key Door N": {
+  "type": "Normal",
+  "region": "Sewers Dark Cross"
+ },
+ "Sewers Water S": {
+  "type": "Normal",
+  "region": "Sewers Water"
+ },
+ "Sewers Water W": {
+  "type": "Normal",
+  "region": "Sewers Water"
+ },
+ "Sewers Dark Aquabats ES": {
+  "type": "Normal",
+  "region": "Sewers Dark Aquabats"
+ },
+ "Sewers Dark Aquabats N": {
+  "type": "Interior",
+  "region": "Sewers Dark Aquabats"
+ },
+ "Sewers Key Rat S": {
+  "type": "Interior",
+  "region": "Sewers Key Rat"
+ },
+ "Sewers Key Rat NE": {
+  "type": "Normal",
+  "region": "Sewers Key Rat"
+ },
+ "Sewers Secret Room Key Door S": {
+  "type": "Normal",
+  "region": "Sewers Rat Path"
+ },
+ "Sewers Rat Path WS": {
+  "type": "Interior",
+  "region": "Sewers Rat Path"
+ },
+ "Sewers Rat Path WN": {
+  "type": "Interior",
+  "region": "Sewers Rat Path"
+ },
+ "Sewers Secret Room ES": {
+  "type": "Interior",
+  "region": "Sewers Secret Room"
+ },
+ "Sewers Secret Room EN": {
+  "type": "Interior",
+  "region": "Sewers Secret Room"
+ },
+ "Eastern Lobby NW": {
+  "type": "Interior",
+  "region": "Eastern Lobby"
+ },
+ "Eastern Lobby Left Ledge SW": {
+  "type": "Interior",
+  "region": "Eastern Lobby Left Ledge"
+ },
+ "Eastern Lobby NE": {
+  "type": "Interior",
+  "region": "Eastern Lobby"
+ },
+ "Eastern Lobby Right Ledge SE": {
+  "type": "Interior",
+  "region": "Eastern Lobby Right Ledge"
+ },
+ "Eastern Cannonball S": {
+  "type": "Normal",
+  "region": "Eastern Cannonball"
+ },
+ "Eastern Cannonball N": {
+  "type": "Normal",
+  "region": "Eastern Cannonball"
+ },
+ "Eastern Cannonball Ledge WN": {
+  "type": "Normal",
+  "region": "Eastern Cannonball Ledge"
+ },
+ "Eastern Cannonball Ledge Key Door EN": {
+  "type": "Normal",
+  "region": "Eastern Cannonball Ledge"
+ },
+ "Eastern East Wing EN": {
+  "type": "Interior",
+  "region": "Eastern East Wing"
+ },
+ "Eastern Pot Switch WN": {
+  "type": "Interior",
+  "region": "Eastern Pot Switch"
+ },
+ "Eastern East Wing ES": {
+  "type": "Interior",
+  "region": "Eastern East Wing"
+ },
+ "Eastern Map Balcony WS": {
+  "type": "Interior",
+  "region": "Eastern Map Balcony"
+ },
+ "Eastern Hint Tile Blocked Path SE": {
+  "type": "Normal",
+  "region": "Eastern Hint Tile Blocked Path"
+ },
+ "Eastern Courtyard N": {
+  "type": "Normal",
+  "region": "Eastern Courtyard"
+ },
+ "Eastern Dark Square Key Door WN": {
+  "type": "Normal",
+  "region": "Eastern Dark Square"
+ },
+ "Eastern Big Key EN": {
+  "type": "Normal",
+  "region": "Eastern Big Key"
+ },
+ "Eastern Big Key NE": {
+  "type": "Normal",
+  "region": "Eastern Big Key"
+ },
+ "Eastern Darkness S": {
+  "type": "Normal",
+  "region": "Eastern Darkness"
+ },
+ "Eastern Darkness NE": {
+  "type": "Interior",
+  "region": "Eastern Darkness"
+ },
+ "Eastern Rupees SE": {
+  "type": "Interior",
+  "region": "Eastern Rupees"
+ },
+ "Eastern Darkness Up Stairs": {
+  "type": "SpiralStairs",
+  "region": "Eastern Darkness"
+ },
+ "Eastern Single Eyegore ES": {
+  "type": "Normal",
+  "region": "Eastern Single Eyegore"
+ },
+ "Desert Main Lobby S": {
+  "type": "Normal",
+  "region": "Desert Main Lobby"
+ },
+ "Desert East Lobby S": {
+  "type": "Normal",
+  "region": "Desert East Lobby"
+ },
+ "Desert East Lobby WS": {
+  "type": "Interior",
+  "region": "Desert East Lobby"
+ },
+ "Desert East Wing ES": {
+  "type": "Interior",
+  "region": "Desert East Wing"
+ },
+ "Desert East Wing Key Door EN": {
+  "type": "Interior",
+  "region": "Desert East Wing"
+ },
+ "Desert Compass Key Door WN": {
+  "type": "Interior",
+  "region": "Desert Compass Room"
+ },
+ "Desert Cannonball S": {
+  "type": "Normal",
+  "region": "Desert Cannonball"
+ },
+ "Desert North Hall NW": {
+  "type": "Interior",
+  "region": "Desert North Hall"
+ },
+ "Desert Map SW": {
+  "type": "Interior",
+  "region": "Desert Map Room"
+ },
+ "Desert North Hall NE": {
+  "type": "Interior",
+  "region": "Desert North Hall"
+ },
+ "Desert Map SE": {
+  "type": "Interior",
+  "region": "Desert Map Room"
+ },
+ "Desert Sandworm Corner NE": {
+  "type": "Interior",
+  "region": "Desert Sandworm Corner"
+ },
+ "Desert Bonk Torch SE": {
+  "type": "Interior",
+  "region": "Desert Bonk Torch"
+ },
+ "Desert West Wing WS": {
+  "type": "Interior",
+  "region": "Desert West Wing"
+ },
+ "Desert West S": {
+  "type": "Normal",
+  "region": "Desert West Lobby"
+ },
+ "Desert West Lobby ES": {
+  "type": "Interior",
+  "region": "Desert West Lobby"
+ },
+ "Desert Back Lobby S": {
+  "type": "Normal",
+  "region": "Desert Back Lobby"
+ },
+ "Desert Tiles 1 Up Stairs": {
+  "type": "SpiralStairs",
+  "region": "Desert Tiles 1"
+ },
+ "Desert Beamos Hall NE": {
+  "type": "Normal",
+  "region": "Desert Beamos Hall"
+ },
+ "Desert Tiles 2 SE": {
+  "type": "Normal",
+  "region": "Desert Tiles 2"
+ },
+ "Desert Tiles 2 NE": {
+  "type": "Interior",
+  "region": "Desert Tiles 2"
+ },
+ "Desert Wall Slide SE": {
+  "type": "Interior",
+  "region": "Desert Wall Slide"
+ },
+ "Desert Wall Slide NW": {
+  "type": "Normal",
+  "region": "Desert Wall Slide"
+ },
+ "Hera Lobby Key Stairs": {
+  "type": "SpiralStairs",
+  "region": "Hera Back"
+ },
+ "Hera Tridorm SE": {
+  "type": "Interior",
+  "region": "Hera Tridorm"
+ },
+ "Hera Torches NE": {
+  "type": "Interior",
+  "region": "Hera Torches"
+ },
+ "Hera Startile Corner NW": {
+  "type": "Interior",
+  "region": "Hera Startile Corner"
+ },
+ "Hera Startile Wide SW": {
+  "type": "Interior",
+  "region": "Hera Startile Wide"
+ },
+ "Tower Lobby S": {
+  "type": "Normal",
+  "region": "Tower Lobby"
+ },
+ "Tower Room 03 Up Stairs": {
+  "type": "SpiralStairs",
+  "region": "Tower Room 03"
+ },
+ "Tower Dark Maze ES": {
+  "type": "Interior",
+  "region": "Tower Dark Maze"
+ },
+ "Tower Dark Chargers WS": {
+  "type": "Interior",
+  "region": "Tower Dark Chargers"
+ },
+ "Tower Dark Archers Up Stairs": {
+  "type": "SpiralStairs",
+  "region": "Tower Dark Archers"
+ },
+ "Tower Circle of Pots ES": {
+  "type": "Interior",
+  "region": "Tower Circle of Pots"
+ },
+ "Tower Pacifist Run WS": {
+  "type": "Interior",
+  "region": "Tower Pacifist Run"
+ },
+ "PoD Lobby N": {
+  "type": "Interior",
+  "region": "PoD Lobby"
+ },
+ "PoD Middle Cage S": {
+  "type": "Interior",
+  "region": "PoD Middle Cage"
+ },
+ "PoD Middle Cage N": {
+  "type": "Normal",
+  "region": "PoD Middle Cage"
+ },
+ "PoD Pit Room NW": {
+  "type": "Normal",
+  "region": "PoD Pit Room"
+ },
+ "PoD Pit Room NE": {
+  "type": "Normal",
+  "region": "PoD Pit Room Blocked"
+ },
+ "PoD Basement Ledge Up Stairs": {
+  "type": "SpiralStairs",
+  "region": "PoD Basement Ledge"
+ },
+ "PoD Arena Main NW": {
+  "type": "Normal",
+  "region": "PoD Arena North"
+ },
+ "PoD Arena Ledge ES": {
+  "type": "Normal",
+  "region": "PoD Arena Ledge"
+ },
+ "PoD Map Balcony ES": {
+  "type": "Interior",
+  "region": "PoD Map Balcony"
+ },
+ "PoD Fairy Pool WS": {
+  "type": "Interior",
+  "region": "PoD Fairy Pool"
+ },
+ "PoD Map Balcony WS": {
+  "type": "Normal",
+  "region": "PoD Map Balcony"
+ },
+ "PoD Mimics 1 SW": {
+  "type": "Interior",
+  "region": "PoD Mimics 1"
+ },
+ "PoD Jelly Hall NW": {
+  "type": "Interior",
+  "region": "PoD Jelly Hall"
+ },
+ "PoD Jelly Hall NE": {
+  "type": "Interior",
+  "region": "PoD Jelly Hall"
+ },
+ "PoD Warp Hint SE": {
+  "type": "Interior",
+  "region": "PoD Warp Hint"
+ },
+ "PoD Falling Bridge SW": {
+  "type": "Normal",
+  "region": "PoD Falling Bridge"
+ },
+ "PoD Falling Bridge WN": {
+  "type": "Normal",
+  "region": "PoD Falling Bridge Ledge"
+ },
+ "PoD Big Chest Balcony W": {
+  "type": "Normal",
+  "region": "PoD Big Chest Balcony"
+ },
+ "PoD Dark Maze EN": {
+  "type": "Normal",
+  "region": "PoD Dark Maze"
+ },
+ "PoD Dark Maze E": {
+  "type": "Normal",
+  "region": "PoD Dark Maze"
+ },
+ "PoD Compass Room SE": {
+  "type": "Interior",
+  "region": "PoD Compass Room"
+ },
+ "PoD Harmless Hellway NE": {
+  "type": "Interior",
+  "region": "PoD Harmless Hellway"
+ },
+ "PoD Dark Alley NE": {
+  "type": "Normal",
+  "region": "PoD Dark Alley"
+ },
+ "PoD Dark Pegs WN": {
+  "type": "Interior",
+  "region": "PoD Dark Pegs Left"
+ },
+ "PoD Lonely Turtle EN": {
+  "type": "Interior",
+  "region": "PoD Lonely Turtle"
+ },
+ "Swamp Entrance Down Stairs": {
+  "type": "SpiralStairs",
+  "region": "Swamp Entrance"
+ },
+ "Swamp Pot Row WN": {
+  "type": "Normal",
+  "region": "Swamp Pot Row"
+ },
+ "Swamp Pot Row WS": {
+  "type": "Normal",
+  "region": "Swamp Pot Row"
+ },
+ "Swamp Map Ledge EN": {
+  "type": "Normal",
+  "region": "Swamp Map Ledge"
+ },
+ "Swamp Trench 1 Approach ES": {
+  "type": "Normal",
+  "region": "Swamp Trench 1 Approach"
+ },
+ "Swamp Trench 1 Key Ledge NW": {
+  "type": "Interior",
+  "region": "Swamp Trench 1 Key Ledge"
+ },
+ "Swamp Hammer Switch SW": {
+  "type": "Interior",
+  "region": "Swamp Hammer Switch"
+ },
+ "Swamp Hammer Switch WN": {
+  "type": "Normal",
+  "region": "Swamp Hammer Switch"
+ },
+ "Swamp Hub WS": {
+  "type": "Normal",
+  "region": "Swamp Hub"
+ },
+ "Swamp Hub WN": {
+  "type": "Normal",
+  "region": "Swamp Hub"
+ },
+ "Swamp Hub Dead Ledge EN": {
+  "type": "Normal",
+  "region": "Swamp Hub Dead Ledge"
+ },
+ "Swamp Hub North Ledge N": {
+  "type": "Normal",
+  "region": "Swamp Hub North Ledge"
+ },
+ "Swamp Crystal Switch EN": {
+  "type": "Normal",
+  "region": "Swamp Crystal Switch Outer"
+ },
+ "Swamp Crystal Switch SE": {
+  "type": "Interior",
+  "region": "Swamp Crystal Switch Outer"
+ },
+ "Swamp Shortcut NE": {
+  "type": "Interior",
+  "region": "Swamp Shortcut"
+ },
+ "Swamp Trench 2 Departure WS": {
+  "type": "Normal",
+  "region": "Swamp Trench 2 Departure"
+ },
+ "Swamp Big Key Ledge WN": {
+  "type": "Normal",
+  "region": "Swamp Big Key Ledge"
+ },
+ "Swamp West Shallows ES": {
+  "type": "Normal",
+  "region": "Swamp West Shallows"
+ },
+ "Swamp Barrier EN": {
+  "type": "Normal",
+  "region": "Swamp Barrier"
+ },
+ "Swamp Shooters EN": {
+  "type": "Interior",
+  "region": "Swamp Shooters"
+ },
+ "Swamp Left Elbow WN": {
+  "type": "Interior",
+  "region": "Swamp Left Elbow"
+ },
+ "Swamp C SE": {
+  "type": "Interior",
+  "region": "Swamp C"
+ },
+ "Swamp Waterway NE": {
+  "type": "Interior",
+  "region": "Swamp Waterway"
+ },
+ "Swamp Waterway N": {
+  "type": "Interior",
+  "region": "Swamp Waterway"
+ },
+ "Swamp Waterway NW": {
+  "type": "Interior",
+  "region": "Swamp Waterway"
+ },
+ "Swamp I S": {
+  "type": "Interior",
+  "region": "Swamp I"
+ },
+ "Swamp T SW": {
+  "type": "Interior",
+  "region": "Swamp T"
+ },
+ "Swamp T NW": {
+  "type": "Normal",
+  "region": "Swamp T"
+ },
+ "Skull 1 Lobby WS": {
+  "type": "Normal",
+  "region": "Skull 1 Lobby"
+ },
+ "Skull Map Room SE": {
+  "type": "Normal",
+  "region": "Skull Map Room"
+ },
+ "Skull Pot Circle WN": {
+  "type": "Interior",
+  "region": "Skull Pot Circle"
+ },
+ "Skull Pull Switch EN": {
+  "type": "Interior",
+  "region": "Skull Pull Switch"
+ },
+ "Skull Pinball NE": {
+  "type": "Normal",
+  "region": "Skull Pinball"
+ },
+ "Skull Compass Room NE": {
+  "type": "Normal",
+  "region": "Skull Compass Room"
+ },
+ "Skull Compass Room ES": {
+  "type": "Normal",
+  "region": "Skull Compass Room"
+ },
+ "Skull Left Drop ES": {
+  "type": "Interior",
+  "region": "Skull Left Drop"
+ },
+ "Skull Compass Room WS": {
+  "type": "Interior",
+  "region": "Skull Compass Room"
+ },
+ "Skull Pot Prison ES": {
+  "type": "Normal",
+  "region": "Skull Pot Prison"
+ },
+ "Skull 2 East Lobby SW": {
+  "type": "Normal",
+  "region": "Skull 2 East Lobby"
+ },
+ "Skull Big Key EN": {
+  "type": "Interior",
+  "region": "Skull Big Key"
+ },
+ "Skull Lone Pot WN": {
+  "type": "Interior",
+  "region": "Skull Lone Pot"
+ },
+ "Skull Small Hall ES": {
+  "type": "Normal",
+  "region": "Skull Small Hall"
+ },
+ "Skull Small Hall WS": {
+  "type": "Interior",
+  "region": "Skull Small Hall"
+ },
+ "Skull 2 West Lobby S": {
+  "type": "Normal",
+  "region": "Skull 2 West Lobby"
+ },
+ "Skull 2 West Lobby ES": {
+  "type": "Interior",
+  "region": "Skull 2 West Lobby"
+ },
+ "Skull 2 West Lobby NW": {
+  "type": "Interior",
+  "region": "Skull 2 West Lobby Ledge"
+ },
+ "Skull X Room SW": {
+  "type": "Interior",
+  "region": "Skull X Room"
+ },
+ "Skull 3 Lobby SW": {
+  "type": "Normal",
+  "region": "Skull 3 Lobby"
+ },
+ "Skull 3 Lobby NW": {
+  "type": "Normal",
+  "region": "Skull 3 Lobby"
+ },
+ "Skull Star Pits SW": {
+  "type": "Normal",
+  "region": "Skull Star Pits"
+ },
+ "Skull Star Pits ES": {
+  "type": "Interior",
+  "region": "Skull Star Pits"
+ },
+ "Skull Torch Room WS": {
+  "type": "Interior",
+  "region": "Skull Torch Room"
+ },
+ "Skull Spike Corner ES": {
+  "type": "Interior",
+  "region": "Skull Spike Corner"
+ },
+ "Skull Final Drop WS": {
+  "type": "Interior",
+  "region": "Skull Final Drop"
+ },
+ "Thieves Lobby S": {
+  "type": "Normal",
+  "region": "Thieves Lobby"
+ },
+ "Thieves Ambush E": {
+  "type": "Normal",
+  "region": "Thieves Ambush"
+ },
+ "Thieves Rail Ledge W": {
+  "type": "Normal",
+  "region": "Thieves Rail Ledge"
+ },
+ "Thieves Rail Ledge NW": {
+  "type": "Normal",
+  "region": "Thieves Rail Ledge"
+ },
+ "Thieves BK Corner NE": {
+  "type": "Normal",
+  "region": "Thieves BK Corner"
+ },
+ "Thieves Compass Room W": {
+  "type": "Normal",
+  "region": "Thieves Compass Room"
+ },
+ "Thieves Hallway SE": {
+  "type": "Normal",
+  "region": "Thieves Hallway"
+ },
+ "Thieves Pot Alcove Bottom SW": {
+  "type": "Normal",
+  "region": "Thieves Pot Alcove Bottom"
+ },
+ "Thieves Hallway WS": {
+  "type": "Interior",
+  "region": "Thieves Hallway"
+ },
+ "Thieves Pot Alcove Mid ES": {
+  "type": "Interior",
+  "region": "Thieves Pot Alcove Mid"
+ },
+ "Thieves Hellway NW": {
+  "type": "Normal",
+  "region": "Thieves Hellway"
+ },
+ "Thieves Spike Track WS": {
+  "type": "Interior",
+  "region": "Thieves Spike Track"
+ },
+ "Thieves Hellway Crystal ES": {
+  "type": "Interior",
+  "region": "Thieves Hellway S Crystal"
+ },
+ "Thieves Spike Track NE": {
+  "type": "Interior",
+  "region": "Thieves Spike Track"
+ },
+ "Thieves Triple Bypass SE": {
+  "type": "Interior",
+  "region": "Thieves Triple Bypass"
+ },
+ "Thieves Hellway Crystal EN": {
+  "type": "Interior",
+  "region": "Thieves Hellway N Crystal"
+ },
+ "Thieves Triple Bypass WN": {
+  "type": "Interior",
+  "region": "Thieves Triple Bypass"
+ },
+ "Thieves Spike Switch SW": {
+  "type": "Normal",
+  "region": "Thieves Spike Switch"
+ },
+ "Thieves Spike Switch Up Stairs": {
+  "type": "SpiralStairs",
+  "region": "Thieves Spike Switch"
+ },
+ "Thieves Cricket Hall Right ES": {
+  "type": "Interior",
+  "region": "Thieves Cricket Hall Right"
+ },
+ "Thieves Attic Window WS": {
+  "type": "Interior",
+  "region": "Thieves Attic Window"
+ },
+ "Thieves Lonely Zazak WS": {
+  "type": "Normal",
+  "region": "Thieves Lonely Zazak"
+ },
+ "Thieves Blocked Entry SW": {
+  "type": "Interior",
+  "region": "Thieves Blocked Entry"
+ },
+ "Thieves Lonely Zazak NW": {
+  "type": "Interior",
+  "region": "Thieves Lonely Zazak"
+ },
+ "Thieves Lonely Zazak ES": {
+  "type": "Interior",
+  "region": "Thieves Lonely Zazak"
+ },
+ "Thieves Blind's Cell WS": {
+  "type": "Interior",
+  "region": "Thieves Blind's Cell"
+ },
+ "Thieves Conveyor Bridge EN": {
+  "type": "Normal",
+  "region": "Thieves Conveyor Bridge"
+ },
+ "Thieves Conveyor Bridge ES": {
+  "type": "Normal",
+  "region": "Thieves Conveyor Bridge"
+ },
+ "Thieves Conveyor Bridge WS": {
+  "type": "Interior",
+  "region": "Thieves Conveyor Bridge"
+ },
+ "Thieves Big Chest Room ES": {
+  "type": "Interior",
+  "region": "Thieves Big Chest Room"
+ },
+ "Ice Jelly Key Down Stairs": {
+  "type": "SpiralStairs",
+  "region": "Ice Jelly Key"
+ },
+ "Ice Compass Room NE": {
+  "type": "Normal",
+  "region": "Ice Compass Room"
+ },
+ "Ice Conveyor SW": {
+  "type": "Normal",
+  "region": "Ice Conveyor"
+ },
+ "Ice Bomb Jump NW": {
+  "type": "Normal",
+  "region": "Ice Bomb Jump Ledge"
+ },
+ "Ice Spike Cross SE": {
+  "type": "Normal",
+  "region": "Ice Spike Cross"
+ },
+ "Ice Spike Cross ES": {
+  "type": "Normal",
+  "region": "Ice Spike Cross"
+ },
+ "Ice Spike Cross WS": {
+  "type": "Interior",
+  "region": "Ice Spike Cross"
+ },
+ "Ice Firebar ES": {
+  "type": "Interior",
+  "region": "Ice Firebar"
+ },
+ "Ice Spike Room WS": {
+  "type": "Normal",
+  "region": "Ice Spike Room"
+ },
+ "Ice Tall Hint EN": {
+  "type": "Normal",
+  "region": "Ice Tall Hint"
+ },
+ "Ice Tall Hint SE": {
+  "type": "Normal",
+  "region": "Ice Tall Hint"
+ },
+ "Ice Hookshot Balcony SW": {
+  "type": "Interior",
+  "region": "Ice Hookshot Balcony"
+ },
+ "Ice Spikeball NW": {
+  "type": "Interior",
+  "region": "Ice Spikeball"
+ },
+ "Ice Lonely Freezor NE": {
+  "type": "Normal",
+  "region": "Ice Lonely Freezor"
+ },
+ "Iced T EN": {
+  "type": "Normal",
+  "region": "Iced T"
+ },
+ "Ice Catwalk WN": {
+  "type": "Normal",
+  "region": "Ice Catwalk"
+ },
+ "Ice Catwalk NW": {
+  "type": "Normal",
+  "region": "Ice Catwalk"
+ },
+ "Ice Crystal Right ES": {
+  "type": "Normal",
+  "region": "Ice Crystal Right"
+ },
+ "Ice Crystal Left WS": {
+  "type": "Interior",
+  "region": "Ice Crystal Left"
+ },
+ "Ice Big Chest View ES": {
+  "type": "Interior",
+  "region": "Ice Big Chest View"
+ },
+ "Ice Crystal Right NE": {
+  "type": "Interior",
+  "region": "Ice Crystal Right"
+ },
+ "Ice Backwards Room SE": {
+  "type": "Interior",
+  "region": "Ice Backwards Room"
+ },
+ "Ice Backwards Room Down Stairs": {
+  "type": "SpiralStairs",
+  "region": "Ice Backwards Room"
+ },
+ "Ice Anti-Fairy SE": {
+  "type": "Interior",
+  "region": "Ice Anti-Fairy"
+ },
+ "Ice Switch Room NE": {
+  "type": "Interior",
+  "region": "Ice Switch Room"
+ },
+ "Ice Switch Room ES": {
+  "type": "Normal",
+  "region": "Ice Switch Room"
+ },
+ "Ice Refill WS": {
+  "type": "Normal",
+  "region": "Ice Refill"
+ },
+ "Mire Hub WN": {
+  "type": "Normal",
+  "region": "Mire Hub"
+ },
+ "Mire Hub WS": {
+  "type": "Normal",
+  "region": "Mire Hub"
+ },
+ "Mire Hub Right EN": {
+  "type": "Normal",
+  "region": "Mire Hub Right"
+ },
+ "Mire Hub Top NW": {
+  "type": "Normal",
+  "region": "Mire Hub Top"
+ },
+ "Mire Map Spot WN": {
+  "type": "Normal",
+  "region": "Mire Map Spot"
+ },
+ "Mire BK Door Room N": {
+  "type": "Normal",
+  "region": "Mire BK Door Room"
+ },
+ "Mire Spikes WS": {
+  "type": "Normal",
+  "region": "Mire Spikes"
+ },
+ "Mire Spikes NW": {
+  "type": "Interior",
+  "region": "Mire Spikes"
+ },
+ "Mire Ledgehop SW": {
+  "type": "Interior",
+  "region": "Mire Ledgehop"
+ },
+ "Mire Ledgehop NW": {
+  "type": "Normal",
+  "region": "Mire Ledgehop"
+ },
+ "Mire Bent Bridge W": {
+  "type": "Normal",
+  "region": "Mire Bent Bridge"
+ },
+ "Mire Over Bridge E": {
+  "type": "Normal",
+  "region": "Mire Over Bridge"
+ },
+ "Mire Over Bridge W": {
+  "type": "Normal",
+  "region": "Mire Over Bridge"
+ },
+ "Mire Right Bridge SE": {
+  "type": "Normal",
+  "region": "Mire Right Bridge"
+ },
+ "Mire Left Bridge S": {
+  "type": "Normal",
+  "region": "Mire Left Bridge"
+ },
+ "Mire Fishbone E": {
+  "type": "Normal",
+  "region": "Mire Fishbone"
+ },
+ "Mire Fishbone SE": {
+  "type": "Normal",
+  "region": "Mire South Fish"
+ },
+ "Mire Spike Barrier NE": {
+  "type": "Normal",
+  "region": "Mire Spike Barrier"
+ },
+ "Mire Spike Barrier ES": {
+  "type": "Interior",
+  "region": "Mire Spike Barrier"
+ },
+ "Mire Square Rail WS": {
+  "type": "Interior",
+  "region": "Mire Square Rail"
+ },
+ "Mire Square Rail NW": {
+  "type": "Interior",
+  "region": "Mire Square Rail"
+ },
+ "Mire Lone Warp SW": {
+  "type": "Interior",
+  "region": "Mire Lone Warp"
+ },
+ "Mire Conveyor Crystal ES": {
+  "type": "Normal",
+  "region": "Mire Conveyor Crystal"
+ },
+ "Mire Conveyor Crystal WS": {
+  "type": "Interior",
+  "region": "Mire Conveyor Crystal"
+ },
+ "Mire Tile Room ES": {
+  "type": "Interior",
+  "region": "Mire Tile Room"
+ },
+ "Mire Neglected Room NE": {
+  "type": "Normal",
+  "region": "Mire Neglected Room"
+ },
+ "Mire Conveyor Barrier NW": {
+  "type": "Normal",
+  "region": "Mire Conveyor Barrier"
+ },
+ "Mire Neglected Room SE": {
+  "type": "Interior",
+  "region": "Mire Neglected Room"
+ },
+ "Mire Chest View NE": {
+  "type": "Interior",
+  "region": "Mire Chest View"
+ },
+ "Mire Torches Top SW": {
+  "type": "Interior",
+  "region": "Mire Torches Top"
+ },
+ "Mire Torches Bottom NW": {
+  "type": "Interior",
+  "region": "Mire Torches Bottom"
+ },
+ "Mire Torches Bottom ES": {
+  "type": "Interior",
+  "region": "Mire Torches Bottom"
+ },
+ "Mire Attic Hint WS": {
+  "type": "Interior",
+  "region": "Mire Attic Hint"
+ },
+ "Mire Dark Shooters SE": {
+  "type": "Interior",
+  "region": "Mire Dark Shooters"
+ },
+ "Mire Key Rupees NE": {
+  "type": "Interior",
+  "region": "Mire Key Rupees"
+ },
+ "Mire Block X WS": {
+  "type": "Normal",
+  "region": "Mire Block X"
+ },
+ "Mire Tall Dark and Roomy WN": {
+  "type": "Interior",
+  "region": "Mire Tall Dark and Roomy"
+ },
+ "Mire Shooter Rupees EN": {
+  "type": "Interior",
+  "region": "Mire Shooter Rupees"
+ },
+ "Mire Tall Dark and Roomy WS": {
+  "type": "Interior",
+  "region": "Mire Tall Dark and Roomy"
+ },
+ "Mire Crystal Right ES": {
+  "type": "Interior",
+  "region": "Mire Crystal Right"
+ },
+ "Mire Crystal Mid NW": {
+  "type": "Interior",
+  "region": "Mire Crystal Mid"
+ },
+ "Mire Crystal Top SW": {
+  "type": "Interior",
+  "region": "Mire Crystal Top"
+ },
+ "Mire Crystal Left WS": {
+  "type": "Normal",
+  "region": "Mire Crystal Left"
+ },
+ "Mire Falling Foes ES": {
+  "type": "Normal",
+  "region": "Mire Falling Foes"
+ },
+ "Mire Antechamber NW": {
+  "type": "Normal",
+  "region": "Mire Antechamber"
+ },
+ "TR Main Lobby SE": {
+  "type": "Normal",
+  "region": "TR Main Lobby"
+ },
+ "TR Lobby Ledge NE": {
+  "type": "Normal",
+  "region": "TR Lobby Ledge"
+ },
+ "TR Hub ES": {
+  "type": "Normal",
+  "region": "TR Hub"
+ },
+ "TR Hub EN": {
+  "type": "Normal",
+  "region": "TR Hub"
+ },
+ "TR Hub NW": {
+  "type": "Normal",
+  "region": "TR Hub"
+ },
+ "TR Hub NE": {
+  "type": "Normal",
+  "region": "TR Hub"
+ },
+ "TR Torches Ledge WS": {
+  "type": "Normal",
+  "region": "TR Torches Ledge"
+ },
+ "TR Torches WN": {
+  "type": "Normal",
+  "region": "TR Torches"
+ },
+ "TR Roller Room SW": {
+  "type": "Normal",
+  "region": "TR Roller Room"
+ },
+ "TR Pokey 1 NW": {
+  "type": "Interior",
+  "region": "TR Pokey 1"
+ },
+ "TR Chain Chomps SW": {
+  "type": "Interior",
+  "region": "TR Chain Chomps Bottom"
+ },
+ "TR Chain Chomps Down Stairs": {
+  "type": "SpiralStairs",
+  "region": "TR Chain Chomps Top"
+ },
+ "TR Pipe Pit WN": {
+  "type": "Normal",
+  "region": "TR Pipe Pit"
+ },
+ "TR Lava Dual Pipes WN": {
+  "type": "Normal",
+  "region": "TR Lava Dual Pipes"
+ },
+ "TR Lava Island WS": {
+  "type": "Normal",
+  "region": "TR Lava Island"
+ },
+ "TR Lava Escape SE": {
+  "type": "Normal",
+  "region": "TR Lava Escape"
+ },
+ "TR Lava Escape NW": {
+  "type": "Normal",
+  "region": "TR Lava Escape"
+ },
+ "TR Pokey 2 EN": {
+  "type": "Normal",
+  "region": "TR Pokey 2 Top"
+ },
+ "TR Pokey 2 ES": {
+  "type": "Normal",
+  "region": "TR Pokey 2 Bottom"
+ },
+ "TR Dodgers NE": {
+  "type": "Normal",
+  "region": "TR Dodgers"
+ },
+ "TR Lazy Eyes SE": {
+  "type": "Normal",
+  "region": "TR Lazy Eyes"
+ },
+ "TR Lazy Eyes ES": {
+  "type": "Normal",
+  "region": "TR Lazy Eyes"
+ },
+ "TR Dash Room ES": {
+  "type": "Interior",
+  "region": "TR Dash Room"
+ },
+ "TR Tongue Pull WS": {
+  "type": "Interior",
+  "region": "TR Tongue Pull"
+ },
+ "TR Dash Room NW": {
+  "type": "Interior",
+  "region": "TR Dash Room"
+ },
+ "TR Crystaroller SW": {
+  "type": "Interior",
+  "region": "TR Crystaroller Bottom"
+ },
+ "TR Crystaroller Down Stairs": {
+  "type": "SpiralStairs",
+  "region": "TR Crystaroller Top"
+ },
+ "TR Dash Bridge NW": {
+  "type": "Normal",
+  "region": "TR Dash Bridge"
+ },
+ "TR Dash Bridge SW": {
+  "type": "Normal",
+  "region": "TR Dash Bridge"
+ },
+ "TR Dash Bridge WS": {
+  "type": "Normal",
+  "region": "TR Dash Bridge"
+ },
+ "TR Eye Bridge NW": {
+  "type": "Normal",
+  "region": "TR Eye Bridge"
+ },
+ "TR Crystal Maze ES": {
+  "type": "Normal",
+  "region": "TR Crystal Maze Start"
+ },
+ "TR Final Abyss NW": {
+  "type": "Normal",
+  "region": "TR Final Abyss Ledge"
+ },
+ "GT Lobby S": {
+  "type": "Normal",
+  "region": "GT Lobby"
+ },
+ "GT Torch WN": {
+  "type": "Normal",
+  "region": "GT Bob's Torch"
+ },
+ "GT Torch EN": {
+  "type": "Interior",
+  "region": "GT Bob's Torch"
+ },
+ "GT Hope Room WN": {
+  "type": "Interior",
+  "region": "GT Hope Room"
+ },
+ "GT Tile Room WN": {
+  "type": "Normal",
+  "region": "GT Tile Room"
+ },
+ "GT Tile Room EN": {
+  "type": "Interior",
+  "region": "GT Tile Room"
+ },
+ "GT Speed Torch WN": {
+  "type": "Interior",
+  "region": "GT Speed Torch Upper"
+ },
+ "GT Speed Torch NE": {
+  "type": "Normal",
+  "region": "GT Speed Torch Upper"
+ },
+ "GT Crystal Conveyor NE": {
+  "type": "Normal",
+  "region": "GT Crystal Conveyor"
+ },
+ "GT Crystal Conveyor WN": {
+  "type": "Interior",
+  "region": "GT Crystal Conveyor Left"
+ },
+ "GT Compass Room EN": {
+  "type": "Interior",
+  "region": "GT Compass Room"
+ },
+ "GT Invisible Bridges WS": {
+  "type": "Normal",
+  "region": "GT Invisible Bridges"
+ },
+ "GT Invisible Catwalk WS": {
+  "type": "Normal",
+  "region": "GT Invisible Catwalk"
+ },
+ "GT Invisible Catwalk NW": {
+  "type": "Normal",
+  "region": "GT Invisible Catwalk"
+ },
+ "GT Invisible Catwalk NE": {
+  "type": "Normal",
+  "region": "GT Invisible Catwalk"
+ },
+ "GT Conveyor Cross EN": {
+  "type": "Normal",
+  "region": "GT Conveyor Cross"
+ },
+ "GT Hookshot ES": {
+  "type": "Interior",
+  "region": "GT Hookshot South Platform"
+ },
+ "GT Map Room WS": {
+  "type": "Interior",
+  "region": "GT Map Room"
+ },
+ "GT Hookshot SW": {
+  "type": "Normal",
+  "region": "GT Hookshot South Entry"
+ },
+ "GT Double Switch NW": {
+  "type": "Normal",
+  "region": "GT Double Switch Entry"
+ },
+ "GT Double Switch EN": {
+  "type": "Interior",
+  "region": "GT Double Switch Exit"
+ },
+ "GT Spike Crystals WN": {
+  "type": "Interior",
+  "region": "GT Spike Crystal Left"
+ },
+ "GT Warp Maze (Pits) ES": {
+  "type": "Normal",
+  "region": "GT Warp Maze Exit Section"
+ },
+ "GT Firesnake Room SW": {
+  "type": "Interior",
+  "region": "GT Firesnake Room Ledge"
+ },
+ "GT Warp Maze (Rails) NW": {
+  "type": "Interior",
+  "region": "GT Warp Maze - Rail Choice"
+ },
+ "GT Warp Maze (Rails) WS": {
+  "type": "Normal",
+  "region": "GT Warp Maze - Rando Rail"
+ },
+ "GT Conveyor Star Pits EN": {
+  "type": "Normal",
+  "region": "GT Conveyor Star Pits"
+ },
+ "GT Hidden Star ES": {
+  "type": "Normal",
+  "region": "GT Hidden Star"
+ },
+ "GT Falling Bridge WN": {
+  "type": "Normal",
+  "region": "GT Falling Bridge"
+ },
+ "GT Falling Bridge WS": {
+  "type": "Normal",
+  "region": "GT Falling Bridge"
+ },
+ "GT Randomizer Room ES": {
+  "type": "Normal",
+  "region": "GT Randomizer Room"
+ },
+ "GT Four Torches NW": {
+  "type": "Interior",
+  "region": "GT Four Torches"
+ },
+ "GT Fairy Abyss SW": {
+  "type": "Interior",
+  "region": "GT Fairy Abyss"
+ },
+ "GT Dash Hall NE": {
+  "type": "Normal",
+  "region": "GT Dash Hall"
+ },
+ "GT Hidden Spikes SE": {
+  "type": "Normal",
+  "region": "GT Hidden Spikes"
+ },
+ "GT Cannonball Bridge WN": {
+  "type": "Normal",
+  "region": "GT Cannonball Bridge"
+ },
+ "GT Cannonball Bridge SE": {
+  "type": "Interior",
+  "region": "GT Cannonball Bridge"
+ },
+ "GT Refill NE": {
+  "type": "Interior",
+  "region": "GT Refill"
+ },
+ "GT Beam Dash ES": {
+  "type": "Normal",
+  "region": "GT Beam Dash"
+ },
+ "GT Conveyor Bridge EN": {
+  "type": "Normal",
+  "region": "GT Conveyor Bridge"
+ },
+ "GT Torch Cross WN": {
+  "type": "Normal",
+  "region": "GT Torch Cross"
+ },
+ "GT Mini Helmasaur Room WN": {
+  "type": "Interior",
+  "region": "GT Mini Helmasaur Room"
+ },
+ "GT Bomb Conveyor EN": {
+  "type": "Interior",
+  "region": "GT Bomb Conveyor"
+ },
+ "GT Bomb Conveyor SW": {
+  "type": "Interior",
+  "region": "GT Bomb Conveyor"
+ },
+ "GT Crystal Circles NW": {
+  "type": "Interior",
+  "region": "GT Crystal Circles"
+ },
+ "GT Left Moldorm Ledge NW": {
+  "type": "Normal",
+  "region": "GT Left Moldorm Ledge"
+ },
+ "GT Validation WS": {
+  "type": "Normal",
+  "region": "GT Validation Door"
+ },
+ "GT Brightly Lit Hall NW": {
+  "type": "Normal",
+  "region": "GT Brightly Lit Hall"
+ }
+}

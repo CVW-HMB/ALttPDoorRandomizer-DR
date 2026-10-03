@@ -1,0 +1,7 @@
+# work output of the pipeline
+mega/
+two/
+final*/
+out/
+*.tmp
+*.log

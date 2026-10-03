@@ -1,0 +1,29 @@
+meta:
+  players: 1
+settings:
+  1:
+    mode: standard
+    door_shuffle: crossed
+    intensity: 3
+    pottery: lottery
+    dropshuffle: keys
+    mapshuffle: true
+    compassshuffle: true
+    door_self_loops: true
+    decoupledoors: true
+    pseudoboots: true
+    shuffleenemies: shuffled
+    any_enemy_logic: none
+    shufflebosses: full
+    dungeon_counters: 'on'
+    collection_rate: true
+    trap_door_mode: oneway
+    key_logic_algorithm: strict
+    standardize_palettes: original
+placements:
+  1:
+    Sanctuary: Triforce
+item_pool_adjust:
+  1:
+    Triforce: 1
+    Rupees (20): -1
