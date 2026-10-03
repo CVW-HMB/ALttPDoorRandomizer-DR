@@ -2,8 +2,9 @@ import unittest
 from collections import defaultdict
 from types import SimpleNamespace
 
-from DoorShuffle import (default_door_connections, default_one_way_connections, find_valid_bd_combination, ladders,
-                         open_edges, spiral_staircases, straight_staircases)
+import DoorShuffle
+from DoorShuffle import (analyzes_cleanly, default_door_connections, default_one_way_connections,
+                         find_valid_bd_combination, ladders, open_edges, spiral_staircases, straight_staircases)
 from source.classes.CustomSettings import CustomSettings
 from test.TestBase import build_vanilla_world
 
@@ -48,6 +49,26 @@ class TestForcedBombDoors(unittest.TestCase):
         bombs, dashes, _ = find_valid_bd_combination(builder, (0, 0), world, 1)
         self.assertEqual(bombs, custom)
         self.assertEqual(dashes, [])
+
+
+class TestKeyAnalysisFailure(unittest.TestCase):
+    # a layout that passes validation but has no key counter for some door set is rejected, not raised
+    def setUp(self):
+        self.orig = DoorShuffle.analyze_dungeon
+        self.layout = SimpleNamespace(sector=SimpleNamespace(name='Test'))
+
+    def tearDown(self):
+        DoorShuffle.analyze_dungeon = self.orig
+
+    def test_failed_analysis_rejects_layout(self):
+        def boom(key_layout, world, player):
+            raise Exception('Unable to find door permutation. Init CID: 01')
+        DoorShuffle.analyze_dungeon = boom
+        self.assertFalse(analyzes_cleanly(self.layout, None, 1))
+
+    def test_clean_analysis_accepts_layout(self):
+        DoorShuffle.analyze_dungeon = lambda key_layout, world, player: None
+        self.assertTrue(analyzes_cleanly(self.layout, None, 1))
 
 
 if __name__ == '__main__':
