@@ -734,7 +734,8 @@ def patch_rom(world, rom, player, team, is_mystery=False):
         for name, pair in boss_indicator.items():
             dungeon_id, boss_door = pair
             boss_region = world.get_door(boss_door, player).entrance.parent_region
-            opposite_door = next(iter(x for x in boss_region.entrances if x.name != 'Skull Final Drop WS')).door
+            entrance = next(iter(x for x in boss_region.entrances if x.name != 'Skull Final Drop WS'), None)
+            opposite_door = entrance.door if entrance else None
             if opposite_door and isinstance(opposite_door, Door) and opposite_door.roomIndex > -1:
                 dungeon_name = opposite_door.entrance.parent_region.dungeon.name
                 dungeon_id = boss_indicator[dungeon_name][0]

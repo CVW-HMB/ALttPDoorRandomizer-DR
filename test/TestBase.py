@@ -24,9 +24,9 @@ PRIZES = ['Green Pendant', 'Red Pendant', 'Blue Pendant', 'Beat Agahnim 1', 'Bea
           'Crystal 1', 'Crystal 2', 'Crystal 3', 'Crystal 4', 'Crystal 5', 'Crystal 6', 'Crystal 7']
 
 
-def build_vanilla_world(mode='open', logic='noglitches', customizer=None, key_logic='partial'):
+def build_vanilla_world(mode='open', logic='noglitches', customizer=None, key_logic='partial', door_shuffle='vanilla'):
     player = 1
-    args = parse_cli(['--mode', mode, '--logic', logic, '--shuffle', 'vanilla', '--door_shuffle', 'vanilla',
+    args = parse_cli(['--mode', mode, '--logic', logic, '--shuffle', 'vanilla', '--door_shuffle', door_shuffle,
                       '--intensity', '1', '--suppress_rom', '--spoiler', 'none',
                       '--key_logic_algorithm', key_logic])
     world = World(args.multi, args.shuffle, args.door_shuffle, args.logic, args.mode, args.swords,

@@ -1141,6 +1141,7 @@ def main_dungeon_generation(dungeon_builders, recombinant_builders, connections_
         builder = sector_queue.popleft()
         split_dungeon = (builder.name.startswith('Desert Palace') or builder.name.startswith('Skull Woods')
                          or (builder.name.startswith('Hyrule Castle') and world.mode[player] == 'standard'))
+        split_dungeon = split_dungeon and builder.name not in dungeon_regions
         name = builder.name
         if split_dungeon:
             name = ' '.join(builder.name.split(' ')[:-1])
@@ -2750,6 +2751,16 @@ def calc_used_dungeon_items(builder, world, player):
     return base
 
 
+def analyzes_cleanly(key_layout, world, player):
+    # some layouts pass validation but have no key counter for a reachable door set
+    try:
+        analyze_dungeon(key_layout, world, player)
+        return True
+    except Exception as e:
+        logging.getLogger('').debug(f'Key analysis failed for {key_layout.sector.name}: {e}')
+        return False
+
+
 def find_valid_combination(builder, target, start_regions, world, player, drop_keys=True):
     logger = logging.getLogger('')
     key_door_pool = list(builder.candidates.small)
@@ -2781,7 +2792,7 @@ def find_valid_combination(builder, target, start_regions, world, player, drop_k
 
     key_layout = build_key_layout(builder, start_regions, proposal, event_starts, world, player)
     determine_prize_lock(key_layout, world, player)
-    while not validate_key_layout(key_layout, world, player):
+    while not (validate_key_layout(key_layout, world, player) and analyzes_cleanly(key_layout, world, player)):
         itr += 1
         if itr >= len(sample_list):
             if not drop_keys:
@@ -2805,7 +2816,6 @@ def find_valid_combination(builder, target, start_regions, world, player, drop_k
     # make changes
     if player not in world.key_logic.keys():
         world.key_logic[player] = {}
-    analyze_dungeon(key_layout, world, player)
     builder.key_door_proposal = proposal
     world.key_logic[player][builder.name] = key_layout.key_logic
     world.key_layout[player][builder.name] = key_layout
@@ -2894,6 +2904,7 @@ def find_valid_bd_combination(builder, suggested, world, player):
     if custom_dash_doors:
         bd_door_pool = filter_key_door_pool(bd_door_pool, custom_dash_doors)
         dash_doors_needed -= len(custom_dash_doors)
+    bomb_doors_needed, dash_doors_needed = max(0, bomb_doors_needed), max(0, dash_doors_needed)
     while len(bd_door_pool) < bomb_doors_needed + dash_doors_needed:
         test = random.choice([True, False])
         if test:
