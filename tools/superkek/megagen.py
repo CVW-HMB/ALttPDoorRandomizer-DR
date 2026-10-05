@@ -50,16 +50,108 @@ def rooms_of(sectors):
 
 
 DECOUPLED = bool(os.environ.get('DECOUPLED'))
+# standard escape: Sanctuary only behind the throne room door, like DR's own Dungeon/Sewers split
+# (split_dungeon_builder). HC_SPLIT=0 lays HC out as one piece (how the first published seeds were made).
+HC_SPLIT = os.environ.get('HC_SPLIT', '1') != '0'
+SEWERS_TARGET = int(os.environ.get('SEWERS_TARGET', '10'))
+THRONE_N = 'Hyrule Castle Throne Room N'
 
 
-def grow_dec(name, sectors, entrance_regions, world, player, path_name=None, tries=60):
+def vec_add(t, v, sign):
+    out = dict(t)
+    for k, x in v.items():
+        out[k] = out.get(k, 0) + sign * x
+    return out
+
+
+def split_hc(hc, dungeon_lobbies, lobby_doors, world, player):
+    # -> (dungeon sectors, sewers sectors, link door): Throne Room N <-> link is the only way into the sewers half,
+    # which holds Sanctuary; each half balances on its own once those two doors are set aside
+    throne_n = world.get_door(THRONE_N, player)
+    find = lambda reg: next(s for s in hc if any(r.name == reg for r in s.regions))
+    sanc = find('Sanctuary')
+    dungeon_must = {find('Hyrule Castle Throne Room'), find('Hyrule Dungeon Cellblock')}
+    dungeon_must |= {s for s in hc if any(r in dungeon_lobbies for r in s.regions)}
+    # the Swamp moat needs the overworld floodgate, which stays shut until Zelda reaches Sanctuary
+    dungeon_must |= {s for s in hc if any(r.name in ('Swamp Lobby', 'Swamp Entrance') for r in s.regions)}
+    if sanc in dungeon_must:
+        return None
+    # DR's choice of sewers access: a south door of a sector with somewhere else to go
+    links = [(d, s) for s in hc if s not in dungeon_must for d in s.outstanding_doors
+             if d.type == DoorType.Normal and dname(d) == 'South' and d not in lobby_doors and len(s.outstanding_doors) > 1]
+    if not links:
+        return None
+    link, link_sec = rng.choice(links)
+    vecs = {s: axis_vec([d for d in s.outstanding_doors if d not in (link, throne_n)]) for s in hc}
+    musts = list(dict.fromkeys([sanc, link_sec]))
+    pool = [s for s in hc if s not in dungeon_must and s not in musts]
+    rng.shuffle(pool)
+    sew = list(musts)
+    for s in pool:
+        if rooms_of(sew) >= SEWERS_TARGET:
+            break
+        sew.append(s)
+    tot = {}
+    for s in sew:
+        tot = vec_add(tot, vecs[s], 1)
+    l1 = lambda t: sum(abs(x) for x in t.values())
+    for step in range(200):
+        if l1(tot) == 0:
+            break
+        moves = [(l1(vec_add(tot, vecs[s], 1)), 'add', s) for s in pool if s not in sew]
+        moves += [(l1(vec_add(tot, vecs[s], -1)), 'del', s) for s in sew if s not in musts]
+        best = min(m[0] for m in moves)
+        slack = 1 if best >= l1(tot) and rng.random() < 0.7 else 0
+        best_moves = [m for m in moves if m[0] <= best + slack]
+        _, kind, s = rng.choice(best_moves)
+        if kind == 'add':
+            sew.append(s)
+        else:
+            sew.remove(s)
+        tot = vec_add(tot, vecs[s], 1 if kind == 'add' else -1)
+    if l1(tot) != 0:
+        return None
+    return [s for s in hc if s not in sew], sew, link
+
+
+def grow_split_hc(hc, entrance_names, lobby_region, lobby_doors, world, player):
+    parts = split_hc(hc, [lobby_region[n] for n in ('Hyrule Castle South', 'Hyrule Castle West', 'Hyrule Castle East')],
+                     lobby_doors, world, player)
+    if not parts:
+        return None, 0, None
+    hc_d, hc_s, link = parts
+    throne_n = world.get_door(THRONE_N, player)
+    link_region = link.entrance.parent_region
+    d_entr = [r for s in hc_d for r in s.regions if r.name in entrance_names] or [lobby_region['Hyrule Castle South']]
+    s_entr = [link_region] + [r for s in hc_s for r in s.regions if r.name in entrance_names and r is not link_region]
+    owner = {d: s for s in hc for d in s.outstanding_doors}
+    owner[link].outstanding_doors.remove(link)
+    owner[throne_n].outstanding_doors.remove(throne_n)
+    try:
+        d_prop, d_tries = grow('Hyrule Castle', hc_d, d_entr, world, player, path_name='Hyrule Castle Dungeon', tries=20)
+        if not d_prop:
+            return None, d_tries, None
+        s_prop, s_tries = grow('Hyrule Castle', hc_s, s_entr, world, player, path_name='Hyrule Castle Sewers', tries=20,
+                               extra_paths=[(link_region.name, 'Sanctuary')])
+        if not s_prop:
+            return None, d_tries + s_tries, None
+    finally:
+        owner[link].outstanding_doors.append(link)
+        owner[throne_n].outstanding_doors.append(throne_n)
+    prop = dict(d_prop)
+    prop.update(s_prop)
+    prop[throne_n], prop[link] = link, throne_n
+    return prop, d_tries + s_tries, {'sewers_rooms': rooms_of(hc_s), 'sewers_sectors': len(hc_s), 'throne_link': link.name}
+
+
+def grow_dec(name, sectors, entrance_regions, world, player, path_name=None, tries=60, extra_paths=()):
     # decoupled: each door's exit gets its own target; every door is used once as exit and once as entrance
     all_regions = set(r for s in sectors for r in s.regions)
     doors = [d for s in sectors for d in s.outstanding_doors]
     valid = {d.name: (d, i) for i, d in enumerate(doors)}
     sector_of = {d: s for s in sectors for d in s.outstanding_doors}
     bk_special = any(DS.check_for_special(s.regions) for s in sectors)
-    paths = DS.determine_paths_for_dungeon(world, player, all_regions, path_name or name)
+    paths = DS.determine_paths_for_dungeon(world, player, all_regions, path_name or name) + list(extra_paths)
     by_name = {d.name: d for d in doors}
     fixed = [(by_name[a], by_name[b]) for a, b in FIXED if a in by_name and b in by_name]
     for attempt in range(tries):
@@ -116,19 +208,19 @@ def grow_dec(name, sectors, entrance_regions, world, player, path_name=None, tri
     return None, tries
 
 
-def grow(name, sectors, entrance_regions, world, player, path_name=None, tries=60):
+def grow(name, sectors, entrance_regions, world, player, path_name=None, tries=60, extra_paths=()):
     if DECOUPLED:
-        return grow_dec(name, sectors, entrance_regions, world, player, path_name, tries)
-    return grow_coupled(name, sectors, entrance_regions, world, player, path_name, tries)
+        return grow_dec(name, sectors, entrance_regions, world, player, path_name, tries, extra_paths)
+    return grow_coupled(name, sectors, entrance_regions, world, player, path_name, tries, extra_paths)
 
 
-def grow_coupled(name, sectors, entrance_regions, world, player, path_name=None, tries=60):
+def grow_coupled(name, sectors, entrance_regions, world, player, path_name=None, tries=60, extra_paths=()):
     all_regions = set(r for s in sectors for r in s.regions)
     doors = [d for s in sectors for d in s.outstanding_doors]
     valid = {d.name: (d, i) for i, d in enumerate(doors)}
     sector_of = {d: s for s in sectors for d in s.outstanding_doors}
     bk_special = any(DS.check_for_special(s.regions) for s in sectors)
-    paths = DS.determine_paths_for_dungeon(world, player, all_regions, path_name or name)
+    paths = DS.determine_paths_for_dungeon(world, player, all_regions, path_name or name) + list(extra_paths)
     by_name = {d.name: d for d in doors}
     fixed = [(by_name[a], by_name[b]) for a, b in FIXED if a in by_name and b in by_name]
     for attempt in range(tries):
@@ -217,7 +309,10 @@ def patched(all_sectors, connections_tuple, world, player, *a, **k):
     hc_lobby_names = ['Hyrule Castle South', 'Hyrule Castle West', 'Hyrule Castle East', 'Sanctuary']
     hc_fixed = {s for s in free if any(r.name in HC_ONLY for r in s.regions)
                 or any(lobby_region[n] in s.regions for n in hc_lobby_names)}
-    musts = [at_boss, at_lobby] + [s for s in free if 'Open Floodgate' in s.item_logic and s not in hc_fixed]
+    # standard: the Swamp moat needs the overworld floodgate, so those rooms can't be in HC. Matched by region:
+    # sector.item_logic is filled in DR's create_dungeon_builders, which this replaces, so it is empty here
+    musts = [at_boss, at_lobby] + [s for s in free if s not in hc_fixed and (
+        'Open Floodgate' in s.item_logic or any(r.name in ('Swamp Lobby', 'Swamp Entrance') for r in s.regions))]
     pool = [s for s in free if s not in hc_fixed and s not in musts]
     report = {}
     for attempt in range(int(os.environ.get('ASSIGN_TRIES', '400'))):
@@ -269,12 +364,18 @@ def patched(all_sectors, connections_tuple, world, player, *a, **k):
         at_prop, at_tries = grow('Agahnims Tower', at, at_entr, world, player, tries=20)
         if not at_prop:
             continue
-        hc_entr = [r for s in hc for r in s.regions if r.name in set(entrances_map.get('Hyrule Castle', []))] or [lobby_region['Hyrule Castle South']]
-        hc_prop, hc_tries = grow('Hyrule Castle', hc, hc_entr, world, player, path_name='Hyrule Castle Dungeon', tries=20)
+        split_info = {}
+        if HC_SPLIT:
+            hc_prop, hc_tries, split_info = grow_split_hc(hc, set(entrances_map.get('Hyrule Castle', [])), lobby_region,
+                                                          {p.door for p in world.dungeon_portals[player] if p.door},
+                                                          world, player)
+        else:
+            hc_entr = [r for s in hc for r in s.regions if r.name in set(entrances_map.get('Hyrule Castle', []))] or [lobby_region['Hyrule Castle South']]
+            hc_prop, hc_tries = grow('Hyrule Castle', hc, hc_entr, world, player, path_name='Hyrule Castle Dungeon', tries=20)
         if not hc_prop:
             continue
         report = {'at_rooms': rooms_of(at), 'hc_rooms': rooms_of(hc), 'at_sectors': len(at), 'hc_sectors': len(hc),
-                  'assign_attempt': attempt, 'at_tries': at_tries, 'hc_tries': hc_tries}
+                  'assign_attempt': attempt, 'at_tries': at_tries, 'hc_tries': hc_tries, **split_info}
         break
     else:
         print('MEGA FAILED', flush=True)
@@ -289,7 +390,7 @@ def patched(all_sectors, connections_tuple, world, player, *a, **k):
     def key_pairs(prop):
         seen_p, out = set(), []
         for a, b in prop.items():
-            if a is b or a in seen_p or a in lobby_doors or b in lobby_doors:
+            if a is b or a in seen_p or a in lobby_doors or b in lobby_doors or THRONE_N in (a.name, b.name):
                 continue
             seen_p.update((a, b))
             if (a.type == DoorType.Normal and b.type == DoorType.Normal and a.name in keycap and b.name in keycap

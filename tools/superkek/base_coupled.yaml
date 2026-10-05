@@ -9,6 +9,8 @@ settings:
     dropshuffle: keys
     mapshuffle: true
     compassshuffle: true
+    keyshuffle: wild
+    bigkeyshuffle: true
     door_self_loops: true
 placements:
   1:

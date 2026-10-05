@@ -18,8 +18,9 @@ SITE = ['Bow', 'Boomerang', 'Hookshot', 'Bombs', 'Mushroom', 'Magic Powder', 'Ic
         'Cape', 'Mirror', 'Boots', 'Gloves', 'Flippers', 'Moon Pearl', 'Shield', 'Tunic', 'Heart', 'Map', 'Compass',
         'Big Key']
 KEYNAME = {'Hyrule Castle': 'Escape'}
-SETTINGS = ['Mode', 'Door Shuffle', 'Intensity', 'Decouple Doors', 'Pseudoboots', 'Boss shuffle', 'Enemy shuffle',
-            'Enemy logic', 'Key Logic Algorithm', 'Trap Door Mode', 'Pottery Mode']
+SETTINGS = ['Mode', 'Door Shuffle', 'Intensity', 'Decouple Doors', 'Pseudoboots', 'Small Key shuffle', 'Big Key shuffle',
+            'Map shuffle', 'Compass shuffle', 'Boss shuffle', 'Enemy shuffle', 'Enemy logic', 'Key Logic Algorithm',
+            'Trap Door Mode', 'Pottery Mode']
 
 for d in sys.argv[1:]:
     d = d.rstrip('/')
@@ -36,7 +37,11 @@ for d in sys.argv[1:]:
         st[k] = m.group(1).strip().strip("'").strip() if m else '?'
     sanc = re.search(r'^Sanctuary @ [^:]+: (.*)$', sp, re.M)
     locs = json.load(open(f'{d}/locs.json'))
-    placed = yaml.safe_load(open(glob.glob(f'{d}/*_custom.yaml')[0]))['placements'][1]
+    custom = yaml.safe_load(open(glob.glob(f'{d}/*_custom.yaml')[0]))
+    placed = custom['placements'][1]
+    # item_pool is recorded before money balancing, placements after: a higher Rupees (300) count means money spawned
+    pool300 = custom.get('item_pool', {}).get(1, {}).get('Rupees (300)', 0)
+    placed300 = sum(1 for i in placed.values() if i == 'Rupees (300)')
     door_types = sp[sp.index('Door Types:'):] if 'Door Types:' in sp else ''
     key_doors = {}
     for m in re.finditer(r'\(([A-Za-z ]+)\) Key Door$', door_types, re.M):
@@ -47,6 +52,7 @@ for d in sys.argv[1:]:
     print(f'   spoiler hash:      {re.search(r"^Hash:\s*(.*)$", sp, re.M).group(1)}')
     print(f'   HUD dungeon counters 0x18003A={rom[0x18003A]} 0x18003C={rom[0x18003C]} (2 = always on)')
     print(f'   Sanctuary chest: {sanc.group(1) if sanc else "?"}')
+    print(f'   money spawned: {"none" if placed300 <= pool300 else f"YES ({placed300 - pool300} extra Rupees (300))"} (pool {pool300}, placed {placed300})')
     for k, v in st.items():
         print(f'   {k}: {v}')
     print(f'   world locations: {len(placed)}')

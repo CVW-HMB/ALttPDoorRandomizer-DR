@@ -32,6 +32,12 @@ def one(seed):
     out = f'{S}/two/{tag}_{seed}'
     os.makedirs(out, exist_ok=True)
     src = os.environ.get('SRC_FMT', f'{S}/mega/full{{seed}}.yaml').format(seed=seed)
+    # both passes use the final settings (EXTRA_SETTINGS, as given to final.py): enemizer etc. change the fill, so a
+    # pass 2 without them does not predict where final.py puts progression
+    custom = yaml.safe_load(open(src))
+    custom['settings'][1].update(json.loads(os.environ.get('EXTRA_SETTINGS', '{}')))
+    src = f'{out}/pass1.yaml'
+    yaml.safe_dump(custom, open(src, 'w'), sort_keys=False)
     locs_file = f'{out}/locs.json'
     if not run(['--customizer', src, '--suppress_rom', '--spoiler', 'none', '--print_custom_yaml', *(['--skip_playthrough'] if os.environ.get('SKIP_PT') else []),
                 '--outputpath', out, '--seed', str(seed)], f'{out}/pass1.log', {'LOCS_OUT': locs_file}):
@@ -49,7 +55,6 @@ def one(seed):
     rng.shuffle(targets)
     pool = yaml.safe_load(open(exported)).get('item_pool', {}).get(1, {})
     items = [i for i in PROGRESSION if pool.get(i) or i.startswith('Bottle')]
-    custom = yaml.safe_load(open(src))
     want = int(os.environ.get('RESERVE_MULT', '2')) * sum(pool.get(i, 0) for i in items)
     targets = sorted(targets[:want])
     custom['advanced_placements'] = {1: [{'type': 'PreferredLocationGroup', 'items': items, 'locations': targets}]}

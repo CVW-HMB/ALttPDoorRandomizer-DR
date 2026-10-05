@@ -47,6 +47,8 @@ def one(s):
             return s, 'roll timeout', info, tb, time.time() - t0 - tb
     rlog = open(f'{out}/log.txt').read()
     tr = time.time() - t0 - tb
+    if 'ESCAPE BYPASS' in rlog:
+        return s, 'escape bypass (Sanctuary reachable without the throne room)', info, tb, tr
     if 'Total Time' in rlog:
         return s, 'ROLLED', info, tb, tr
     errs = [l for l in rlog.splitlines() if re.search(r'KEYFAIL|Exception|Error', l)]
@@ -56,4 +58,6 @@ def one(s):
 with ThreadPoolExecutor(int(os.environ.get('PAR', '4'))) as ex:
     for s, res, info, tb, tr in ex.map(one, range(first, first + count)):
         size = f"AT={info['at_rooms']} HC={info['hc_rooms']} keys AT={info['at_keys']} HC={info['hc_keys']}" if info else ''
+        if info and 'sewers_rooms' in info:
+            size += f" sewers={info['sewers_rooms']} via {info['throne_link']}"
         print(f'{s}: {res} | {size} | build {tb:.0f}s' + (f' roll {tr:.0f}s' if tr else ''), flush=True)

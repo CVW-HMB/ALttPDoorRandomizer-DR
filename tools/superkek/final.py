@@ -44,7 +44,8 @@ def one(spec):
     bps = glob.glob(f'{out}/*.bps')
     sizes = dict(re.findall(r'ROOMS (Hyrule Castle|Agahnims Tower)\s+supertiles=\s*(\d+)', log))
     bosses = dict(re.findall(r'^(Eastern Palace|Desert Palace|Tower of Hera|Palace of Darkness|Swamp Palace|Skull Woods|Thieves Town|Ice Palace|Misery Mire|Turtle Rock|Ganons Tower \w+): (.+)$', open(glob.glob(f'{out}/*Spoiler.txt')[0]).read(), re.M))
-    return name, (f'ok bps={os.path.basename(bps[0]) if bps else None} layout_same={same} prog {inside}/{len(hits)} '
+    escape = 'ok' if 'ESCAPE ok' in log else ('BYPASS' if 'ESCAPE BYPASS' in log else '?')
+    return name, (f'ok bps={os.path.basename(bps[0]) if bps else None} escape={escape} layout_same={same} prog {inside}/{len(hits)} '
                   f'outside={outside} HC={sizes.get("Hyrule Castle")} AT={sizes.get("Agahnims Tower")} bosses={len(bosses)}')
 
 

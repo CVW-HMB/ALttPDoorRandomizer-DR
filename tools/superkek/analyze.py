@@ -11,8 +11,41 @@ def wrap(builder, *a, **k):
         raise
 DoorShuffle.find_valid_combination = wrap
 orig_link = DoorShuffle.link_doors
+
+
+def escape_check(world, player):
+    # standard escape checkpoint: from the castle lobbies and Zelda's cell, Sanctuary must be out of reach without
+    # crossing the throne room tapestry. Ignores item rules, so "ok" holds for any inventory.
+    from collections import deque
+    from BaseClasses import RegionType
+    cut = {'Hyrule Castle Throne Room Tapestry', 'Hyrule Castle Tapestry Backwards'}
+    starts = [p.door.entrance.parent_region for p in world.dungeon_portals[player]
+              if p.name in ('Hyrule Castle South', 'Hyrule Castle West', 'Hyrule Castle East')]
+    starts.append(world.get_region('Hyrule Dungeon Cellblock', player))
+    sanc = world.get_region('Sanctuary', player)
+    prev, q = {r: None for r in starts}, deque(starts)
+    while q:
+        r = q.popleft()
+        for e in r.exits:
+            c = e.connected_region
+            if c is not None and c not in prev and e.name not in cut and c.type == RegionType.Dungeon:
+                prev[c] = (r, e)
+                q.append(c)
+    if sanc not in prev:
+        print(f'ESCAPE ok: Sanctuary only past the throne room '
+              f'(Throne Room N <-> {world.get_door("Hyrule Castle Throne Room N", player).dest.name})', flush=True)
+        return
+    path, r = [], sanc
+    while prev[r]:
+        r, e = prev[r]
+        path.append(e.name)
+    print(f'ESCAPE BYPASS: Sanctuary reachable without the throne room: {" -> ".join(reversed(path))}', flush=True)
+
+
 def patched(world, player):
     orig_link(world, player)
+    if world.mode[player] == 'standard':
+        escape_check(world, player)
     res = {}
     for name, b in world.dungeon_layouts[player].items():
         regs = b.master_sector.region_set() if b.master_sector else set()
