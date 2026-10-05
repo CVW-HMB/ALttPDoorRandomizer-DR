@@ -1048,33 +1048,23 @@ def balance_money_progression(world):
                 while difference > 0:
                     swap_targets = [x for x in unchecked_locations if x not in sphere_locations and x.item.name.startswith('Rupees') and x.item.player == target_player]
                     best_swap = max(swap_targets, key=rupee_value) if swap_targets else None
-                    best_value = rupee_value(best_swap) if best_swap else 300
+                    best_value = rupee_value(best_swap) if best_swap else 0
                     increase_targets = [x for x in balance_locations[target_player] if rupee_value(x) < best_value]
-                    if len(increase_targets) == 0 and best_swap is not None:
-                        # every later rupee is worth no more than what the early spheres already hold; mint a 300 instead
-                        best_swap, best_value = None, 300
-                        increase_targets = [x for x in balance_locations[target_player] if rupee_value(x) < best_value]
                     if len(increase_targets) == 0:
-                        logger.warning(f'Player {target_player} is {difference:.0f} rupees short and no early location can hold more money - a money grind may be required')
+                        logger.warning(f'Player {target_player} is {difference:.0f} rupees short and no swap can move more money earlier - a money grind may be required')
                         wallet[target_player] += difference
                         difference = 0
                         break
                     best_target = min(increase_targets, key=rupee_value)
                     old_value = rupee_value(best_target)
-                    if best_swap is None:
-                        logger.debug(f'Upgrading {best_target.item.name} @ {best_target.name} for 300 Rupees')
-                        best_target.item = ItemFactory('Rupees (300)', best_target.item.player)
-                        best_target.item.location = best_target
-                        check_shop_swap(best_target.item.location)
-                    else:
-                        old_item = best_target.item
-                        logger.debug(f'Swapping {best_target.item.name} @ {best_target.name} for {best_swap.item.name} @ {best_swap.name}')
-                        best_target.item = best_swap.item
-                        best_target.item.location = best_target
-                        best_swap.item = old_item
-                        best_swap.item.location = best_swap
-                        check_shop_swap(best_target.item.location)
-                        check_shop_swap(best_swap.item.location)
+                    old_item = best_target.item
+                    logger.debug(f'Swapping {best_target.item.name} @ {best_target.name} for {best_swap.item.name} @ {best_swap.name}')
+                    best_target.item = best_swap.item
+                    best_target.item.location = best_target
+                    best_swap.item = old_item
+                    best_swap.item.location = best_swap
+                    check_shop_swap(best_target.item.location)
+                    check_shop_swap(best_swap.item.location)
                     increase = best_value - old_value
                     difference -= increase
                     wallet[target_player] += increase
