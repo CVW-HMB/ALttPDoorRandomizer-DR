@@ -54,9 +54,8 @@ final steps, see below).
 ## Environment
 
 - Repo checkout with this branch, plus `Zelda no Densetsu - Kamigami no Triforce (Japan).sfc` (JP 1.0) at the repo root.
-- Python: the DR venv, `/Users/vincewelke/gitrepos/alttpr/ALttPDoorRandomizer/.venv/bin/python` (3.12, has
-  `pyyaml` and `python-bps-continued`). The scripts launch sub-processes with the same interpreter
-  (override with `DR_PY`). System python 3.14 lacks yaml/bps.
+- Python 3.12 venv at the repo root (`.venv`), from DR's own manifest; setup commands are in `README.md` next to
+  this file. The scripts launch sub-processes with the same interpreter (override with `DR_PY`).
 - `LC_ALL=en_US.UTF-8` is required or DR crashes in `BabelFish` (`locale.getdefaultlocale()` returns None). The
   scripts set it for their sub-processes; set it yourself for one-off DR runs.
 - DR imports need `PYTHONPATH=<repo>/source` (scripts set it).
@@ -94,7 +93,7 @@ Regenerate (only when needed):
 
 ```bash
 cd <repo>
-export LC_ALL=en_US.UTF-8 PYTHONPATH=source; PY=/Users/vincewelke/gitrepos/alttpr/ALttPDoorRandomizer/.venv/bin/python
+export LC_ALL=en_US.UTF-8 PYTHONPATH=source; PY=.venv/bin/python
 DUMP_OUT=tools/superkek/sectors.json $PY tools/superkek/dump.py --customizer tools/superkek/base_coupled.yaml --suppress_rom --spoiler none --outputpath /tmp/dump --seed 1
 KEYCAP_OUT=tools/superkek/keycap.json $PY tools/superkek/keycap.py --customizer tools/superkek/base_coupled.yaml --suppress_rom --spoiler none --outputpath /tmp/dump --seed 1
 $PY tools/superkek/build_solutions.py        # a few minutes (Desert/TR search 3 extra sectors)
@@ -103,7 +102,7 @@ $PY tools/superkek/build_solutions.py        # a few minutes (Desert/TR search 3
 ## Rolling: Super Kek Priest (coupled)
 
 ```bash
-cd tools/superkek; PY=/Users/vincewelke/gitrepos/alttpr/ALttPDoorRandomizer/.venv/bin/python
+cd tools/superkek; PY=../../.venv/bin/python
 # 1. build + roll candidates (seed numbers are your choice; failures print why)
 ROLL_TMO=150 PAR=2 $PY megarun.py 1000 8
 #    -> "1000: ROLLED | AT=45 HC=117 keys AT=0 HC=4 | build 3s roll 77s"   (~75% roll)
@@ -127,7 +126,7 @@ DR adds none; it works coupled but is slower to roll and was not used for the pu
 ## Rolling: Super Kek Priest 64 (decoupled)
 
 ```bash
-cd tools/superkek; PY=/Users/vincewelke/gitrepos/alttpr/ALttPDoorRandomizer/.venv/bin/python
+cd tools/superkek; PY=../../.venv/bin/python
 DECOUPLED=1 MEGA_KEYS_MAX=0 SKIP_PT=1 ROLL_TMO=150 BASE_YAML=$PWD/base_decoupled.yaml PAR=3 $PY megarun.py 2000 6
 #    -> "2000: ROLLED ..." build 3-90s, roll 45-105s; 6/6 rolled in the last batch
 SKIP_PT=1 PAR=2 TMO=200 $PY twopass.py mega 2000,2001
@@ -244,7 +243,7 @@ Logged in as homemadebeer in Chrome. Series 51 "HMB Test Modes" (`https://alttpr
 | DR_superkekpriest64_PB_3002 | 32167 | Super Kek Priest 64 | yes | Quake, Gloves, Bugnet, Tunic, Hammer | 115 / 53 |
 
 Seed numbers, spoilers, the exact final customizer files and the BPS of every published seed are in the private
-archive `/Users/vincewelke/gitrepos/alttpr/scratch_ignore/superkek_published/` (not in git: this repo is public and
+archive kept outside the repo by the maintainer (not in git: this repo is public and
 the pipeline is deterministic, so a seed number would let anyone regenerate a live async's spoiler). Its README
 shows how to regenerate any of them exactly. **Never commit seed numbers or spoilers of live seeds here.**
 

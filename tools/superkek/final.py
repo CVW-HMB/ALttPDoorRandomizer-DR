@@ -31,8 +31,11 @@ def one(spec):
                        env=dict(env, LOCS_OUT=f'{out}/locs.json'), timeout=1200)
     log = open(f'{out}/log.txt').read()
     if 'Total Time' not in log:
+        # DR can write the patch before failing (e.g. in the spoiler playthrough): remove it so it can't be published
+        for f in glob.glob(f'{out}/*.bps') + glob.glob(f'{out}/*.sfc'):
+            os.remove(f)
         errs = [l for l in log.splitlines() if re.search('Exception|Error', l)]
-        return name, 'FAILED ' + (errs[-1] if errs else log[-200:])
+        return name, 'FAILED (patch removed) ' + (errs[-1] if errs else log[-200:])
     pass1 = json.load(open(f'{S}/two/mega_{seed}/locs.json'))
     now = json.load(open(f'{out}/locs.json'))
     same = {k: sorted(v) for k, v in pass1.items()} == {k: sorted(v) for k, v in now.items()}

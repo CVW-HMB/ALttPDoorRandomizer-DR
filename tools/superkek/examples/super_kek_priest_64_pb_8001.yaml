@@ -1,0 +1,1590 @@
+meta:
+  players: 1
+settings:
+  1:
+    mode: standard
+    door_shuffle: crossed
+    intensity: 3
+    pottery: lottery
+    dropshuffle: keys
+    mapshuffle: true
+    compassshuffle: true
+    keyshuffle: wild
+    bigkeyshuffle: true
+    door_self_loops: true
+    decoupledoors: true
+    pseudoboots: true
+    shuffleenemies: shuffled
+    any_enemy_logic: none
+    shufflebosses: full
+    dungeon_counters: 'on'
+    collection_rate: true
+    trap_door_mode: oneway
+    key_logic_algorithm: strict
+    standardize_palettes: original
+placements:
+  1:
+    Sanctuary: Triforce
+item_pool_adjust:
+  1:
+    Triforce: 1
+    Rupees (20): -1
+doors:
+  1:
+    lobbies:
+      Ice: Mire Left Bridge S
+      Hera: Hera Lobby S
+      Skull 2 West: Skull 1 Lobby S
+      Skull 2 East: Skull 2 West Lobby S
+      Skull 1: Skull 2 East Lobby SW
+      Skull 3: Skull Spike Corner SW
+      Thieves Town: Hyrule Castle West Lobby S
+      Swamp: Eastern Cannonball S
+      Palace of Darkness: Eastern Courtyard Ledge S
+      Mire: TR Eye Bridge SW
+      Ganons Tower: TR Main Lobby SE
+      Eastern: Skull 3 Lobby SW
+      Turtle Rock Eye Bridge: Hyrule Castle West Hall S
+      Turtle Rock Chest: TR Lava Escape SE
+      Turtle Rock Main: Hyrule Castle East Hall SW
+      Turtle Rock Lazy Eyes: TR Boss SW
+      Desert East: Sewers Water S
+      Desert South: Eastern Hint Tile Blocked Path SE
+      Desert Back: Eastern Map Valley SW
+      Desert West: Desert Boss SW
+      Sanctuary: Sanctuary S
+      Hyrule Castle South: Mire Conveyor Crystal SE
+      Hyrule Castle West: TR Lazy Eyes SE
+      Hyrule Castle East: Hyrule Castle East Lobby S
+      Agahnims Tower: Ice Tall Hint SE
+    doors:
+      Ice Crystal Right ES:
+        dest: Mire Failure Bridge W
+        one-way: true
+      Ice Backwards Room Down Stairs:
+        dest: Swamp Drain Left Up Stairs
+        one-way: true
+      Mire Failure Bridge W:
+        dest: Mire Hidden Shooters ES
+        one-way: true
+      Mire Lone Shooter WS:
+        dest: Mire BK Door Room EN
+        one-way: true
+      Mire BK Door Room N:
+        dest: Skull Star Pits SW
+        one-way: true
+      Skull Star Pits SW:
+        dest: PoD Sexy Statue NW
+        one-way: true
+      Mire Hidden Shooters ES:
+        dest: Eastern Attic Start WS
+        one-way: true
+      Ice Tall Hint EN:
+        dest: Ice Pengator Switch WS
+        one-way: true
+      Skull Vines NW:
+        dest: Tower Agahnim 1 SW
+        one-way: true
+      PoD Sexy Statue W:
+        dest: GT Hope Room EN
+        one-way: true
+      GT Hope Room EN:
+        dest: Eastern Cannonball Hell WS
+        one-way: true
+      Mire Cross SW:
+        dest: TR Hub NW
+        one-way: true
+      PoD Sexy Statue NW:
+        dest: GT Gauntlet 3 SW
+        one-way: true
+      GT Torch WN:
+        dest: GT Conveyor Cross EN
+        one-way: true
+      GT Hookshot NW:
+        dest: Thieves Lobby S
+        one-way: true
+      TR Hub NW:
+        dest: Hyrule Dungeon Armory S
+        one-way: true
+      Swamp Drain Left Up Stairs:
+        dest: PoD Middle Cage Down Stairs
+        one-way: true
+      Ice Pengator Switch WS:
+        dest: Eastern Big Key EN
+        one-way: true
+      Thieves Lobby E:
+        dest: GT Cannonball Bridge WN
+        one-way: true
+      Thieves Lobby N Edge:
+        dest: Desert North Hall SW Edge
+        one-way: true
+      TR Hub NE:
+        dest: TR Lava Dual Pipes SW
+        one-way: true
+      TR Hub SW:
+        dest: PoD Dark Alley NE
+        one-way: true
+      PoD Left Cage Down Stairs:
+        dest: Sewers Rope Room Up Stairs
+        one-way: true
+      Eastern Big Key EN:
+        dest: PoD Big Chest Balcony W
+        one-way: true
+      GT Conveyor Cross EN:
+        dest: Eastern East Wing W
+        one-way: true
+      PoD Middle Cage N:
+        dest: Eastern Darkness S
+        one-way: true
+      GT Torch Up Stairs:
+        dest: Ice Lonely Freezor Down Stairs
+        one-way: true
+      GT Hope Room Up Stairs:
+        dest: Swamp C Down Stairs
+        one-way: true
+      Swamp T NW:
+        dest: Swamp Lobby S
+        one-way: true
+      Eastern Attic Start Down Stairs:
+        dest: Mire 2 Up Stairs
+        one-way: true
+      Swamp C Down Stairs:
+        dest: Tower Pacifist Run Up Stairs
+        one-way: true
+      PoD Lobby S:
+        dest: GT Speed Torch NE
+        one-way: true
+      Eastern Darkness S:
+        dest: Tower Altar NW
+        one-way: true
+      Desert North Hall W Edge:
+        dest: Desert Sandworm Corner E Edge
+        one-way: true
+      Desert Sandworm Corner E Edge:
+        dest: Hyrule Dungeon South Abyss West Edge
+        one-way: true
+      Sewers Rope Room Up Stairs:
+        dest: Tower Push Statue Down Stairs
+        one-way: true
+      GT Cannonball Bridge Up Stairs:
+        dest: GT Blocked Stairs Down Stairs
+        one-way: true
+      GT Hookshot SW:
+        dest: Mire Conveyor Barrier NW
+        one-way: true
+      Mire Hidden Shooters SE:
+        dest: Mire Spike Barrier NE
+        one-way: true
+      Hyrule Dungeon Armory S:
+        dest: Mire Crystal Dead End NW
+        one-way: true
+      GT Gauntlet 1 Down Stairs:
+        dest: Swamp Flooded Room Up Stairs
+        one-way: true
+      Eastern Cannonball Hell WS:
+        dest: Ice Switch Room ES
+        one-way: true
+      PoD Big Chest Balcony W:
+        dest: Ice Spike Cross ES
+        one-way: true
+      GT Big Chest SW:
+        dest: Swamp Basement Shallows NW
+        one-way: true
+      Eastern Darkness Up Stairs:
+        dest: Mire Torches Top Down Stairs
+        one-way: true
+      TR Hub ES:
+        dest: PoD Map Balcony WS
+        one-way: true
+      Tower Red Spears Down Stairs:
+        dest: Swamp Drain Right Up Stairs
+        one-way: true
+      TR Lava Dual Pipes EN:
+        dest: Mire Map Spot WN
+        one-way: true
+      Ice Firebar Down Ladder:
+        dest: Ice Freezors Up Ladder
+        one-way: true
+      Ice Freezors Up Ladder:
+        dest: Ice Big Key Down Ladder
+        one-way: true
+      Ice Big Key Down Ladder:
+        dest: PoD Dark Pegs Up Ladder
+        one-way: true
+      GT Speed Torch SE:
+        dest: GT Hookshot NW
+        one-way: true
+      TR Hub EN:
+        dest: PoD Sexy Statue W
+        one-way: true
+      Mire Conveyor Barrier NW:
+        dest: TR Hub SW
+        one-way: true
+      Mire 2 Up Stairs:
+        dest: Eastern Attic Start Down Stairs
+        one-way: true
+      TR Hub SE:
+        dest: Mire BK Door Room N
+        one-way: true
+      Desert North Hall SW Edge:
+        dest: Thieves Lobby NE Edge
+        one-way: true
+      Ice Lonely Freezor Down Stairs:
+        dest: Mire Conveyor Barrier Up Stairs
+        one-way: true
+      Hyrule Dungeon South Abyss North Edge:
+        dest: Desert North Hall SE Edge
+        one-way: true
+      Desert North Hall E Edge:
+        dest: Desert North Hall W Edge
+        one-way: true
+      Mire BK Door Room EN:
+        dest: GT Tile Room WN
+        one-way: true
+      PoD Map Balcony WS:
+        dest: TR Hub ES
+        one-way: true
+      Tower Altar NW:
+        dest: Mire Hidden Shooters SE
+        one-way: true
+      Mire Conveyor Barrier Up Stairs:
+        dest: Tower Red Spears Down Stairs
+        one-way: true
+      Swamp Flooded Room Up Stairs:
+        dest: PoD Left Cage Down Stairs
+        one-way: true
+      Tower Agahnim 1 SW:
+        dest: Mire 2 NE
+        one-way: true
+      Eastern Attic Start WS:
+        dest: Ice Crystal Right ES
+        one-way: true
+      Mire Minibridge NE:
+        dest: Ice Switch Room SE
+        one-way: true
+      Hyrule Dungeon South Abyss West Edge:
+        dest: Desert North Hall E Edge
+        one-way: true
+      Thieves Lobby NE Edge:
+        dest: Desert Sandworm Corner S Edge
+        one-way: true
+      Mire Crystal Dead End NW:
+        dest: Mire Cross SW
+        one-way: true
+      TR Lava Dual Pipes SW:
+        dest: Mire Minibridge NE
+        one-way: true
+      Desert North Hall SE Edge:
+        dest: Hyrule Dungeon South Abyss North Edge
+        one-way: true
+      PoD Dark Alley NE:
+        dest: Ice Spike Cross SE
+        one-way: true
+      Desert Sandworm Corner S Edge:
+        dest: Thieves Lobby N Edge
+        one-way: true
+      Ice Spike Cross SE:
+        dest: Skull Vines NW
+        one-way: true
+      GT Cannonball Bridge WN:
+        dest: TR Hub EN
+        one-way: true
+      GT Tile Room WN:
+        dest: Thieves Lobby E
+        one-way: true
+      Swamp Basement Shallows NW:
+        dest: PoD Lobby S
+        one-way: true
+      Tower Push Statue Down Stairs:
+        dest: GT Hope Room Up Stairs
+        one-way: true
+      Tower Antechamber South Stairs:
+        dest: Tower Catwalk North Stairs
+        one-way: true
+      TR Lava Dual Pipes WN:
+        dest: Eastern False Switches ES
+        one-way: true
+      Mire Torches Top Down Stairs:
+        dest: Eastern Darkness Up Stairs
+        one-way: true
+      Mire 2 NE:
+        dest: GT Hookshot SW
+        one-way: true
+      Eastern East Wing W:
+        dest: Ice Tall Hint EN
+        one-way: true
+      Thieves Lobby S:
+        dest: Ice Lonely Freezor NE
+        one-way: true
+      Ice Switch Room SE:
+        dest: Eastern Big Key NE
+        one-way: true
+      GT Gauntlet 3 SW:
+        dest: TR Hub NE
+        one-way: true
+      GT Speed Torch NE:
+        dest: GT Big Chest SW
+        one-way: true
+      Eastern Big Key NE:
+        dest: GT Speed Torch SE
+        one-way: true
+      Sewers Rope Room North Stairs:
+        dest: Tower Antechamber South Stairs
+        one-way: true
+      PoD Map Balcony South Stairs:
+        dest: Sewers Rope Room North Stairs
+        one-way: true
+      GT Blocked Stairs Down Stairs:
+        dest: GT Cannonball Bridge Up Stairs
+        one-way: true
+      Mire Spike Barrier SE:
+        dest: Swamp T NW
+        one-way: true
+      Ice Spike Cross ES:
+        dest: Mire Lone Shooter WS
+        one-way: true
+      Swamp Drain Right Up Stairs:
+        dest: GT Gauntlet 1 Down Stairs
+        one-way: true
+      Ice Anti-Fairy Up Stairs:
+        dest: Swamp Entrance Down Stairs
+        one-way: true
+      Ice Lonely Freezor NE:
+        dest: Mire Spike Barrier SE
+        one-way: true
+      Mire Spike Barrier NE:
+        dest: TR Hub SE
+        one-way: true
+      Swamp Entrance Down Stairs:
+        dest: Ice Anti-Fairy Up Stairs
+        one-way: true
+      Mire Map Spot WN:
+        dest: TR Lava Dual Pipes EN
+        one-way: true
+      Swamp Lobby S:
+        dest: PoD Middle Cage N
+        one-way: true
+      PoD Middle Cage Down Stairs:
+        dest: GT Torch Up Stairs
+        one-way: true
+      PoD Dark Pegs Up Ladder:
+        dest: Ice Firebar Down Ladder
+        one-way: true
+      Hyrule Dungeon Armory Down Stairs:
+        dest: Hyrule Dungeon Armory Down Stairs
+        one-way: true
+      Eastern False Switches ES:
+        dest: GT Torch WN
+        one-way: true
+      Tower Pacifist Run Up Stairs:
+        dest: Ice Backwards Room Down Stairs
+        one-way: true
+      Ice Switch Room ES:
+        dest: TR Lava Dual Pipes WN
+        one-way: true
+      Tower Catwalk North Stairs:
+        dest: PoD Map Balcony South Stairs
+        one-way: true
+      Mire Wizzrobe Bypass NE:
+        dest: Swamp Waterfall Room SW
+        one-way: true
+      Mire Tile Room SW:
+        dest: GT Brightly Lit Hall NW
+        one-way: true
+      Mire Wizzrobe Bypass EN:
+        dest: GT Validation WS
+        one-way: true
+      Swamp Behind Waterfall Up Stairs:
+        dest: Tower Lone Statue Down Stairs
+        one-way: true
+      GT Validation WS:
+        dest: GT Warp Maze (Pits) ES
+        one-way: true
+      Swamp Waterfall Room SW:
+        dest: Eastern Dark Square NW
+        one-way: true
+      GT Brightly Lit Hall NW:
+        dest: Tower Lobby S
+        one-way: true
+      GT Warp Maze (Pits) ES:
+        dest: Swamp Hammer Switch WN
+        one-way: true
+      Eastern Dark Square NW:
+        dest: Desert Tiles 2 SE
+        one-way: true
+      Tower Dark Chargers Up Stairs:
+        dest: GT Lobby Left Down Stairs
+        one-way: true
+      Tower Lobby S:
+        dest: PoD Pit Room NE
+        one-way: true
+      PoD Warp Room Up Stairs:
+        dest: Mire Firesnake Skip Down Stairs
+        one-way: true
+      GT Lobby Left Down Stairs:
+        dest: Ice Pengator Trap Up Stairs
+        one-way: true
+      Swamp Hammer Switch WN:
+        dest: Mire Hub E
+        one-way: true
+      Mire Hub WS:
+        dest: Sewers Dark Aquabats ES
+        one-way: true
+      Tower Lone Statue Down Stairs:
+        dest: Hyrule Dungeon Cellblock Up Stairs
+        one-way: true
+      GT Lobby S:
+        dest: Swamp Donut Top N
+        one-way: true
+      PoD Mimics 1 NW:
+        dest: TR Dark Ride SW
+        one-way: true
+      Sewers Dark Aquabats ES:
+        dest: Swamp Pot Row WS
+        one-way: true
+      Desert Wall Slide NW:
+        dest: Swamp Hub S
+        one-way: true
+      Mire Hub Right EN:
+        dest: Mire Block X WS
+        one-way: true
+      Desert Tiles 2 SE:
+        dest: Thieves Hallway NE
+        one-way: true
+      Mire Conveyor Crystal ES:
+        dest: Hyrule Castle Lobby W
+        one-way: true
+      Swamp Hub S:
+        dest: TR Compass Room NW
+        one-way: true
+      Mire Hub Top NW:
+        dest: Thieves Pot Alcove Bottom SW
+        one-way: true
+      Swamp Hub ES:
+        dest: GT Torch Cross WN
+        one-way: true
+      Hyrule Castle Lobby WN:
+        dest: Thieves Ambush E
+        one-way: true
+      Thieves Ambush E:
+        dest: Eastern Cannonball Ledge WN
+        one-way: true
+      TR Dark Ride SW:
+        dest: TR Torches NW
+        one-way: true
+      Thieves Pot Alcove Mid WS:
+        dest: Mire Falling Foes ES
+        one-way: true
+      Thieves Pot Alcove Bottom SW:
+        dest: GT Invisible Catwalk NW
+        one-way: true
+      Mire Falling Foes ES:
+        dest: Mire Crystal Left WS
+        one-way: true
+      Hyrule Castle Lobby E:
+        dest: Mire Bent Bridge W
+        one-way: true
+      Hyrule Castle Lobby S:
+        dest: GT Gauntlet 4 NW
+        one-way: true
+      GT Invisible Catwalk WS:
+        dest: Swamp Barrier EN
+        one-way: true
+      GT Brightly Lit Hall Down Stairs:
+        dest: Sewers Secret Room Up Stairs
+        one-way: true
+      Mire Bent Bridge SW:
+        dest: Mire Neglected Room NE
+        one-way: true
+      Thieves Conveyor Maze WN:
+        dest: Swamp Crystal Switch EN
+        one-way: true
+      TR Torches WN:
+        dest: Eastern Single Eyegore ES
+        one-way: true
+      PoD Basement Ledge Up Stairs:
+        dest: Hyrule Dungeon Staircase Down Stairs
+        one-way: true
+      Swamp Hub WN:
+        dest: Iced T EN
+        one-way: true
+      GT Invisible Catwalk NW:
+        dest: Sewers Pull Switch S
+        one-way: true
+      Swamp Pot Row WS:
+        dest: GT Hidden Spikes EN
+        one-way: true
+      Thieves Hallway NE:
+        dest: PoD Harmless Hellway SE
+        one-way: true
+      Sewers Pull Switch S:
+        dest: Thieves Rail Ledge NW
+        one-way: true
+      Eastern Cannonball Ledge WN:
+        dest: Mire Fishbone E
+        one-way: true
+      Eastern Dark Square Key Door WN:
+        dest: GT Beam Dash ES
+        one-way: true
+      Mire Hub NE:
+        dest: Thieves Spike Switch SW
+        one-way: true
+      Mire Fishbone E:
+        dest: TR Pipe Pit WN
+        one-way: true
+      PoD Falling Bridge SW:
+        dest: Desert Compass NE
+        one-way: true
+      PoD Pit Room S:
+        dest: Hyrule Castle East Lobby NW
+        one-way: true
+      TR Pipe Pit Up Stairs:
+        dest: Hyrule Castle Back Hall Down Stairs
+        one-way: true
+      Thieves Rail Ledge W:
+        dest: Mire Over Bridge E
+        one-way: true
+      Tower Room 03 Up Stairs:
+        dest: TR Chain Chomps Down Stairs
+        one-way: true
+      GT Quad Pot Up Stairs:
+        dest: Thieves Attic Down Stairs
+        one-way: true
+      Hyrule Castle East Lobby N:
+        dest: TR Dash Room SW
+        one-way: true
+      GT Gauntlet 5 WS:
+        dest: Thieves Conveyor Bridge ES
+        one-way: true
+      GT Hidden Spikes SE:
+        dest: Thieves Hellway NW
+        one-way: true
+      Thieves Conveyor Maze Down Stairs:
+        dest: PoD Shooter Room Up Stairs
+        one-way: true
+      Hyrule Castle East Lobby W:
+        dest: PoD Arena Ledge ES
+        one-way: true
+      PoD Compass Room W Down Stairs:
+        dest: Ice Spike Room Up Stairs
+        one-way: true
+      Hyrule Castle Lobby W:
+        dest: GT Conveyor Bridge EN
+        one-way: true
+      Ice Spike Room WS:
+        dest: PoD Dark Maze EN
+        one-way: true
+      Hyrule Dungeon Staircase Down Stairs:
+        dest: GT Four Torches Up Stairs
+        one-way: true
+      TR Pipe Pit WN:
+        dest: TR Lava Island ES
+        one-way: true
+      Mire Over Bridge W:
+        dest: Swamp Hub Dead Ledge EN
+        one-way: true
+      TR Lava Island ES:
+        dest: Ice Many Pots WS
+        one-way: true
+      Mire Tall Dark and Roomy ES:
+        dest: TR Torches Ledge WS
+        one-way: true
+      Thieves Ambush S Edge:
+        dest: Desert Main Lobby NE Edge
+        one-way: true
+      Hyrule Castle Back Hall W:
+        dest: TR Crystal Maze ES
+        one-way: true
+      Hyrule Castle Lobby North Stairs:
+        dest: Hyrule Castle Throne Room South Stairs
+        one-way: true
+      Swamp Pot Row WN:
+        dest: GT Conveyor Star Pits EN
+        one-way: true
+      Hyrule Dungeon Cellblock Up Stairs:
+        dest: Swamp Right Elbow Down Stairs
+        one-way: true
+      Ice Many Pots SW:
+        dest: Ice Compass Room NE
+        one-way: true
+      Mire Neglected Room NE:
+        dest: Ice Lobby SE
+        one-way: true
+      Mire Hub ES:
+        dest: GT Invisible Bridges WS
+        one-way: true
+      TR Compass Room NW:
+        dest: Ice Conveyor SW
+        one-way: true
+      Swamp Hub Dead Ledge EN:
+        dest: GT Falling Bridge WN
+        one-way: true
+      Thieves BK Corner WN Edge:
+        dest: Thieves Big Chest Nook ES Edge
+        one-way: true
+      TR Crystal Maze North Stairs:
+        dest: Sewers Dark Cross South Stairs
+        one-way: true
+      TR Dash Room SW:
+        dest: Hyrule Dungeon Guardroom N
+        one-way: true
+      Eastern Cannonball Ledge Key Door EN:
+        dest: Ice Refill WS
+        one-way: true
+      TR Crystal Maze ES:
+        dest: Ice Catwalk WN
+        one-way: true
+      Thieves Cricket Hall Left Edge:
+        dest: Desert Arrow Pot Corner W Edge
+        one-way: true
+      Ice Lobby SE:
+        dest: GT Dash Hall NE
+        one-way: true
+      Swamp Left Elbow Down Stairs:
+        dest: PoD Dark Basement W Up Stairs
+        one-way: true
+      GT Beam Dash ES:
+        dest: Swamp Big Key Ledge WN
+        one-way: true
+      Desert Compass NE:
+        dest: TR Roller Room SW
+        one-way: true
+      Mire Block X WS:
+        dest: GT Frozen Over ES
+        one-way: true
+      Sewers Key Rat NE:
+        dest: GT Petting Zoo SE
+        one-way: true
+      Thieves Spike Track ES:
+        dest: Thieves Compass Room W
+        one-way: true
+      Thieves Ambush EN Edge:
+        dest: Hyrule Dungeon South Abyss Catwalk West Edge
+        one-way: true
+      GT Dash Hall NE:
+        dest: Mire Lobby S
+        one-way: true
+      Eastern Duo Eyegores NE:
+        dest: Desert Back Lobby S
+        one-way: true
+      Desert Main Lobby S:
+        dest: Desert Beamos Hall NE
+        one-way: true
+      Thieves Hallway SE:
+        dest: GT Wizzrobes 2 NE
+        one-way: true
+      GT Frozen Over Up Stairs:
+        dest: Sewers Behind Tapestry Down Stairs
+        one-way: true
+      Desert Back Lobby S:
+        dest: TR Final Abyss NW
+        one-way: true
+      Swamp Trench 2 Pots ES:
+        dest: Ice Hookshot Ledge WN
+        one-way: true
+      Desert Beamos Hall NE:
+        dest: PoD Conveyor SW
+        one-way: true
+      Ice Pengator Trap Up Stairs:
+        dest: Ice Narrow Corridor Down Stairs
+        one-way: true
+      Ice Hookshot Ledge WN:
+        dest: Swamp Map Ledge EN
+        one-way: true
+      Ice Spikeball Up Stairs:
+        dest: Tower Dual Statues Down Stairs
+        one-way: true
+      Desert Main Lobby NE Edge:
+        dest: Desert Dead End Edge
+        one-way: true
+      Hyrule Castle Back Hall Down Stairs:
+        dest: Hyrule Dungeon Map Room Up Stairs
+        one-way: true
+      GT Gauntlet 4 NW:
+        dest: Desert West S
+        one-way: true
+      Thieves Big Chest Nook ES Edge:
+        dest: Thieves Cricket Hall Right Edge
+        one-way: true
+      PoD Pit Room NW:
+        dest: TR Tile Room SE
+        one-way: true
+      Swamp Push Statue Down Stairs:
+        dest: Ice Floor Switch Up Stairs
+        one-way: true
+      Hyrule Castle East Lobby NW:
+        dest: GT Bob's Room SE
+        one-way: true
+      Swamp Barrier EN:
+        dest: GT Warp Maze (Rails) WS
+        one-way: true
+      Thieves BK Corner NE:
+        dest: GT Crystal Circles SW
+        one-way: true
+      Ice Spike Room Down Stairs:
+        dest: GT Moldorm Pit Up Stairs
+        one-way: true
+      GT Lobby Right Down Stairs:
+        dest: Swamp West Block Path Up Stairs
+        one-way: true
+      Hyrule Dungeon Map Room Up Stairs:
+        dest: Swamp Attic Down Stairs
+        one-way: true
+      Ice Catwalk WN:
+        dest: Ice Cross Right ES
+        one-way: true
+      PoD Harmless Hellway SE:
+        dest: GT Left Moldorm Ledge NW
+        one-way: true
+      Iced T Up Stairs:
+        dest: GT Right Moldorm Ledge Down Stairs
+        one-way: true
+      Thieves Conveyor Bridge ES:
+        dest: TR Pipe Ledge WS
+        one-way: true
+      TR Pipe Ledge WS:
+        dest: GT Hidden Star ES
+        one-way: true
+      Thieves Compass Room N Edge:
+        dest: Hyrule Dungeon North Abyss Catwalk Edge
+        one-way: true
+      Mire Falling Foes Up Stairs:
+        dest: PoD Big Key Landing Down Stairs
+        one-way: true
+      TR Pokey 1 SW:
+        dest: GT Crystal Conveyor NE
+        one-way: true
+      TR Final Abyss NW:
+        dest: Ice Cross Bottom SE
+        one-way: true
+      GT Left Moldorm Ledge NW:
+        dest: Sewers Secret Room Key Door S
+        one-way: true
+      Swamp Push Statue S:
+        dest: GT Double Switch NW
+        one-way: true
+      Eastern Single Eyegore ES:
+        dest: Swamp Trench 2 Departure WS
+        one-way: true
+      Thieves Hellway NW:
+        dest: Mire Fishbone SE
+        one-way: true
+      Swamp Crystal Switch EN:
+        dest: Hyrule Castle Lobby WN
+        one-way: true
+      Desert Main Lobby N Edge:
+        dest: Thieves BK Corner S Edge
+        one-way: true
+      Ice Bomb Jump NW:
+        dest: Swamp Push Statue S
+        one-way: true
+      Thieves BK Corner WS Edge:
+        dest: Hyrule Dungeon Guardroom Catwalk Edge
+        one-way: true
+      PoD Big Key Landing Down Stairs:
+        dest: Mire Falling Foes Up Stairs
+        one-way: true
+      Desert Dead End Edge:
+        dest: Desert East Wing N Edge
+        one-way: true
+      Thieves BK Corner S Edge:
+        dest: Thieves Compass Room N Edge
+        one-way: true
+      TR Torches Ledge WS:
+        dest: Mire Tall Dark and Roomy ES
+        one-way: true
+      GT Invisible Catwalk ES:
+        dest: Swamp Pot Row WN
+        one-way: true
+      GT Petting Zoo SE:
+        dest: Mire Wizzrobe Bypass NE
+        one-way: true
+      TR Final Abyss South Stairs:
+        dest: Hyrule Castle Lobby North Stairs
+        one-way: true
+      Thieves Cricket Hall Right Edge:
+        dest: Desert Main Lobby E Edge
+        one-way: true
+      Sewers Dark Cross Key Door N:
+        dest: GT Lobby S
+        one-way: true
+      Mire Hub SE:
+        dest: PoD Pit Room NW
+        one-way: true
+      Hyrule Dungeon South Abyss Catwalk North Edge:
+        dest: Thieves Ambush S Edge
+        one-way: true
+      GT Staredown Up Ladder:
+        dest: GT Falling Torches Down Ladder
+        one-way: true
+      Swamp Trench 2 Departure WS:
+        dest: GT Invisible Catwalk ES
+        one-way: true
+      TR Crystaroller Down Stairs:
+        dest: PoD Basement Ledge Up Stairs
+        one-way: true
+      Ice Cross Right ES:
+        dest: Swamp Hub WN
+        one-way: true
+      Desert Main Lobby E Edge:
+        dest: Thieves BK Corner WN Edge
+        one-way: true
+      GT Hidden Spikes EN:
+        dest: Thieves Conveyor Maze WN
+        one-way: true
+      PoD Dark Basement W Up Stairs:
+        dest: GT Brightly Lit Hall Down Stairs
+        one-way: true
+      Swamp Hub North Ledge N:
+        dest: Thieves Hallway SE
+        one-way: true
+      Swamp Trench 1 Approach ES:
+        dest: Eastern Dark Square Key Door WN
+        one-way: true
+      TR Tile Room SE:
+        dest: Eastern Duo Eyegores NE
+        one-way: true
+      GT Conveyor Star Pits EN:
+        dest: Hyrule Castle East Lobby W
+        one-way: true
+      Ice Catwalk NW:
+        dest: TR Pokey 1 SW
+        one-way: true
+      Tower Dual Statues Down Stairs:
+        dest: TR Dark Ride Up Stairs
+        one-way: true
+      PoD Shooter Room Up Stairs:
+        dest: GT Crystal Paths Down Stairs
+        one-way: true
+      GT Crystal Circles SW:
+        dest: Ice Bomb Jump NW
+        one-way: true
+      PoD Dark Maze E:
+        dest: Thieves Rail Ledge W
+        one-way: true
+      Sewers Behind Tapestry Down Stairs:
+        dest: PoD Dark Basement E Up Stairs
+        one-way: true
+      Swamp West Shallows ES:
+        dest: TR Lava Island WS
+        one-way: true
+      GT Hidden Star ES:
+        dest: PoD Falling Bridge WN
+        one-way: true
+      PoD Conveyor SW:
+        dest: Mire Antechamber NW
+        one-way: true
+      Swamp Attic Down Stairs:
+        dest: Swamp Behind Waterfall Up Stairs
+        one-way: true
+      Sewers Secret Room Key Door S:
+        dest: Hyrule Castle East Lobby N
+        one-way: true
+      Desert East Wing W Edge:
+        dest: Thieves Ambush ES Edge
+        one-way: true
+      Desert Bridge Down Stairs:
+        dest: Tower Dark Archers Up Stairs
+        one-way: true
+      GT Invisible Catwalk NE:
+        dest: GT Hidden Spikes SE
+        one-way: true
+      Sewers Dark Cross South Stairs:
+        dest: TR Crystal Maze North Stairs
+        one-way: true
+      Ice Jelly Key Down Stairs:
+        dest: GT Quad Pot Up Stairs
+        one-way: true
+      Hyrule Dungeon Staircase Up Stairs:
+        dest: TR Crystaroller Down Stairs
+        one-way: true
+      GT Frozen Over ES:
+        dest: Swamp Hub WS
+        one-way: true
+      Thieves Compass Room WS Edge:
+        dest: Thieves Ambush EN Edge
+        one-way: true
+      GT Four Torches Up Stairs:
+        dest: Thieves Conveyor Maze Down Stairs
+        one-way: true
+      PoD Conveyor North Stairs:
+        dest: TR Final Abyss South Stairs
+        one-way: true
+      Desert West S:
+        dest: Swamp Hub North Ledge N
+        one-way: true
+      Tower Dark Archers Up Stairs:
+        dest: Ice Spike Room Down Stairs
+        one-way: true
+      TR Lazy Eyes ES:
+        dest: Mire Hub WS
+        one-way: true
+      PoD Dark Basement E Up Stairs:
+        dest: Desert Bridge Down Stairs
+        one-way: true
+      Swamp Trench 1 Departure WS:
+        dest: Mire Wizzrobe Bypass EN
+        one-way: true
+      Thieves Spike Switch Up Stairs:
+        dest: GT Wizzrobes 1 Down Stairs
+        one-way: true
+      GT Wizzrobes 2 NE:
+        dest: Ice Many Pots SW
+        one-way: true
+      Thieves Attic Down Stairs:
+        dest: Tower Dark Chargers Up Stairs
+        one-way: true
+      GT Bob's Room SE:
+        dest: Ice Pengator Trap NE
+        one-way: true
+      Mire Antechamber NW:
+        dest: PoD Pit Room S
+        one-way: true
+      Hyrule Dungeon Guardroom Abyss Edge:
+        dest: Thieves BK Corner WS Edge
+        one-way: true
+      TR Roller Room SW:
+        dest: Mire Hub Top NW
+        one-way: true
+      TR Dark Ride Up Stairs:
+        dest: PoD Compass Room E Down Stairs
+        one-way: true
+      Thieves Conveyor Bridge EN:
+        dest: GT Gauntlet 5 WS
+        one-way: true
+      Desert Arrow Pot Corner S Edge:
+        dest: Desert West Wing N Edge
+        one-way: true
+      Mire Over Bridge E:
+        dest: Mire Hub WN
+        one-way: true
+      Swamp Donut Top N:
+        dest: Mire Bent Bridge SW
+        one-way: true
+      PoD Compass Room E Down Stairs:
+        dest: Ice Spikeball Up Stairs
+        one-way: true
+      Mire Crystal Left WS:
+        dest: Swamp West Shallows ES
+        one-way: true
+      Desert East Lobby S:
+        dest: Ice Catwalk NW
+        one-way: true
+      GT Right Moldorm Ledge Down Stairs:
+        dest: PoD Warp Room Up Stairs
+        one-way: true
+      Mire Lobby S:
+        dest: Thieves BK Corner NE
+        one-way: true
+      Hyrule Dungeon Guardroom N:
+        dest: GT Conveyor Bridge SE
+        one-way: true
+      Hyrule Castle Back Hall E:
+        dest: Ice Spike Room WS
+        one-way: true
+      Mire Dark Shooters Up Stairs:
+        dest: Sewers Pull Switch Down Stairs
+        one-way: true
+      GT Falling Torches Down Ladder:
+        dest: GT Staredown Up Ladder
+        one-way: true
+      GT Falling Bridge WS:
+        dest: Mire Conveyor Crystal ES
+        one-way: true
+      Mire Hub WN:
+        dest: Swamp Hub ES
+        one-way: true
+      Sewers Secret Room Up Stairs:
+        dest: Swamp Left Elbow Down Stairs
+        one-way: true
+      TR Chain Chomps Down Stairs:
+        dest: Mire Dark Shooters Up Stairs
+        one-way: true
+      Swamp Map Ledge EN:
+        dest: Thieves Pot Alcove Mid WS
+        one-way: true
+      Ice Cross Bottom SE:
+        dest: Sewers Dark Cross Key Door N
+        one-way: true
+      PoD Pit Room NE:
+        dest: Desert East Lobby S
+        one-way: true
+      PoD Dark Maze EN:
+        dest: Swamp Trench 1 Departure WS
+        one-way: true
+      Ice Pengator Trap NE:
+        dest: Hyrule Castle Lobby S
+        one-way: true
+      Ice Floor Switch Up Stairs:
+        dest: Mire Post-Gap Down Stairs
+        one-way: true
+      Ice Compass Room NE:
+        dest: Sewers Behind Tapestry S
+        one-way: true
+      Thieves Rail Ledge NW:
+        dest: Mire Tile Room SW
+        one-way: true
+      Desert West Wing N Edge:
+        dest: Thieves BK Corner SW Edge
+        one-way: true
+      GT Invisible Bridges WS:
+        dest: Thieves Conveyor Bridge EN
+        one-way: true
+      Hyrule Dungeon North Abyss South Edge:
+        dest: Desert Main Lobby NW Edge
+        one-way: true
+      GT Crystal Conveyor NE:
+        dest: Desert Main Lobby S
+        one-way: true
+      Thieves Ambush ES Edge:
+        dest: Thieves Compass Room WS Edge
+        one-way: true
+      GT Warp Maze (Rails) WS:
+        dest: TR Lazy Eyes ES
+        one-way: true
+      Swamp Pot Row Up Stairs:
+        dest: Ice Jelly Key Down Stairs
+        one-way: true
+      Swamp Right Elbow Down Stairs:
+        dest: Hyrule Dungeon Staircase Up Stairs
+        one-way: true
+      GT Moldorm Pit Up Stairs:
+        dest: PoD Compass Room W Down Stairs
+        one-way: true
+      Hyrule Dungeon North Abyss Catwalk Edge:
+        dest: Desert Main Lobby N Edge
+        one-way: true
+      GT Conveyor Bridge SE:
+        dest: Mire Hub NE
+        one-way: true
+      Swamp Big Key Ledge WN:
+        dest: PoD Dark Maze E
+        one-way: true
+      Iced T EN:
+        dest: Hyrule Castle Back Hall W
+        one-way: true
+      GT Conveyor Bridge EN:
+        dest: GT Invisible Catwalk WS
+        one-way: true
+      Mire Post-Gap Down Stairs:
+        dest: GT Frozen Over Up Stairs
+        one-way: true
+      Desert Main Lobby NW Edge:
+        dest: Hyrule Dungeon North Abyss South Edge
+        one-way: true
+      Sewers Behind Tapestry S:
+        dest: Desert Wall Slide NW
+        one-way: true
+      Ice Spike Room Up Stairs:
+        dest: Swamp Push Statue Down Stairs
+        one-way: true
+      Desert East Wing N Edge:
+        dest: Thieves Ambush SE Edge
+        one-way: true
+      GT Wizzrobes 1 Down Stairs:
+        dest: Thieves Spike Switch Up Stairs
+        one-way: true
+      GT Torch Cross WN:
+        dest: Hyrule Castle Back Hall E
+        one-way: true
+      Thieves Compass Room NW Edge:
+        dest: Desert Arrow Pot Corner S Edge
+        one-way: true
+      Swamp Hub WS:
+        dest: Thieves Triple Bypass EN
+        one-way: true
+      Thieves BK Corner SW Edge:
+        dest: Thieves Compass Room NW Edge
+        one-way: true
+      Swamp West Block Path Up Stairs:
+        dest: GT Lobby Right Down Stairs
+        one-way: true
+      GT Lobby Up Stairs:
+        dest: GT Lobby Up Stairs
+        one-way: true
+      Mire Firesnake Skip Down Stairs:
+        dest: Tower Room 03 Up Stairs
+        one-way: true
+      Desert Tiles 1 Up Stairs:
+        dest: Desert Tiles 1 Up Stairs
+        one-way: true
+      Thieves Compass Room W:
+        dest: Mire Hub ES
+        one-way: true
+      Thieves Ambush SE Edge:
+        dest: Hyrule Dungeon South Abyss Catwalk North Edge
+        one-way: true
+      PoD Arena Ledge ES:
+        dest: GT Falling Bridge WS
+        one-way: true
+      Thieves Spike Switch SW:
+        dest: Sewers Key Rat NE
+        one-way: true
+      Mire Bent Bridge W:
+        dest: Hyrule Castle Lobby E
+        one-way: true
+      Hyrule Dungeon Guardroom Catwalk Edge:
+        dest: Desert East Wing W Edge
+        one-way: true
+      Mire Hub E:
+        dest: TR Torches WN
+        one-way: true
+      Ice Narrow Corridor Down Stairs:
+        dest: Iced T Up Stairs
+        one-way: true
+      Thieves Triple Bypass EN:
+        dest: Mire Over Bridge W
+        one-way: true
+      Ice Refill WS:
+        dest: Swamp Trench 1 Approach ES
+        one-way: true
+      Desert Arrow Pot Corner W Edge:
+        dest: Hyrule Dungeon Guardroom Abyss Edge
+        one-way: true
+      Sewers Pull Switch Down Stairs:
+        dest: TR Pipe Pit Up Stairs
+        one-way: true
+      GT Crystal Paths Down Stairs:
+        dest: Swamp Pot Row Up Stairs
+        one-way: true
+      Mire Fishbone SE:
+        dest: PoD Mimics 1 NW
+        one-way: true
+      PoD Falling Bridge WN:
+        dest: Mire Hub Right EN
+        one-way: true
+      Hyrule Dungeon South Abyss Catwalk West Edge:
+        dest: Thieves Cricket Hall Left Edge
+        one-way: true
+      Hyrule Castle Throne Room South Stairs:
+        dest: PoD Conveyor North Stairs
+        one-way: true
+      GT Double Switch NW:
+        dest: PoD Falling Bridge SW
+        one-way: true
+      Ice Conveyor SW:
+        dest: GT Invisible Catwalk NE
+        one-way: true
+      TR Torches NW:
+        dest: Mire Hub SE
+        one-way: true
+      GT Falling Bridge WN:
+        dest: Thieves Spike Track ES
+        one-way: true
+      Ice Many Pots WS:
+        dest: Swamp Trench 2 Pots ES
+        one-way: true
+      TR Lava Island WS:
+        dest: Eastern Cannonball Ledge Key Door EN
+        one-way: true
+      Mire Ledgehop NW:
+        dest: PoD Arena Bridge SE
+        one-way: true
+      PoD Arena Main NE:
+        dest: TR Dash Bridge SW
+        one-way: true
+      TR Dash Bridge NW:
+        dest: Desert Cannonball S
+        one-way: true
+      Mire Ledgehop WN:
+        dest: GT Randomizer Room ES
+        one-way: true
+      Mire Spikes WS:
+        dest: TR Pokey 2 EN
+        one-way: true
+      Desert Cannonball S:
+        dest: Sanctuary N
+        one-way: true
+      PoD Arena Main NW:
+        dest: GT DMs Room SW
+        one-way: true
+      PoD Arena Bridge SE:
+        dest: TR Dodgers NE
+        one-way: true
+      TR Dodgers NE:
+        dest: PoD Mimics 2 SW
+        one-way: true
+      TR Big Chest Entrance SE:
+        dest: Eastern Lobby Bridge N
+        one-way: true
+      PoD Bow Statue Down Ladder:
+        dest: Ice Tongue Pull Up Ladder
+        one-way: true
+      TR Dash Bridge WS:
+        dest: PoD Arena Crystals E
+        one-way: true
+      Ice Hammer Block Down Stairs:
+        dest: Ice Hammer Block Down Stairs
+        one-way: true
+      TR Dash Bridge SW:
+        dest: TR Twin Pokeys NW
+        one-way: true
+      GT Randomizer Room ES:
+        dest: Mire Spikes WS
+        one-way: true
+      Sanctuary N:
+        dest: Eastern Lobby S
+        one-way: true
+      TR Pokey 2 EN:
+        dest: TR Hallway WS
+        one-way: true
+      PoD Arena Crystals E:
+        dest: TR Dash Bridge WS
+        one-way: true
+      TR Twin Pokeys NW:
+        dest: PoD Arena Main SW
+        one-way: true
+      Eastern Lobby S:
+        dest: Mire Ledgehop NW
+        one-way: true
+      TR Hallway WS:
+        dest: TR Pokey 2 ES
+        one-way: true
+      Eastern Lobby Bridge N:
+        dest: TR Big Chest Entrance SE
+        one-way: true
+      PoD Arena Main SW:
+        dest: TR Dash Bridge NW
+        one-way: true
+      TR Pokey 2 ES:
+        dest: Mire Ledgehop WN
+        one-way: true
+      GT DMs Room SW:
+        dest: PoD Arena Main NW
+        one-way: true
+      Ice Tongue Pull Up Ladder:
+        dest: PoD Bow Statue Down Ladder
+        one-way: true
+      PoD Mimics 2 SW:
+        dest: PoD Arena Main NE
+        one-way: true
+      Hyrule Castle Throne Room N:
+        dest: Mire Spikes SW
+        one-way: true
+      Mire Spikes SW:
+        dest: Hyrule Castle Throne Room N
+        one-way: true
+      Mire Right Bridge SE:
+        dest: Ice Antechamber NE
+        one-way: true
+        type: Bomb Door
+      Mire Left Bridge Down Stairs:
+        dest: Mire Left Bridge Down Stairs
+        one-way: true
+      Ice Antechamber NE:
+        dest: Mire Right Bridge SE
+        one-way: true
+        type: Bomb Door
+      Hera Lobby Key Stairs:
+        dest: Hera Tile Room Up Stairs
+        one-way: true
+      Hera Tile Room Up Stairs:
+        dest: Hera Lobby Key Stairs
+        one-way: true
+      Hera Lobby Down Stairs:
+        dest: Hera Basement Cage Up Stairs
+        one-way: true
+      Hera Basement Cage Up Stairs:
+        dest: Hera Lobby Down Stairs
+        one-way: true
+      Hera Lobby Up Stairs:
+        dest: Hera Beetles Down Stairs
+        one-way: true
+      Hera Beetles Down Stairs:
+        dest: Hera Lobby Up Stairs
+        one-way: true
+      Hera Startile Wide Up Stairs:
+        dest: Hera 4F Down Stairs
+        one-way: true
+      Hera 4F Down Stairs:
+        dest: Hera Startile Wide Up Stairs
+        one-way: true
+      Hera 4F Up Stairs:
+        dest: Hera 5F Down Stairs
+        one-way: true
+      Hera 5F Down Stairs:
+        dest: Hera 4F Up Stairs
+        one-way: true
+      Hera 5F Up Stairs:
+        dest: Hera Boss Down Stairs
+        one-way: true
+      Hera Boss Down Stairs:
+        dest: Hera 5F Up Stairs
+        one-way: true
+      Skull 1 Lobby WS:
+        dest: Skull Pot Prison ES
+        one-way: true
+        type: Bomb Door
+      Skull Pot Prison SE:
+        dest: Skull Compass Room NE
+        one-way: true
+      Skull Pot Prison ES:
+        dest: Skull 1 Lobby WS
+        one-way: true
+        type: Bomb Door
+      Skull Compass Room ES:
+        dest: Skull Pinball WS
+        one-way: true
+        type: Bomb Door
+      Skull Small Hall ES:
+        dest: Skull 2 East Lobby WS
+        one-way: true
+      Skull Pinball NE:
+        dest: Skull Map Room SE
+        one-way: true
+        type: Bomb Door
+      Skull 2 East Lobby WS:
+        dest: Skull Small Hall ES
+        one-way: true
+      Skull Pinball WS:
+        dest: Skull Compass Room ES
+        one-way: true
+        type: Bomb Door
+      Skull Map Room SE:
+        dest: Skull Pinball NE
+        one-way: true
+        type: Bomb Door
+      Skull Compass Room NE:
+        dest: Skull Pot Prison SE
+        one-way: true
+      Hyrule Castle West Lobby EN:
+        dest: Thieves Lonely Zazak WS
+        one-way: true
+        type: Bomb Door
+      Hyrule Castle West Lobby N:
+        dest: Thieves Boss SE
+        one-way: true
+        type: Bomb Door
+      Hyrule Castle West Lobby E:
+        dest: Thieves Basement Block WN
+        one-way: true
+        type: Bomb Door
+      Thieves Lonely Zazak WS:
+        dest: Hyrule Castle West Lobby EN
+        one-way: true
+        type: Bomb Door
+      Thieves Basement Block WN:
+        dest: Hyrule Castle West Lobby E
+        one-way: true
+        type: Bomb Door
+      Thieves Basement Block Up Stairs:
+        dest: Thieves Basement Block Up Stairs
+        one-way: true
+      Thieves Boss SE:
+        dest: Hyrule Castle West Lobby N
+        one-way: true
+        type: Bomb Door
+      Eastern Cannonball N:
+        dest: Swamp Boss SW
+        one-way: true
+        type: Bomb Door
+      Swamp Boss SW:
+        dest: Eastern Cannonball N
+        one-way: true
+        type: Bomb Door
+      Eastern Courtyard Ledge E:
+        dest: Eastern Courtyard WN
+        one-way: true
+        type: Bomb Door
+      Eastern Courtyard N:
+        dest: PoD Boss SE
+        one-way: true
+        type: Bomb Door
+      PoD Boss SE:
+        dest: Eastern Courtyard N
+        one-way: true
+        type: Bomb Door
+      Eastern Courtyard WN:
+        dest: Eastern Courtyard Ledge E
+        one-way: true
+        type: Bomb Door
+      Eastern Courtyard Ledge W:
+        dest: Eastern Courtyard EN
+        one-way: true
+      Eastern Courtyard EN:
+        dest: Eastern Courtyard Ledge W
+        one-way: true
+      TR Eye Bridge NW:
+        dest: Mire Boss SW
+        one-way: true
+        type: Bomb Door
+      Mire Boss SW:
+        dest: TR Eye Bridge NW
+        one-way: true
+        type: Bomb Door
+      TR Lobby Ledge NE:
+        dest: GT Agahnim 2 SW
+        one-way: true
+        type: Bomb Door
+      GT Agahnim 2 SW:
+        dest: TR Lobby Ledge NE
+        one-way: true
+        type: Bomb Door
+      Skull 3 Lobby NW:
+        dest: Eastern Boss SE
+        one-way: true
+        type: Bomb Door
+      Eastern Boss SE:
+        dest: Skull 3 Lobby NW
+        one-way: true
+        type: Bomb Door
+      Hyrule Castle East Hall W:
+        dest: Hyrule Castle West Hall E
+        one-way: true
+        type: Bomb Door
+      Hyrule Castle East Hall S:
+        dest: TR Lava Escape NW
+        one-way: true
+        type: Bomb Door
+      TR Lava Escape NW:
+        dest: Hyrule Castle East Hall S
+        one-way: true
+        type: Bomb Door
+      Hyrule Castle West Hall E:
+        dest: Hyrule Castle East Hall W
+        one-way: true
+        type: Bomb Door
+      Eastern Hint Tile EN:
+        dest: Sewers Water W
+        one-way: true
+      Eastern West Wing E:
+        dest: Eastern Map Valley WN
+        one-way: true
+      Sewers Water W:
+        dest: Eastern West Wing E
+        one-way: true
+      Eastern Map Valley WN:
+        dest: Eastern Hint Tile EN
+        one-way: true
+      Skull Pot Circle WN:
+        type: Bomb Door
+      Skull Left Drop ES:
+        type: Bomb Door
+      Skull Big Key EN:
+        type: Bomb Door
+      Skull Small Hall WS:
+        type: Bomb Door
+      Skull 2 West Lobby NW:
+        type: Bomb Door
+      Skull Spike Corner ES:
+        type: Bomb Door
+      Thieves Blocked Entry SW:
+        type: Bomb Door
+      Thieves Lonely Zazak ES:
+        type: Bomb Door
+advanced_placements:
+  1:
+  - type: PreferredLocationGroup
+    items:
+    - Progressive Sword
+    - Progressive Bow
+    - Progressive Glove
+    - Progressive Shield
+    - Book of Mudora
+    - Hammer
+    - Hookshot
+    - Magic Mirror
+    - Ocarina
+    - Pegasus Boots
+    - Cape
+    - Mushroom
+    - Shovel
+    - Lamp
+    - Magic Powder
+    - Moon Pearl
+    - Cane of Somaria
+    - Cane of Byrna
+    - Fire Rod
+    - Ice Rod
+    - Flippers
+    - Bombos
+    - Ether
+    - Quake
+    - Blue Boomerang
+    - Red Boomerang
+    - Bug Catching Net
+    - Magic Upgrade (1/2)
+    - Bottle
+    - Bottle (Red Potion)
+    - Bottle (Green Potion)
+    - Bottle (Blue Potion)
+    - Bottle (Fairy)
+    - Bottle (Bee)
+    - Bottle (Good Bee)
+    locations:
+    - Agahnim 1
+    - Castle Tower - Dark Maze
+    - 'Desert Arrow Pot Corner Pot #3'
+    - 'Desert Circle of Pots Pot #1'
+    - 'Desert East Wing Pot #1'
+    - 'Desert Main Lobby Pot #2'
+    - 'Desert Map Room Pot #1'
+    - 'Desert Map Room Pot #3'
+    - 'Desert Tiles 1 Pot #1'
+    - 'Eastern Dark Pots Pot #2'
+    - 'Eastern Dark Pots Pot #4'
+    - 'Eastern Darkness Pot #2'
+    - 'Eastern Duo Eyegores Pot #4'
+    - 'Eastern False Switches Pot #2'
+    - 'Eastern Lobby Pot #2'
+    - 'Eastern Map Balcony Pot #7'
+    - 'Eastern Pot Switch Pot #3'
+    - 'GT Conveyor Star Pits Pot #1'
+    - 'GT Conveyor Star Pits Pot #2'
+    - 'GT Conveyor Star Pits Pot #3'
+    - 'GT Hope Room Pot #2'
+    - 'GT Mimics 2 Pot #8'
+    - 'GT Quad Pot Pot #3'
+    - 'GT Refill Pot #8'
+    - Ganons Tower - Map Chest
+    - Ganons Tower - Randomizer Room - Bottom Left
+    - Hyrule Castle - Zelda's Chest
+    - 'Ice Hammer Block Pot #1'
+    - 'Ice Lonely Freezor Pot #1'
+    - 'Ice Lonely Freezor Pot #2'
+    - 'Ice Many Pots Pot #14'
+    - 'Ice Many Pots Pot #6'
+    - Ice Palace - Compass Chest
+    - 'Ice Stalfos Hint Pot #3'
+    - 'Mire BK Door Room Pot #4'
+    - 'Mire BK Door Room Pot #5'
+    - 'Mire Fishbone Pot #2'
+    - Misery Mire - Compass Chest
+    - Palace of Darkness - Harmless Hellway
+    - Palace of Darkness - The Arena - Bridge
+    - Palace of Darkness - The Arena - Ledge
+    - 'PoD Sexy Statue Pot #1'
+    - 'PoD Sexy Statue Pot #5'
+    - Sewers - Secret Room - Middle
+    - 'Sewers Behind Tapestry Pot #4'
+    - 'Skull Star Pits Pot #11'
+    - 'Swamp Attic Pot #4'
+    - 'Swamp Behind Waterfall Pot #10'
+    - 'Swamp Donut Bottom Pot #2'
+    - 'Swamp Donut Top Pot #1'
+    - 'Swamp Hub Dead Ledge Pot #2'
+    - 'Swamp Hub North Ledge Pot #8'
+    - 'Swamp I Pot #2'
+    - 'Swamp I Pot #3'
+    - 'Swamp I Pot #6'
+    - 'Swamp Pot Row Pot #1'
+    - 'Swamp Shooters Pot #2'
+    - 'Swamp Trench 1 Key Ledge Pot #2'
+    - 'Swamp Trench 2 Pots Pot #13'
+    - 'TR Final Abyss Balcony Pot #2'
+    - 'TR Hub Ledges Pot #1'
+    - 'TR Lazy Eyes Pot #3'
+    - 'TR Torches Ledge Pot #3'
+    - 'Thieves Attic Hint Pot #1'
+    - 'Thieves Conveyor Maze Pot #3'
+    - 'Thieves Pot Alcove Bottom Pot #14'
+    - 'Thieves Pot Alcove Mid Pot #10'
+    - 'Thieves Pot Alcove Mid Pot #9'
+    - 'Tower Circle of Pots Pot #14'
+    - 'Tower Circle of Pots Pot #5'
+    - 'Tower Dark Maze Pot #7'
+    - Trench 1 Switch
+    - Turtle Rock - Crystaroller Room
+    - Turtle Rock - Roller Room - Left
+    - Turtle Rock - Roller Room - Right
+    - Zelda Pickup

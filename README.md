@@ -4,6 +4,9 @@ This is a door randomizer for _The Legend of Zelda: A Link to the Past_ for the 
 based on the Entrance Randomizer found at [KevinCathcart's Github Project.](https://github.com/KevinCathcart/ALttPEntranceRandomizer)
 See https://alttpr.com/ for more details on the normal randomizer.
 
+> **Super Kek Priest seeds:** this branch (`tools/superkek-priest`) adds tools for rolling the Super Kek Priest
+> modes. Setup, example seeds and roll commands are in [tools/superkek/README.md](tools/superkek/README.md).
+
 # Documentation
 1. [Setup and Installation](#setup-and-installation)
 2. [Commonly Missed Things](#commonly-missed-things)  (** **Read This If New** **)

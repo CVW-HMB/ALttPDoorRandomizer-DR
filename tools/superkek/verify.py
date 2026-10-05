@@ -24,6 +24,10 @@ SETTINGS = ['Mode', 'Door Shuffle', 'Intensity', 'Decouple Doors', 'Pseudoboots'
 
 for d in sys.argv[1:]:
     d = d.rstrip('/')
+    log = f'{d}/log.txt'
+    if os.path.exists(log) and 'Total Time' not in open(log).read():
+        print(f'== {os.path.basename(d)}\n   ROLL FAILED (see {log}): do not publish')
+        continue
     bps = glob.glob(f'{d}/*.bps')[0]
     patched = f'{d}/verify.sfc'
     with open(ROM, 'rb') as s, open(bps, 'rb') as p, open(patched, 'wb') as o:

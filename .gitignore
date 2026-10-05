@@ -47,3 +47,6 @@ data/sprites/official/selan.1.zspr
 
 *errors.txt
 *success.txt
+
+# local virtualenv (tools/superkek/README.md)
+.venv/
